@@ -44,7 +44,7 @@ const titleHTML = computed(() => {
           <TextSection><span v-html="fakultas?.description1"></span></TextSection>
         </div>
         <div class="flex gap-5 mt-10">
-          <a href="https://registrasi.unpas.ac.id/register" target="_blank">
+          <a href="https://situ2.unpas.ac.id/spmbfront/jalur-seleksi" target="_blank">
             <InteractiveHoverButton :text="'Daftar Sekarang'" />
           </a>
           <InteractiveHoverButton @click="$router.push('/tentang-fakultas')" text="Selengkapnya" bg-color="bg-none"

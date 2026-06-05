@@ -57,7 +57,7 @@ const navigateToDetail = (slug: string) => {
           </div>
         </div>
         <div class="flex gap-4 md:gap-5 lg:gap-6">
-          <a href="https://registrasi.unpas.ac.id/register" target="_blank" class="w-1/2">
+          <a href="https://situ2.unpas.ac.id/spmbfront/jalur-seleksi" target="_blank" class="w-1/2">
             <InteractiveHoverButton :class="'w-full'" :padding="'py-2 px-4 lg:py-3 lg:px-6'" :text="'Daftar'"></InteractiveHoverButton>
           </a>
           <InteractiveHoverButton @click="navigateToDetail(item.slug)" :class="'w-1/2'" :padding="'py-2 px-4 lg:py-3 lg:px-6'"

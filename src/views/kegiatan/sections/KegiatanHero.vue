@@ -51,7 +51,7 @@ const komunitasCount = computed(() => {
           <TitleMain :text="'Kegiatan Mahasiswa'"></TitleMain>
           <TextSection class="text-black/40">Dari organisasi kemahasiswaan, acara seni dan budaya, hingga kegiatan
             sosial—kampus kami penuh dengan peluang untuk berkembang di luar kelas.</TextSection>
-          <a href="https://registrasi.unpas.ac.id/register" target="_blank">
+          <a href="https://situ2.unpas.ac.id/spmbfront/jalur-seleksi" target="_blank">
             <InteractiveHoverButton :text="'Daftar Sekarang'" />
           </a>
         </div>
@@ -81,7 +81,7 @@ const komunitasCount = computed(() => {
           <TextBody>Komunitas</TextBody>
         </div>
       </div>
-      <a href="https://registrasi.unpas.ac.id/register" target="_blank">
+      <a href="https://situ2.unpas.ac.id/spmbfront/jalur-seleksi" target="_blank">
         <InteractiveHoverButton :text="'Daftar Sekarang'" class="mt-4 md:hidden"></InteractiveHoverButton>
       </a>
     </div>

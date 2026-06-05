@@ -16,7 +16,7 @@ import SectionLayout from '@/layouts/SectionLayout.vue';
           Kami percaya bahwa penelitian adalah kunci untuk menciptakan solusi yang berdampak bagi
           masyarakat.</TextSection>
         <div class="flex lg:gap-10 gap-5 justify-center">
-          <a href="https://registrasi.unpas.ac.id/register" target="_blank">
+          <a href="https://situ2.unpas.ac.id/spmbfront/jalur-seleksi" target="_blank">
             <InteractiveHoverButton :text="'Daftar Sekarang'" />
           </a>
           <ContactAdminButton text="Hubungi Admin" bg-color="bg-none" border-color="border-colorPrimary"

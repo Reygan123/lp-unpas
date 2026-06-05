@@ -64,7 +64,7 @@ const menuItems = [
 ]
 
 const handleClick = () => {
-    window.location.href = 'https://registrasi.unpas.ac.id/register'
+    window.location.href = 'https://situ2.unpas.ac.id/spmbfront/jalur-seleksi'
 }
 
 const navigateToHome = () => {

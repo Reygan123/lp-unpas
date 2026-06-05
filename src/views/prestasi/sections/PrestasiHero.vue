@@ -20,7 +20,7 @@ import TextSection from '@/components/TextSection.vue';
             baik di tingkat nasional maupun internasional.
           </TextSection>
           <div class="flex gap-10 mt-10 justify-center">
-            <a href="https://registrasi.unpas.ac.id/register" target="_blank">
+            <a href="https://situ2.unpas.ac.id/spmbfront/jalur-seleksi" target="_blank">
               <InteractiveHoverButton :text="'Daftar Sekarang'" />
             </a>
           </div>
@@ -40,7 +40,7 @@ import TextSection from '@/components/TextSection.vue';
           baik di tingkat nasional maupun internasional.
         </TextSection>
         <div class="flex gap-10 mt-10 justify-center">
-          <a href="https://registrasi.unpas.ac.id/register" target="_blank">
+          <a href="https://situ2.unpas.ac.id/spmbfront/jalur-seleksi" target="_blank">
             <InteractiveHoverButton :text="'Daftar Sekarang'" />
           </a>
         </div>

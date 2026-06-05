@@ -7,7 +7,7 @@ const baseUrl = import.meta.env.VITE_APP_IMG_URL;
 
 const getImageUrl = (imagePath: string | null) => {
   if (!imagePath) return '';
-  return `${baseUrl}/${imagePath}`;
+  return `${baseUrl}${imagePath}`;
 };
 
 const props = defineProps<{
@@ -44,6 +44,7 @@ onUnmounted(() => {
 </script>
 
 <template>
+  {{ console.log(sliders) }}
   <div class="min-w-full p-0 md:p-4 lg:p-8">
     <div v-if="isLoading"
       class="relative w-full h-[80vh] md:h-[426px] lg:h-[75vh] overflow-hidden bg-gray-200 rounded-b-[32px] md:rounded-[24px] lg:rounded-[32px] animate-pulse">
@@ -64,6 +65,7 @@ onUnmounted(() => {
           'z-index': currentSlide === index ? 1 : 0
         }">
         <div class="w-full h-full z-10 img-container">
+        {{ console.log(getImageUrl(slider.image1)) }}
           <img :src="getImageUrl(slider.image1)" alt="" class="w-full h-full object-cover object-top img-box">
           <svg :style="{ visibility: 'hidden', position: 'absolute' }" width="0" height="0"
             xmlns="http://www.w3.org/2000/svg" version="1.1">
@@ -88,7 +90,7 @@ onUnmounted(() => {
 
           <div class="transition-all duration-1000 transform delay-200"
             :class="(currentSlide === index && !isInitialLoad) ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'">
-            <a href="https://registrasi.unpas.ac.id/register" target="_blank">
+            <a href="https://situ2.unpas.ac.id/spmbfront/jalur-seleksi" target="_blank">
               <InteractiveHoverButton :text="'Daftar Sekarang'" />
             </a>
           </div>

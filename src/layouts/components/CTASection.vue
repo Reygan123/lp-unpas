@@ -13,7 +13,7 @@ import Title from '@/components/Title.vue'
         >
         <div class="flex gap-4 mt-8 justify-center items-center lg:justify-start">
           <div class="w-fit">
-            <a href="https://registrasi.unpas.ac.id/register" target="_blank">
+            <a href="https://situ2.unpas.ac.id/spmbfront/jalur-seleksi" target="_blank">
               <InteractiveHoverButton
                 text="Daftar Sekarang"
                 bg-color="bg-white"

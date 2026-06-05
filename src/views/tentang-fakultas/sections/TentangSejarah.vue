@@ -27,7 +27,7 @@ defineProps<{
           <TitleSection v-if="fakultas?.title2" class="mt-7" :text="`Sejarah ${fakultas?.title2}`"></TitleSection>
           <TextSection class="text-gray-500 mt-7" ><span v-html="fakultas?.description2"></span></TextSection>
           <div class="flex gap-5 lg:mt-10 mt-5">
-            <a href="https://registrasi.unpas.ac.id/register" target="_blank">
+            <a href="https://situ2.unpas.ac.id/spmbfront/jalur-seleksi" target="_blank">
               <InteractiveHoverButton :text="'Daftar Sekarang'" />
             </a>
             <InteractiveHoverButton @click="$router.push('/tentang-fakultas')" text="Selengkapnya" bg-color="bg-transparent" textColor="text-colorPrimary"
