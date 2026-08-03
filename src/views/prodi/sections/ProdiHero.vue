@@ -23,7 +23,7 @@ defineProps<{
             tantangan dunia kerja. Bergabunglah dengan kami dan kembangkan potensi Anda di bidang yang Anda
             cintai.</TextSection>
           <div class="w-full space-x-4 lg:space-x-6">
-            <a href="https://situ2.unpas.ac.id/spmbfront/jalur-seleksi" target="_blank">
+            <a href="https://pmb.unpas.ac.id/" target="_blank">
               <InteractiveHoverButton :text="'Daftar Sekarang'" />
             </a>
             <ContactAdminButton :bg-color="'bg-transparent'" :bg-hover="'bg-colorPrimary'"

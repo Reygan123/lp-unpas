@@ -88,7 +88,7 @@
         <!-- Copyright -->
         <div class="w-full p-3 bg-[#FEF251] rounded-2xl text-center mt-4">
           <p class="text-[#1A1A1A] text-sm md:text-md font-medium">
-            © {{ new Date().getFullYear() }} Unpas Copyright and rights reserved
+            © {{ new Date().getFullYear() }} Fakultas Teknik Universitas Pasundan Copyright and rights reserved
           </p>
         </div>
       </div>
@@ -103,44 +103,44 @@ import LogoOutline from '@/assets/logo-outline1.png'
 
 // Social media data
 const socialMedia = [
-  { name: 'Twitter', icon: 'fab fa-twitter', url: 'https://x.com/univ_pasundan' },
+  { name: 'Twitter', icon: 'fab fa-twitter', url: 'https://x.com/ftunpas' },
   {
     name: 'Instagram',
     icon: 'fab fa-instagram',
-    url: 'https://www.instagram.com/pmbunpas',
+    url: 'https://www.instagram.com/fakultasteknikunpas/?hl=id',
   },
   {
     name: 'Facebook',
     icon: 'fab fa-facebook',
-    url: 'https://www.facebook.com/universitaspasundan',
+    url: 'https://web.facebook.com/ftunpas/?locale=id_ID&_rdc=1&_rdr#',
   },
-  { name: 'TikTok', icon: 'fab fa-tiktok', url: 'https://www.tiktok.com/@univ_pasundan' },
+  { name: 'TikTok', icon: 'fab fa-tiktok', url: 'https://www.tiktok.com/@fakultasteknikunpas' },
   {
     name: 'YouTube',
     icon: 'fab fa-youtube',
-    url: 'https://www.youtube.com/@UniversitasPasundanOfficial',
+    url: 'https://youtube.com/@fakultasteknikunpas?si=M_-jvkbjiqgaxcm6',
   },
 ]
 
 const navigationLinks = [
   { path: '/', label: 'Beranda' },
-  { path: '/tentang-fakultas', label: 'Tentang' },
+  { path: '/akademik', label: 'Tentang' },
   { path: '/prodi', label: 'Prodi' },
   { path: '/prestasi', label: 'Prestasi' },
-  { path: '/kegiatan', label: 'Kegiatan' },
+  { path: '/kemahasiswaan-dan-alumni', label: 'Kegiatan' },
   { path: '/fasilitas', label: 'Fasilitas' },
   { path: '/tenaga-pengajar', label: 'Tenaga Pengajar' },
-  { path: '/riset-dan-inovasi', label: 'Penelitian & Inovasi' },
+  { path: '/penelitian', label: 'Penelitian & Inovasi' },
   { path: '/testimoni', label: 'Testimoni' },
   { path: '/kerjasama', label: 'Kerjasama & Mitra' },
   { path: '/berita', label: 'Berita' },
-  { path: '/agenda', label: 'Agenda' },
+  // { path: '/agenda', label: 'Agenda' },
   { path: '/Faq', label: 'Faq & Bantuan' },
   { path: '/kontak', label: 'Kontak' },
 ]
 
 const campuses = [
-  { name: 'Kampus I', address: 'Jl. Lengkong Besar No.68' },
+  { name: 'Kampus I', address: 'Jl. Dr. Setiabudi No. 193, Gegerkalong, Sukasari, Kota Bandung, Jawa Barat.' },
   { name: 'Kampus II', address: 'Jl. Tamansari No.6-8' },
   { name: 'Kampus IV', address: 'Jl. Dr. Setiabudhi No.193' },
   { name: 'Kampus V', address: 'Jl. Sumatera No.41' },

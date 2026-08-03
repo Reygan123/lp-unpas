@@ -57,14 +57,15 @@ watch(() => route.path, () => {
 
 const menuItems = [
     { name: 'Beranda', path: '/', icon: 'pi pi-home' },
-    { name: 'Tentang', path: '/tentang-fakultas', icon: 'pi pi-book' },
-    { name: isMobile.value ? 'Riset' : 'Riset & Inovasi', path: '/riset-dan-inovasi', icon: 'pi pi-calendar' },
+    { name: 'Akademik', path: '/akademik', icon: 'pi pi-book' },
+    { name: 'Penelitian', path: '/penelitian', icon: 'pi pi-calendar' },
+    { name: 'Pengabdian', path: '/pengabdian-masyarakat', icon: 'pi pi-heart' },
+    { name: isMobile.value ? 'Kemahasiswaan' : 'Kemahasiswaan & Alumni', path: '/kemahasiswaan-dan-alumni', icon: 'pi pi-users' },
     { name: isMobile.value ? 'Prodi' : 'Program Studi', path: '/prodi', icon: 'pi pi-map-marker' },
-    { name: isMobile.value ? 'Kegiatan' : 'Kegiatan Mahasiswa', path: '/kegiatan', icon: 'pi pi-users' },
 ]
 
 const handleClick = () => {
-    window.location.href = 'https://situ2.unpas.ac.id/spmbfront/jalur-seleksi'
+    window.location.href = 'https://pmb.unpas.ac.id/'
 }
 
 const navigateToHome = () => {
@@ -97,8 +98,8 @@ const navigateToHome = () => {
                     height="48"
                 />
                 <div class="w-[85%]">
-                    <p :class="['text-xs', color]">Penerimaan Mahasiswa Baru</p>
-                    <span :class="['text-lg md:text-base lg:text-lg font-medium', color]">Universitas Pasundan</span>
+                    <p :class="['text-[0.63vw]', color]">Penerimaan Mahasiswa Baru</p>
+                    <span :class="['text-[0.90vw] md:text-[0.80vw] lg:text-[0.90vw] font-medium', color]">FT Universitas Pasundan</span>
                 </div>
             </div>
 
@@ -116,7 +117,7 @@ const navigateToHome = () => {
                     :key="index"
                     :to="item.path"
                     :aria-label="item.name"
-                    class="relative p-4 text-center text-xs lg:text-base rounded-lg md:rounded-xl lg:rounded-2xl transition-colors duration-500 ease-in-out hover:font-semibold"
+                    class="relative p-4 text-center text-[0.63vw] lg:text-[0.80vw] rounded-lg md:rounded-xl lg:rounded-2xl transition-colors duration-500 ease-in-out hover:font-semibold"
                     :class="{ 'text-[#444444]': route.path === item.path }"
                 >
                     {{ item.name }}
@@ -139,7 +140,7 @@ const navigateToHome = () => {
                     />
                 </RouterLink>
                 <button
-                    class="pulsating-button flex gap-2 cursor-pointer items-center text-xs md:text-sm lg:text-sm px-8 py-4 md:px-8 md:py-4 font-bold border-2 border-transparent bg-primary text-gray-700 rounded-lg md:rounded-xl lg:rounded-2xl hover:border-2 hover:border-white/50 shadow-black/5 shadow-xl drop-shadow-[0px_20px_40px_rgba(254,242,81,0.5)] hover:shadow-black/5 transition-colors duration-500"
+                    class="pulsating-button flex gap-2 cursor-pointer items-center text-[0.63vw] md:text-[0.70vw] lg:text-[0.70vw] px-8 py-4 md:px-8 md:py-4 font-bold border-2 border-transparent bg-primary text-gray-700 rounded-lg md:rounded-xl lg:rounded-2xl hover:border-2 hover:border-white/50 shadow-black/5 shadow-xl drop-shadow-[0px_20px_40px_rgba(254,242,81,0.5)] hover:shadow-black/5 transition-colors duration-500"
                     @click="handleClick"
                 >
                     Daftar
@@ -161,7 +162,7 @@ const navigateToHome = () => {
                 :class="route.path === item.path ? 'text-[#C73929]' : 'text-[#484C52]'"
             >
                 <i :class="item.icon"></i>
-                <span :class="['text-xs mt-2', route.path === item.path ? 'text-[#C73929] font-bold' : '']">
+                <span :class="['text-[0.63vw] mt-2', route.path === item.path ? 'text-[#C73929] font-bold' : '']">
                     {{ item.name }}
                 </span>
             </RouterLink>

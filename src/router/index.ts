@@ -52,8 +52,8 @@ const router = createRouter({
           },
         },
         {
-          path: "/tentang-fakultas",
-          name: "tentang-fakultas",
+          path: "/akademik",
+          name: "akademik",
           component: () => import("@/views/tentang-fakultas/TentangFakultas.vue"),
           meta: {
             pageTitle: "Tentang Fakultas",
@@ -79,8 +79,8 @@ const router = createRouter({
           },
         },
         {
-          path: "/riset-dan-inovasi",
-          name: "riset-dan-inovasi",
+          path: "/penelitian",
+          name: "penelitian",
           component: () => import("@/views/riset-dan-inovasi/RisetDanInovasi.vue"),
           meta: {
             pageTitle: "Riset dan Inovasi",
@@ -165,24 +165,24 @@ const router = createRouter({
         description: "Hubungi Fakultas Teknik Universitas Pasundan — alamat, nomor telepon, email, dan formulir kontak tersedia untuk Anda.",
       },
     },
-    {
-      path: '/agenda',
-      name: 'agenda',
-      component: Agenda,
-      meta: {
-        pageTitle: "Agenda",
-        description: "Jadwal agenda dan acara Fakultas Teknik Universitas Pasundan — seminar, workshop, dan kegiatan akademik terkini.",
-      },
-    },
-    {
-      path: '/agenda/:slug',
-      name: 'agendaDetail',
-      component: AgendaDetail,
-      meta: {
-        pageTitle: "Agenda Detail",
-        description: "Detail agenda dan acara Fakultas Teknik Universitas Pasundan.",
-      },
-    },
+    // {
+    //   path: '/agenda',
+    //   name: 'agenda',
+    //   component: Agenda,
+    //   meta: {
+    //     pageTitle: "Agenda",
+    //     description: "Jadwal agenda dan acara Fakultas Teknik Universitas Pasundan — seminar, workshop, dan kegiatan akademik terkini.",
+    //   },
+    // },
+    // {
+    //   path: '/agenda/:slug',
+    //   name: 'agendaDetail',
+    //   component: AgendaDetail,
+    //   meta: {
+    //     pageTitle: "Agenda Detail",
+    //     description: "Detail agenda dan acara Fakultas Teknik Universitas Pasundan.",
+    //   },
+    // },
     {
       path: '/faq',
       name: 'faq',
@@ -193,12 +193,21 @@ const router = createRouter({
       },
     },
     {
-      path: '/kegiatan',
+      path: '/kemahasiswaan-dan-alumni',
       name: 'kegiatan',
       component: Kegiatan,
       meta: {
-        pageTitle: "Kegiatan Mahasiswa",
+        pageTitle: "Kemahasiswaan & Alumni",
         description: "Kegiatan dan organisasi mahasiswa Fakultas Teknik Universitas Pasundan — UKM, himpunan, dan berbagai aktivitas kampus.",
+      },
+    },
+    {
+      path: '/pengabdian-masyarakat',
+      name: 'pengabdian-masyarakat',
+      component: () => import('@/views/pengabdian-masyarakat/PengabdianMasyarakatView.vue'),
+      meta: {
+        title: 'Pengabdian Masyarakat - Fakultas Teknik UNPAS',
+        description: 'Program pengabdian kepada masyarakat oleh dosen dan mahasiswa Fakultas Teknik Universitas Pasundan.',
       },
     },
   ],

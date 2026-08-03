@@ -45,9 +45,9 @@ const currentKegiatan = computed(() => {
 </script>
 <template>
     <div class="grid gap-5 text-center lg:w-1/2 w-full mx-auto">
-      <TitleMain text="Kegiatan Mahasiswa" class="text-center"></TitleMain>
+      <TitleMain text="Kemahasiswaan & Alumni" class="text-center"></TitleMain>
       <p class="text-gray-500">
-        Fakultas Teknik Unpas memiliki berbagai kegiatan mahasiswa yang mendukung pengembangan diri
+        Fakultas Teknik Unpas memiliki berbagai Kemahasiswaan & Alumni yang mendukung pengembangan diri
         dan keterampilan.
       </p>
       <div class="flex gap-5 justify-center flex-wrap">

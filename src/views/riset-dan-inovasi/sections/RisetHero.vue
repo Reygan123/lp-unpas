@@ -11,12 +11,12 @@ import SectionLayout from '@/layouts/SectionLayout.vue';
   <SectionLayout>
     <div class="flex lg:flex-row flex-col items-center">
       <div class="text-center lg:w-1/2 w-full mx-auto space-y-4 lg:space-y-6">
-        <TitleSection text="Penelitian dan Publikasi Fakultas Kami"></TitleSection>
+        <TitleSection text="Penelitian, Pengabdian Masyarakat dan Publikasi"></TitleSection>
         <TextSection>Fakultas kami berkomitmen untuk mendorong penelitian yang inovatif dan berkualitas tinggi.
           Kami percaya bahwa penelitian adalah kunci untuk menciptakan solusi yang berdampak bagi
           masyarakat.</TextSection>
         <div class="flex lg:gap-10 gap-5 justify-center">
-          <a href="https://situ2.unpas.ac.id/spmbfront/jalur-seleksi" target="_blank">
+          <a href="https://pmb.unpas.ac.id/" target="_blank">
             <InteractiveHoverButton :text="'Daftar Sekarang'" />
           </a>
           <ContactAdminButton text="Hubungi Admin" bg-color="bg-none" border-color="border-colorPrimary"

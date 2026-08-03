@@ -32,6 +32,7 @@ import { useKurikulumStore } from '@/stores/kurikulum';
 import { useSliderStore } from '@/stores/slider';
 import { useUnggulanStore } from '@/stores/unggulan.ts';
 import ProdiAlasan from '../prodi/sections/ProdiAlasan.vue';
+import ProdiDetailAkreditas from './sections/ProdiDetailAkreditas.vue';
 
 const route = useRoute();
 const departementStore = useDepartementStore();
@@ -105,6 +106,7 @@ watch(() => departementStore.currentDepartement, updateTitle);
       <AboutSection :prodi-detail="departementStore.currentDepartement" :is-loading="false" />
       <ProdiDetailPoster v-if="sliderStore.currentSlider.length > 0" :slider="sliderStore.currentSlider" :is-loading="false" />
       <StatistikSection :prodi-data="departementStore.currentDepartement" :is-loading="false" />
+      <ProdiDetailAkreditas />
       <ProdiDetailProspek v-if="prospekStore.currentProspek.length > 0"
         :prodi-detail="departementStore.currentDepartement"
         :prospek="prospekStore.currentProspek"

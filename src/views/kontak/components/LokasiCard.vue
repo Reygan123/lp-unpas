@@ -18,6 +18,8 @@ defineProps<{
       <TextBody>{{ location.address }}</TextBody>
       <!-- <TextBody>{{ location.tagline }}</TextBody> -->
     </div>
+    <a href="https://maps.app.goo.gl/fBcKH1zLTf2WvK5V9">
     <TextBody class="hover:text-colorPrimary cursor-pointer transition duration-500">Dapatkan Arah &gt;</TextBody>
+    </a>
   </div>
 </template>

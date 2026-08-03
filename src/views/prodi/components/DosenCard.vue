@@ -23,12 +23,12 @@ defineProps<{
         class="w-full h-full object-cover object-top group-hover:scale-105 transition duration-500 dosen-box">
     </div>
     <div class="space-y-2">
-      <div class="h-fit md:h-14 lg:h-16">
+      <div class="h-fit md:h-16 lg:h-20">
         <h4 class="text-sm md:text-base lg:text-lg font-bold leading-tight">{{ name || 'Dr. Andi' }}</h4>
       </div>
       <h4 class="text-sm md:text-base lg:text-lg font-light">{{ title || 'Dosen Senior' }}</h4>
     </div>
-    <div class="flex gap-4 md:gap-6" v-if="facebook || instagram || youtube || tiktok">
+    <!-- <div class="flex gap-4 md:gap-6" v-if="facebook || instagram || youtube || tiktok">
       <a v-if="facebook" :href="facebook" target="_blank" class="w-5 h-5">
         <img :src="FacebookIcon" alt="Facebook" class="w-full h-full object-contain">
       </a>
@@ -41,7 +41,7 @@ defineProps<{
       <a v-if="tiktok" :href="tiktok" target="_blank" class="w-5 h-5">
         <img :src="TiktokIcon" alt="TikTok" class="w-full h-full object-contain">
       </a>
-    </div>
+    </div> -->
   </div>
 </template>
 

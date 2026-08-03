@@ -13,6 +13,13 @@ import 'swiper/css/autoplay';
 import type { Organization } from '@/core/types/organisasi';
 import KegiatanCard from '@/views/prodiDetail/components/KegiatanCard.vue';
 
+// Replace with your project's actual Department type/import if one exists
+interface Department {
+  id: number;
+  name: string;
+  slug: string;
+}
+
 const baseUrl = import.meta.env.VITE_APP_IMG_URL;
 
 const getImageUrl = (imagePath: string | null) => {
@@ -22,19 +29,27 @@ const getImageUrl = (imagePath: string | null) => {
 
 const props = defineProps<{
   organisasi: Organization[]
+  departements: Department[]
 }>();
 
 const activeFilter = ref("semua");
+const activeProdi = ref("semua"); // department id as string, or 'semua'
 const visibleItems = ref(6);
 const itemsPerLoad = 3;
 const refreshKey = ref(0);
 
 const filteredOrganisasi = computed(() => {
-  if (activeFilter.value === "semua") {
-    return props.organisasi;
-  } else {
-    return props.organisasi.filter(org => org.category.toLowerCase() === activeFilter.value.toLowerCase());
+  let result = props.organisasi;
+
+  if (activeFilter.value !== "semua") {
+    result = result.filter(org => org.category.toLowerCase() === activeFilter.value.toLowerCase());
   }
+
+  if (activeProdi.value !== "semua") {
+    result = result.filter(org => String(org.id_departement) === activeProdi.value);
+  }
+
+  return result;
 });
 
 const visibleFilteredOrganisasi = computed(() => {
@@ -50,10 +65,17 @@ const setFilter = async (filter: string) => {
   refreshKey.value++;
 };
 
-const loadMore = async () => {
-  const previousCount = visibleItems.value;
-  visibleItems.value += itemsPerLoad;
+const setProdiFilter = async (value: string) => {
+  if (activeProdi.value === value) return;
 
+  activeProdi.value = value;
+  visibleItems.value = 6;
+
+  refreshKey.value++;
+};
+
+const loadMore = async () => {
+  visibleItems.value += itemsPerLoad;
   await nextTick();
   refreshKey.value++;
 };
@@ -67,10 +89,11 @@ const showLoadMore = computed(() => {
   <SectionLayout>
     <div class="w-full flex flex-col gap-5 lg:gap-10">
       <div class="w-full flex flex-col gap-4 md:gap-5 lg:gap-6 justify-center items-center">
-        <TitleSection :text="'Kegiatan Mahasiswa'"></TitleSection>
+        <TitleSection :text="'Kegiatan Kemahasiswaan'"></TitleSection>
         <TextSection class="text-black/40">Fasilitas unggulan kami mendukung pengalaman belajar yang optimal.</TextSection>
       </div>
 
+      <!-- Category filter -->
       <div class="w-full flex justify-center items-center overflow-x-auto pb-2">
         <div class="w-fit flex gap-2 lg:gap-4">
           <div @click="setFilter('semua')"
@@ -90,6 +113,20 @@ const showLoadMore = computed(() => {
             <p class="text-[10px] md:text-[12px] lg:text-[14px] text-white">Komunitas</p>
           </div>
         </div>
+      </div>
+
+      <!-- Prodi filter -->
+      <div class="w-full flex justify-center items-center">
+        <select
+          :value="activeProdi"
+          @change="setProdiFilter(($event.target as HTMLSelectElement).value)"
+          class="rounded-full px-2 py-3 bg-text/50 text-white text-[10px] md:text-[12px] lg:text-[14px] cursor-pointer outline-none appearance-none text-center"
+        >
+          <option value="semua">Semua Prodi</option>
+          <option v-for="dept in departements" :key="dept.id" :value="String(dept.id)">
+            {{ dept.name }}
+          </option>
+        </select>
       </div>
     </div>
 

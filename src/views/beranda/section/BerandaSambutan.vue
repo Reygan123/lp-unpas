@@ -44,12 +44,12 @@ const titleHTML = computed(() => {
           <TextSection><span v-html="fakultas?.description1"></span></TextSection>
         </div>
         <div class="flex gap-5 mt-10">
-          <a href="https://situ2.unpas.ac.id/spmbfront/jalur-seleksi" target="_blank">
+          <a href="https://pmb.unpas.ac.id/" target="_blank">
             <InteractiveHoverButton :text="'Daftar Sekarang'" />
           </a>
-          <InteractiveHoverButton @click="$router.push('/tentang-fakultas')" text="Selengkapnya" bg-color="bg-none"
+          <!-- <InteractiveHoverButton @click="$router.push('/akademik')" text="Selengkapnya" bg-color="bg-none"
             border-color="border-colorPrimary" text-color="text-colorPrimary" bg-hover="bg-colorPrimary"
-            text-hover="text-white"></InteractiveHoverButton>
+            text-hover="text-white"></InteractiveHoverButton> -->
         </div>
       </div>
 

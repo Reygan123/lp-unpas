@@ -44,7 +44,7 @@ onMounted(async () => {
 
 <template>
   <MainLayout>
-    <HomeSlider :sliders="sliderStore.sliders" :is-loading="isLoading" />
+    <HomeSlider :sliders="sliderStore.sliders ?? []" :is-loading="isLoading" />
     <BerandaSambutan :fakultas="fakultasStore.fakultas" :dosen="berandaStore.dosenData" />
     <BerandaTentang :fakultas="fakultasStore.fakultas" />
     <ProdiAlasan :unggulan="berandaStore.ungulanData" :fakultas="fakultasStore.fakultas" />

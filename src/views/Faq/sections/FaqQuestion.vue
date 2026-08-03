@@ -48,7 +48,7 @@ const backgroundImageUrl = 'https://images.unsplash.com/photo-1635424239131-32dc
           </div>
 
           <div class="flex flex-wrap justify-center gap-4 md:gap-6 lg:-mt-10">
-            <a href="https://situ2.unpas.ac.id/spmbfront/jalur-seleksi" target="_blank">
+            <a href="https://pmb.unpas.ac.id/" target="_blank">
               <InteractiveHoverButton :text="'Daftar Sekarang'" />
             </a>
             <ContactAdminButton :bg-color="'bg-transparent'" :bg-hover="'bg-colorPrimary'" :border-color="'border-colorPrimary'"

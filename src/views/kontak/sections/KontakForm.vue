@@ -13,12 +13,12 @@ const formData = ref({
 });
 
 const sendWhatsAppMessage = () => {
-  if (!identityStore.identity?.phone) return;
+  // if (!identityStore.identity?.phone) return;
 
-  const phone = identityStore.identity.phone.replace(/^0/, '62');
+  // const phone = identityStore.identity.phone.replace(/^0/, '62');
   const text = `Halo, saya ${formData.value.name} (${formData.value.email}). ${formData.value.message}`;
   const encodedText = encodeURIComponent(text);
-  const whatsappUrl = `https://wa.me/${phone}?text=${encodedText}`;
+  const whatsappUrl = `https://wa.me/628111317193?text=${encodedText}`;
 
   window.open(whatsappUrl, '_blank');
 

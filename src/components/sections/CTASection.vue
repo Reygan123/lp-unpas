@@ -21,7 +21,7 @@ import ContactAdminButton from '../ContactAdminButton.vue';
           </div>
 
           <div class="flex items-center gap-3 sm:gap-4 mt-2 sm:mt-0">
-            <a href="https://registrasi.unpas.ac.id/login" target="_blank">
+            <a href="https://pmb.unpas.ac.id/" target="_blank">
               <InteractiveHoverButton :bg-color="'bg-white'" :text-color="'text-colorPrimary'" :bg-hover="'bg-colorPrimary'" :text-hover="'text-white'" :border-hover="'border-white'" :text="'Daftar Sekarang'"></InteractiveHoverButton>
             </a>
             <ContactAdminButton />

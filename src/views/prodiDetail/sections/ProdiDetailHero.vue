@@ -44,7 +44,7 @@ defineProps<{
 
             <div
               class="flex gap-4 md:gap-5 lg:gap-6 justify-center items-center md:justify-start md:items-start animate-fade-in-right">
-              <a href="https://situ2.unpas.ac.id/spmbfront/jalur-seleksi" target="_blank">
+              <a href="https://pmb.unpas.ac.id/" target="_blank">
                 <InteractiveHoverButton :text="'Daftar Sekarang'" />
               </a>
               <ContactAdminButton :bg-color="'bg-transparent'" :bg-hover="'bg-white'" :border-color="'border-white'"

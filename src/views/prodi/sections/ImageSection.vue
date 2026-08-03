@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Gedung from '@/assets/gedung.jpg'
+import Gedung from '@/assets/gedung.webp'
 
 defineProps<{
   isLoading?: boolean;

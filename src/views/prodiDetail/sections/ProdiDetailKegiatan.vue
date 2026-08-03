@@ -54,7 +54,7 @@ const setFilter = async (filter: string) => {
   <SectionLayout>
     <div class="w-full flex flex-col gap-5 lg:gap-10">
       <div class="w-full flex flex-col gap-4 md:gap-5 lg:gap-6 justify-center items-center">
-        <TitleSection :text="'Kegiatan Mahasiswa'"></TitleSection>
+        <TitleSection :text="'Kemahasiswaan & Alumni'"></TitleSection>
         <TextSection class="text-center md:text-left text-black/40">Fasilitas unggulan kami mendukung pengalaman belajar yang optimal.
         </TextSection>
       </div>
@@ -103,7 +103,7 @@ const setFilter = async (filter: string) => {
         </SwiperSlide>
       </Swiper>
       <div class="flex justify-center items-center">
-        <InteractiveHoverButton @click="$router.push('/kegiatan')" :text="'Selengkapnya'"></InteractiveHoverButton>
+        <InteractiveHoverButton @click="$router.push('/kemahasiswaan-dan-alumni')" :text="'Selengkapnya'"></InteractiveHoverButton>
       </div>
     </div>
   </SectionLayout>

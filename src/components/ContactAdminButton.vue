@@ -44,18 +44,18 @@ onMounted(async () => {
 });
 
 const contactAdmin = () => {
-  const phoneNumber = identityStore.identity?.phone;
-  const chatMessage = analyticStore.analytic?.chat;
+  // const phoneNumber = identityStore.identity?.phone;
+  // const chatMessage = analyticStore.analytic?.chat;
 
-  if (phoneNumber) {
-    const cleanedPhone = phoneNumber.replace(/\D/g, '');
-    const encodedMessage = encodeURIComponent(chatMessage || 'Halo, saya ingin bertanya...');
-    const whatsappUrl = `https://wa.me/${cleanedPhone}?text=${encodedMessage}`;
-    window.open(whatsappUrl, '_blank');
-  } else {
-    console.error('Nomor telepon admin tidak tersedia');
-    alert('Maaf, tidak dapat menghubungi admin saat ini.');
-  }
+  // if (phoneNumber) {
+  //   const cleanedPhone = phoneNumber.replace(/\D/g, '');
+  // } else {
+  //   console.error('Nomor telepon admin tidak tersedia');
+  //   alert('Maaf, tidak dapat menghubungi admin saat ini.');
+  // }
+  const encodedMessage = encodeURIComponent('Halo, saya ingin bertanya...');
+  const whatsappUrl = `https://wa.me/628111317193?text=${encodedMessage}`;
+  window.open(whatsappUrl, '_blank');
 };
 </script>
 

@@ -34,9 +34,9 @@ defineProps<{
         <div v-for="i in 3" :key="i" class="h-32 bg-gray-300 animate-pulse rounded-lg"></div>
       </template>
       <template v-else>
-        <KontakCard type="email" :value="identity?.email" :icon="EmailIcon" />
-        <KontakCard type="phone" :value="identity?.phone" :icon="PhoneIcon" />
-        <KontakCard type="map" :link="identity?.link_map" :icon="LocationIcon" />
+        <KontakCard type="email" :value="'info_ftunpas@unpas.ac.id'" :icon="EmailIcon" />
+        <KontakCard type="phone" :value="'(022) 2019433'" :icon="PhoneIcon" />
+        <KontakCard type="map" :link="'https://maps.app.goo.gl/fBcKH1zLTf2WvK5V9'" :icon="LocationIcon" />
       </template>
     </div>
   </SectionLayout>

@@ -17,34 +17,34 @@ defineProps<{
 }>();
 
 const locations = [
+  // {
+  //   id: 1,
+  //   name: "Kampus I",
+  //   address: "Jl. Lengkong Besar No. 68, Lengkong, Kota Bandung, Jawa Barat 40261",
+  //   tagline: "Inspiring with Integrity",
+  //   image: Teknik
+  // },
+  // {
+  //   id: 2,
+  //   name: "Kampus II",
+  //   address: "Jl. Tamansari No. 6-8, Tamansari, Kota Bandung, Jawa Barat",
+  //   tagline: "Life Isn't Perfect But Your Music Can Be",
+  //   image: Hukum
+  // },
   {
     id: 1,
-    name: "Kampus I",
-    address: "Jl. Lengkong Besar No. 68, Lengkong, Kota Bandung, Jawa Barat 40261",
-    tagline: "Inspiring with Integrity",
-    image: Teknik
-  },
-  {
-    id: 2,
-    name: "Kampus II",
-    address: "Jl. Tamansari No. 6-8, Tamansari, Kota Bandung, Jawa Barat",
-    tagline: "Life Isn't Perfect But Your Music Can Be",
-    image: Hukum
-  },
-  {
-    id: 3,
     name: "Kampus IV",
     address: "Jl. Dr. Setiabudi No. 193, Sukasari, Kota Bandung, Jawa Barat 40154",
     tagline: "FISIP Unpas Excellent",
     image: Seni
   },
-  {
-    id: 4,
-    name: "Kampus V",
-    address: "Jl. Sumatera No. 41, Bandung",
-    tagline: "Mendidik dengan Hati, Menginspirasi dengan Ilmu",
-    image: Sosial
-  }
+  // {
+  //   id: 4,
+  //   name: "Kampus V",
+  //   address: "Jl. Sumatera No. 41, Bandung",
+  //   tagline: "Mendidik dengan Hati, Menginspirasi dengan Ilmu",
+  //   image: Sosial
+  // }
 ];
 </script>
 

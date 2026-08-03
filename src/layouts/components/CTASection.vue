@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import InteractiveHoverButton from '@/components/ui/interactive-hover-button/InteractiveHoverButton.vue'
-import Title from '@/components/Title.vue'
+import InteractiveHoverButton from "@/components/ui/interactive-hover-button/InteractiveHoverButton.vue";
+import Title from "@/components/Title.vue";
 </script>
 <template>
   <div
@@ -13,7 +13,7 @@ import Title from '@/components/Title.vue'
         >
         <div class="flex gap-4 mt-8 justify-center items-center lg:justify-start">
           <div class="w-fit">
-            <a href="https://situ2.unpas.ac.id/spmbfront/jalur-seleksi" target="_blank">
+            <a href="https://pmb.unpas.ac.id/" target="_blank">
               <InteractiveHoverButton
                 text="Daftar Sekarang"
                 bg-color="bg-white"
@@ -23,10 +23,13 @@ import Title from '@/components/Title.vue'
             </a>
           </div>
           <div class="w-fit">
-            <InteractiveHoverButton
-              text="Hubungi Kami"
-              borderHover="border-white"
-            />
+            <a
+              href="https://wa.me/628111317193"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <InteractiveHoverButton text="Hubungi Kami" borderHover="border-white" />
+            </a>
           </div>
         </div>
       </div>

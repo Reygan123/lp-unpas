@@ -34,7 +34,7 @@ const komunitasCount = computed(() => {
       <!-- Mobile -->
       <div class="w-full flex flex-col justify-center items-center text-center relative md:hidden">
         <div class="w-full md:w-1/4 flex flex-col justify-center items-center gap-4">
-          <TitleMain :text="'Kegiatan Mahasiswa'"></TitleMain>
+          <TitleMain :text="'Kemahasiswaan & Alumni'"></TitleMain>
           <TextSection class="text-black/40">Dari organisasi kemahasiswaan, acara seni dan budaya, hingga kegiatan
             sosial—kampus kami penuh dengan peluang untuk berkembang di luar kelas.</TextSection>
         </div>
@@ -48,10 +48,10 @@ const komunitasCount = computed(() => {
       <div class="w-full md:flex justify-center items-center text-center relative hidden">
         <div class="relative -bottom-28"><img :src="Sertif" alt=""></div>
         <div class="w-full md:w-1/4 flex flex-col justify-center items-center gap-4 md:mb-8 lg:mb-10">
-          <TitleMain :text="'Kegiatan Mahasiswa'"></TitleMain>
+          <TitleMain :text="'Kemahasiswaan & Alumni'"></TitleMain>
           <TextSection class="text-black/40">Dari organisasi kemahasiswaan, acara seni dan budaya, hingga kegiatan
             sosial—kampus kami penuh dengan peluang untuk berkembang di luar kelas.</TextSection>
-          <a href="https://situ2.unpas.ac.id/spmbfront/jalur-seleksi" target="_blank">
+          <a href="https://pmb.unpas.ac.id/" target="_blank">
             <InteractiveHoverButton :text="'Daftar Sekarang'" />
           </a>
         </div>
@@ -81,7 +81,7 @@ const komunitasCount = computed(() => {
           <TextBody>Komunitas</TextBody>
         </div>
       </div>
-      <a href="https://situ2.unpas.ac.id/spmbfront/jalur-seleksi" target="_blank">
+      <a href="https://pmb.unpas.ac.id/" target="_blank">
         <InteractiveHoverButton :text="'Daftar Sekarang'" class="mt-4 md:hidden"></InteractiveHoverButton>
       </a>
     </div>

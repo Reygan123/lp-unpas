@@ -12,7 +12,7 @@ defineProps<{
 <template>
   <SectionLayout>
     <div class="text-center w-full mx-auto space-y-5 lg:space-y-6">
-      <TitleSection text="Sejarah, Visi, Misi, dan Pencapaian Fakultas Kami" class="text-center lg:w-1/2 mx-auto"></TitleSection>
+      <TitleSection text="Visi dan Misi Fakultas Teknik" class="text-center lg:w-1/2 mx-auto"></TitleSection>
       <TextSection class="lg:w-[70%] mx-auto"><span v-html="fakultas?.description3"></span></TextSection>
     </div>
   </SectionLayout>

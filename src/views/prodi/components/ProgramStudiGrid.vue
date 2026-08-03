@@ -5,14 +5,31 @@ import Star from '@/assets/icons/star.png'
 import Gedung from '@/assets/gedung.jpg'
 import router from '@/router';
 import InteractiveHoverButton from '@/components/ui/interactive-hover-button/InteractiveHoverButton.vue';
+import { computed } from 'vue';
 
-defineProps<{
+const props = defineProps<{
   prodiDatas?: Departement[];
   loading?: boolean;
   error?: string | null;
 }>();
 
 const baseUrl = import.meta.env.VITE_APP_IMG_URL;
+
+const prodiOrder = [
+  'teknik-industri',
+  'teknologi-pangan',
+  'teknik-mesin',
+  'teknik-informatika',
+  'teknik-lingkungan',
+  'perencanaan-wilayah-dan-kota',
+];
+
+const sortedProdiDatas = computed(() => {
+  if (!props.prodiDatas) return [];
+  return [...props.prodiDatas].sort(
+    (a, b) => prodiOrder.indexOf(a.slug) - prodiOrder.indexOf(b.slug)
+  );
+});
 
 const getImageUrl = (imagePath: string | null) => {
   if (!imagePath) return Gedung;
@@ -27,7 +44,7 @@ const navigateToDetail = (slug: string) => {
 <template>
   <div class="w-full">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <div v-for="item in prodiDatas" :key="item.id" class="rounded-lg md:rounded-2xl lg:rounded-4xl space-y-4">
+      <div v-for="item in sortedProdiDatas" :key="item.id" class="rounded-lg md:rounded-2xl lg:rounded-4xl space-y-4">
         <div class="w-full h-[22vh] md:h-[20vh] lg:h-[278px] relative cursor-pointer"
           @click="navigateToDetail(item.slug)">
           <div
@@ -57,7 +74,7 @@ const navigateToDetail = (slug: string) => {
           </div>
         </div>
         <div class="flex gap-4 md:gap-5 lg:gap-6">
-          <a href="https://situ2.unpas.ac.id/spmbfront/jalur-seleksi" target="_blank" class="w-1/2">
+          <a href="https://pmb.unpas.ac.id/" target="_blank" class="w-1/2">
             <InteractiveHoverButton :class="'w-full'" :padding="'py-2 px-4 lg:py-3 lg:px-6'" :text="'Daftar'"></InteractiveHoverButton>
           </a>
           <InteractiveHoverButton @click="navigateToDetail(item.slug)" :class="'w-1/2'" :padding="'py-2 px-4 lg:py-3 lg:px-6'"

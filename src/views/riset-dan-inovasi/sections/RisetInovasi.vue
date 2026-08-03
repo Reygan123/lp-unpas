@@ -12,6 +12,16 @@ const getImageUrl = (imagePath: string | null) => {
   return `${baseUrl}/${imagePath}`;
 };
 
+const openYoutube = (yt: string) => {
+  if (!yt || yt === '-') return;
+
+  const url = /^https?:\/\//i.test(yt)
+    ? yt
+    : `https://www.youtube.com/watch?v=${yt}`;
+
+  window.open(url, '_blank');
+};
+
 defineProps<{
   inovasi: Portofolio[]
 }>();
@@ -31,7 +41,8 @@ defineProps<{
       <template v-for="(data, index) in inovasi" :key="index">
         <div
           class="p-5 flex lg:gap-10 gap-5 w-full md:w-full rounded-[20px] flex-col transition-all duration-300 group cursor-pointer hoverAnimation shadow-gray-300/5 hover:shadow-black/5 shadow-xl hover:shadow-xl drop-shadow-[0px_20px_40px_rgba(254, 242, 81, 0.5)]"
-          :class="[index % 2 == 0 ? 'lg:flex-row-reverse' : 'lg:flex-row']">
+          :class="[index % 2 == 0 ? 'lg:flex-row-reverse' : 'lg:flex-row']"
+          @click="openYoutube(data.yt)">
           <div class="rounded-[20px] bg-[#F0F0F0] lg:w-5/12 w-full h-40 md:h-52 overflow-hidden">
             <img :src="getImageUrl(data.image1)" alt=""
               class="object-cover rounded-[20px] w-full h-full transition-transform duration-500 group-hover:scale-105" />

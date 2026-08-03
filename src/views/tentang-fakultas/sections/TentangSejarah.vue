@@ -24,14 +24,14 @@ defineProps<{
     <div class="flex flex-col-reverse lg:flex-row gap-6 md:gap-12 lg:gap-16">
       <div class="lg:w-1/2 w-full">
         <div>
-          <TitleSection v-if="fakultas?.title2" class="mt-7" :text="`Sejarah ${fakultas?.title2}`"></TitleSection>
+          <TitleSection v-if="fakultas?.title2" class="mt-7" :text="`${fakultas?.title2}`"></TitleSection>
           <TextSection class="text-gray-500 mt-7" ><span v-html="fakultas?.description2"></span></TextSection>
           <div class="flex gap-5 lg:mt-10 mt-5">
-            <a href="https://situ2.unpas.ac.id/spmbfront/jalur-seleksi" target="_blank">
+            <a href="https://pmb.unpas.ac.id/" target="_blank">
               <InteractiveHoverButton :text="'Daftar Sekarang'" />
             </a>
-            <InteractiveHoverButton @click="$router.push('/tentang-fakultas')" text="Selengkapnya" bg-color="bg-transparent" textColor="text-colorPrimary"
-              borderColor="border-colorPrimary" bgHover="bg-colorPrimary" textHover="text-white" />
+            <!-- <InteractiveHoverButton @click="$router.push('/akademik')" text="Selengkapnya" bg-color="bg-transparent" textColor="text-colorPrimary"
+              borderColor="border-colorPrimary" bgHover="bg-colorPrimary" textHover="text-white" /> -->
           </div>
         </div>
       </div>

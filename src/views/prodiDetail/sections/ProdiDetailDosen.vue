@@ -16,6 +16,20 @@ const props = defineProps<{
   team: Team[]
 }>();
 
+// Sorting priority: Ketua → Sekretaris → lainnya
+const titlePriority = (title: string): number => {
+  const t = title.toLowerCase();
+  if (t.includes('ketua')) return 0;
+  if (t.includes('sekretaris')) return 1;
+  return 2;
+};
+
+const sortedTeam = computed(() =>
+  [...props.team]
+    .filter(member => !member.title.toLowerCase().includes('dekan'))
+    .sort((a, b) => titlePriority(a.title) - titlePriority(b.title))
+);
+
 // Pagination variables
 const itemsPerPage = 4;
 const currentPage = ref(1);
@@ -52,11 +66,11 @@ onUnmounted(() => {
   }
 });
 
-const totalPages = computed(() => Math.ceil(props.team.length / itemsPerPage));
+const totalPages = computed(() => Math.ceil(sortedTeam.value.length / itemsPerPage));
 
 const paginatedTeams = computed(() => {
   const start = (currentPage.value - 1) * itemsPerPage;
-  return props.team?.slice(start, start + itemsPerPage);
+  return sortedTeam.value.slice(start, start + itemsPerPage);
 });
 
 function goToPage(page: number) {
@@ -101,7 +115,7 @@ watch(() => paginatedTeams.value, () => {
   <div ref="sectionRef" class="w-full px-[20px] py-[32px] md:px-[60px] md:py-[60px] lg:px-[120px] lg:py-[60px] space-y-12 md:space-y-16 lg:space-y-20">
     <div class="flex flex-col gap-4 md:gap-5 lg:gap-6">
       <TextSection>Tim</TextSection>
-      <TitleSection :text="'Dosen Akademi'"></TitleSection>
+      <TitleSection :text="'Dosen Akademik'"></TitleSection>
       <TextSection>Dosen-dosen unggulan dengan pengalaman dan keahlian tinggi</TextSection>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" :key="animationKey">

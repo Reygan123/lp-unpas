@@ -3,32 +3,60 @@ import Button from '@/components/Button.vue';
 import TextSection from '@/components/TextSection.vue';
 import TitleSection from '@/components/TitleSection.vue';
 import type { Fasilitas } from '@/core/types/fasilitas';
-import { ref, onMounted } from 'vue';
+import { ref, computed, onMounted } from 'vue';
+
+// Replace with your project's actual Department type/import if one exists
+interface Department {
+  id: number;
+  name: string;
+  slug: string;
+}
 
 const baseUrl = import.meta.env.VITE_APP_IMG_URL;
 
-defineProps<{
+const props = defineProps<{
   fasilitas: Fasilitas[];
+  departements: Department[];
   isLoading?: boolean;
 }>();
 
 const selectedFacility = ref<Fasilitas | null>(null);
 const showAll = ref(true);
 const imagesLoaded = ref(false);
+const activeProdi = ref("semua"); // department id as string, or 'semua'
 
 const getImageUrl = (imagePath: string | null) => {
   if (!imagePath) return '';
   return `${baseUrl}/${imagePath}`;
 };
 
-const filterFacility = (facility: Fasilitas | null) => {
-  selectedFacility.value = facility;
-  showAll.value = facility === null;
-  // Reset animation state when changing view
+// Fasilitas filtered by the selected prodi
+const filteredFasilitas = computed(() => {
+  if (activeProdi.value === "semua") return props.fasilitas;
+  return props.fasilitas.filter(f => String((f as any).id_departement) === activeProdi.value);
+});
+
+const resetAnimation = () => {
   imagesLoaded.value = false;
   setTimeout(() => {
     imagesLoaded.value = true;
   }, 100);
+};
+
+const filterFacility = (facility: Fasilitas | null) => {
+  selectedFacility.value = facility;
+  showAll.value = facility === null;
+  resetAnimation();
+};
+
+const setProdiFilter = (deptId: string) => {
+  if (activeProdi.value === deptId) return;
+
+  activeProdi.value = deptId;
+  // Reset facility selection since the available list changes
+  selectedFacility.value = null;
+  showAll.value = true;
+  resetAnimation();
 };
 
 onMounted(() => {
@@ -45,13 +73,28 @@ onMounted(() => {
     <div class="grid gap-2 lg:gap-4 text-center w-full lg:w-1/2 mx-auto">
       <TitleSection text="Fasilitas"></TitleSection>
       <TextSection>Scenes that unfold like a movie, with each image telling a cinematic story.</TextSection>
+
+      <!-- Filter per Prodi -->
+      <div id="prodi-scroll" class="relative overflow-x-scroll scroll-hidden mx-[10px] lg:-mx-[60px]">
+        <div class="flex pb-3 gap-3 whitespace-nowrap">
+          <Button className="btn-primary" padding="px-4 py-2" @click="setProdiFilter('semua')">
+            Semua Prodi
+          </Button>
+          <Button v-for="dept in departements" :key="dept.id"
+            :className="activeProdi === String(dept.id) ? 'btn-primary' : 'btn-neutral'" padding="px-4 py-2"
+            @click="setProdiFilter(String(dept.id))">
+            {{ dept.name }}
+          </Button>
+        </div>
+      </div>
+
       <!-- List Nama Fasilitas -->
       <div id="fasilitas-scroll" class="relative overflow-x-scroll scroll-hidden mx-[10px] lg:-mx-[60px]">
         <div class="flex pb-3 gap-3 whitespace-nowrap">
           <Button className="btn-primary" padding="px-4 py-2" @click="filterFacility(null)">
             Semua Fasilitas
           </Button>
-          <Button v-for="item in fasilitas" :key="item.id"
+          <Button v-for="item in filteredFasilitas" :key="item.id"
             :className="selectedFacility?.id === item.id ? 'btn-primary' : 'btn-neutral'" padding="px-4 py-2"
             @click="filterFacility(item)">
             {{ item.title }}
@@ -65,16 +108,16 @@ onMounted(() => {
         <div class="flex w-full lg:gap-10 md:gap-5">
           <!-- Left Image -->
           <div class="w-1/2 h-40 md:h-52 lg:h-60 rounded-[20px] relative overflow-hidden group">
-            <img v-if="fasilitas[0]?.image1" :src="getImageUrl(fasilitas[0].image1)"
+            <img v-if="filteredFasilitas[0]?.image1" :src="getImageUrl(filteredFasilitas[0].image1)"
               class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-0"
-              :class="{ 'animate-fade-in': imagesLoaded }" :alt="fasilitas[0]?.title || ''" />
+              :class="{ 'animate-fade-in': imagesLoaded }" :alt="filteredFasilitas[0]?.title || ''" />
           </div>
 
           <!-- Right Image -->
           <div class="w-1/2 h-40 md:h-52 lg:h-60 rounded-[20px] relative overflow-hidden group">
-            <img v-if="fasilitas[1]?.image1" :src="getImageUrl(fasilitas[1].image1)"
+            <img v-if="filteredFasilitas[1]?.image1" :src="getImageUrl(filteredFasilitas[1].image1)"
               class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-0"
-              :class="{ 'animate-fade-in-delay-1': imagesLoaded }" :alt="fasilitas[1]?.title || ''" />
+              :class="{ 'animate-fade-in-delay-1': imagesLoaded }" :alt="filteredFasilitas[1]?.title || ''" />
           </div>
         </div>
 
@@ -88,29 +131,29 @@ onMounted(() => {
 
           <!-- Small Image Cell -->
           <div class="w-full h-40 md:h-52 lg:h-60 rounded-[20px] relative overflow-hidden group">
-            <img v-if="fasilitas[2]?.image1" :src="getImageUrl(fasilitas[2].image1)"
+            <img v-if="filteredFasilitas[2]?.image1" :src="getImageUrl(filteredFasilitas[2].image1)"
               class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-0"
-              :class="{ 'animate-fade-in-delay-2': imagesLoaded }" :alt="fasilitas[2]?.title || ''" />
+              :class="{ 'animate-fade-in-delay-2': imagesLoaded }" :alt="filteredFasilitas[2]?.title || ''" />
           </div>
 
           <!-- Tall Image Cell (spanning 2 rows) -->
           <div class="row-span-2 w-full h-full rounded-[20px] relative overflow-hidden group">
-            <img v-if="fasilitas[3]?.image1" :src="getImageUrl(fasilitas[3].image1)"
+            <img v-if="filteredFasilitas[3]?.image1" :src="getImageUrl(filteredFasilitas[3].image1)"
               class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-0"
-              :class="{ 'animate-fade-in-delay-3': imagesLoaded }" :alt="fasilitas[3]?.title || ''" />
+              :class="{ 'animate-fade-in-delay-3': imagesLoaded }" :alt="filteredFasilitas[3]?.title || ''" />
           </div>
 
           <!-- Bottom Row Images -->
           <div class="w-full h-40 md:h-52 lg:h-60 rounded-[20px] relative overflow-hidden group">
-            <img v-if="fasilitas[4]?.image1" :src="getImageUrl(fasilitas[4].image1)"
+            <img v-if="filteredFasilitas[4]?.image1" :src="getImageUrl(filteredFasilitas[4].image1)"
               class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-0"
-              :class="{ 'animate-fade-in-delay-4': imagesLoaded }" :alt="fasilitas[4]?.title || ''" />
+              :class="{ 'animate-fade-in-delay-4': imagesLoaded }" :alt="filteredFasilitas[4]?.title || ''" />
           </div>
 
           <div class="w-full h-40 md:h-52 lg:h-60 rounded-[20px] relative overflow-hidden group">
-            <img v-if="fasilitas[5]?.image1" :src="getImageUrl(fasilitas[5].image1)"
+            <img v-if="filteredFasilitas[5]?.image1" :src="getImageUrl(filteredFasilitas[5].image1)"
               class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-0"
-              :class="{ 'animate-fade-in-delay-5': imagesLoaded }" :alt="fasilitas[5]?.title || ''" />
+              :class="{ 'animate-fade-in-delay-5': imagesLoaded }" :alt="filteredFasilitas[5]?.title || ''" />
           </div>
         </div>
       </div>
@@ -174,7 +217,7 @@ onMounted(() => {
       <!-- Mobile View -->
       <div class="w-full mt-10 grid grid-cols-1 gap-5 md:hidden">
         <template v-if="showAll">
-          <div v-for="(item, index) in fasilitas" :key="index"
+          <div v-for="(item, index) in filteredFasilitas" :key="index"
             class="w-full h-64 rounded-[20px] overflow-hidden relative group">
             <!-- Image with gradient overlay -->
             <img v-if="item.image1" :src="getImageUrl(item.image1)"
@@ -182,12 +225,6 @@ onMounted(() => {
               :alt="item.title || ''" />
             <div class="absolute inset-0 bg-gradient-to-t from-colorPrimary/90 via-transparent to-transparent z-10">
             </div>
-
-            <!-- Content
-            <div class="relative z-20 p-5 h-full flex flex-col justify-end">
-              <h6 class="text-white font-semibold text-lg">{{ item.title }}</h6>
-              <TextSection class="text-white/80 text-sm line-clamp-2"><span v-html="item?.description"></span></TextSection>
-            </div> -->
           </div>
         </template>
 
@@ -199,7 +236,6 @@ onMounted(() => {
               <TextSection class="mt-3"><span v-html="selectedFacility?.description"></span></TextSection>
             </div>
 
-            <!-- .titles -->
             <div v-for="(img, idx) in [
               selectedFacility?.image1,
               selectedFacility?.image2,
@@ -218,12 +254,14 @@ onMounted(() => {
 
 <style scoped>
 
-#fasilitas-scroll {
+#fasilitas-scroll,
+#prodi-scroll {
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
 
-#fasilitas-scroll::-webkit-scrollbar {
+#fasilitas-scroll::-webkit-scrollbar,
+#prodi-scroll::-webkit-scrollbar {
   display: none;
 }
 

@@ -21,7 +21,7 @@ import SectionLayout from '@/layouts/SectionLayout.vue';
           pendidikan dan penelitian.</TextSection>
 
         <div class="flex gap-5 mt-7 justify-center lg:justify-start flex-wrap">
-          <a href="https://situ2.unpas.ac.id/spmbfront/jalur-seleksi" target="_blank">
+          <a href="https://pmb.unpas.ac.id/" target="_blank">
             <InteractiveHoverButton :text="'Daftar Sekarang'" />
           </a>
           <ContactAdminButton text="Hubungi Admin" bg-color="bg-none" border-color="border-colorPrimary"

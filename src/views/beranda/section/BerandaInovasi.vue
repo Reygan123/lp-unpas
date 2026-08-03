@@ -37,7 +37,7 @@ defineProps<{
           </div>
         </div>
 
-        <InteractiveHoverButton @click="$router.push('/riset-dan-inovasi')" text="Selengkapnya"></InteractiveHoverButton>
+        <InteractiveHoverButton @click="$router.push('/penelitian')" text="Selengkapnya"></InteractiveHoverButton>
       </div>
     </div>
   </SectionLayout>

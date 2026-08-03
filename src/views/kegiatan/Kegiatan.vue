@@ -5,13 +5,20 @@ import { onMounted, ref } from 'vue';
 import { useOrganisasiStore } from '@/stores/organisasi';
 import CTASection from '@/components/sections/CTASection.vue';
 import KegiatanList from './sections/KegiatanList.vue';
+import { useDepartementStore } from '@/stores/departement.ts';
+import { useTestimoniStore } from '@/stores/testimoni.ts';
+import TestimonialsSection from '@/components/sections/TestimonialsSection.vue';
 
 const organisasiStore = useOrganisasiStore();
+const departementStore = useDepartementStore();
+const testimoniStore = useTestimoniStore();
 const isLoading = ref(true);
 
 onMounted(async () => {
   try {
     await organisasiStore.fetchOrganisasi();
+    await departementStore.fetchDepartements()
+    await testimoniStore.fetchTestimoni()
   } catch (error) {
     console.error('Error loading organisasi:', error);
   } finally {
@@ -23,7 +30,12 @@ onMounted(async () => {
 <template>
   <MainLayout>
     <KegiatanHero :organisasi="organisasiStore.organizations" :is-loading="isLoading" />
-    <KegiatanList :organisasi="organisasiStore.organizations" :is-loading="isLoading"/>
+    <KegiatanList
+      :organisasi="organisasiStore.organizations"
+      :departements="departementStore.departements"
+      :is-loading="isLoading"
+    />
+    <TestimonialsSection v-if="testimoniStore.testimoni" :testimoni="testimoniStore.testimoni" />
     <CTASection />
   </MainLayout>
 </template>
