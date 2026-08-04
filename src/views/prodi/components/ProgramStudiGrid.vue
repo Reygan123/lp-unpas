@@ -24,6 +24,15 @@ const prodiOrder = [
   'perencanaan-wilayah-dan-kota',
 ];
 
+const linkMap = {
+  'teknik-lingkungan': 'https://situ2.unpas.ac.id/spmbfront/program-studi-detail/detail/25201#jalur',
+  'teknik-industri': 'https://situ2.unpas.ac.id/spmbfront/program-studi-detail/detail/26201',
+  'teknologi-pangan': 'https://situ2.unpas.ac.id/spmbfront/program-studi-detail/detail/41221',
+  'teknik-mesin': 'https://situ2.unpas.ac.id/spmbfront/program-studi-detail/detail/21201',
+  'teknik-informatika': 'https://situ2.unpas.ac.id/spmbfront/program-studi-detail/detail/55201',
+  'perencanaan-wilayah-dan-kota': 'https://situ2.unpas.ac.id/spmbfront/program-studi-detail/detail/35201',
+};
+
 const sortedProdiDatas = computed(() => {
   if (!props.prodiDatas) return [];
   return [...props.prodiDatas].sort(
@@ -38,6 +47,10 @@ const getImageUrl = (imagePath: string | null) => {
 
 const navigateToDetail = (slug: string) => {
   router.push({ name: 'prodiDetail', params: { slug } });
+};
+
+const getLink = (slug: string) => {
+  return linkMap[slug as keyof typeof linkMap] || 'https://pmb.unpas.ac.id/';
 };
 </script>
 
@@ -74,7 +87,7 @@ const navigateToDetail = (slug: string) => {
           </div>
         </div>
         <div class="flex gap-4 md:gap-5 lg:gap-6">
-          <a href="https://pmb.unpas.ac.id/" target="_blank" class="w-1/2">
+          <a :href="getLink(item.slug)" target="_blank" class="w-1/2">
             <InteractiveHoverButton :class="'w-full'" :padding="'py-2 px-4 lg:py-3 lg:px-6'" :text="'Daftar'"></InteractiveHoverButton>
           </a>
           <InteractiveHoverButton @click="navigateToDetail(item.slug)" :class="'w-1/2'" :padding="'py-2 px-4 lg:py-3 lg:px-6'"

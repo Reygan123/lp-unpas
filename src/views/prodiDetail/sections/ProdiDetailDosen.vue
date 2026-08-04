@@ -16,7 +16,6 @@ const props = defineProps<{
   team: Team[]
 }>();
 
-// Sorting priority: Ketua → Sekretaris → lainnya
 const titlePriority = (title: string): number => {
   const t = title.toLowerCase();
   if (t.includes('ketua')) return 0;
@@ -24,17 +23,40 @@ const titlePriority = (title: string): number => {
   return 2;
 };
 
-const sortedTeam = computed(() =>
-  [...props.team]
-    .filter(member => !member.title.toLowerCase().includes('dekan'))
-    .sort((a, b) => titlePriority(a.title) - titlePriority(b.title))
-);
+const getDegreeLevel = (name: string): number => {
+  if (name.includes('Dr.')) return 0;
+  if (name.includes('M.T') || name.includes('M.Eng') || name.includes('M.Ag') || 
+      name.includes('M.Si') || name.includes('M.Pd') || name.includes('M.Kom') || 
+      name.includes('M.M') || name.includes('M.Sc')) return 1;
+  return 2;
+};
 
-// Pagination variables
+const sortedTeam = computed(() => {
+  const ketuaSekretaris: Team[] = [];
+  const others: Team[] = [];
+  
+  props.team.forEach(member => {
+    if (member.title.toLowerCase().includes('ketua') || member.title.toLowerCase().includes('sekretaris')) {
+      ketuaSekretaris.push(member);
+    } else {
+      others.push(member);
+    }
+  });
+  
+  const sortedOthers = others.sort((a, b) => {
+    return getDegreeLevel(a.name) - getDegreeLevel(b.name);
+  });
+  
+  const sortedKetuaSekretaris = ketuaSekretaris.sort((a, b) => {
+    return titlePriority(a.title) - titlePriority(b.title);
+  });
+  
+  return [...sortedKetuaSekretaris, ...sortedOthers];
+});
+
 const itemsPerPage = 4;
 const currentPage = ref(1);
 
-// Animation variables
 const animationKey = ref(0);
 const sectionRef = ref<HTMLElement | null>(null);
 const isSectionVisible = ref(false);
@@ -135,7 +157,6 @@ watch(() => paginatedTeams.value, () => {
       </template>
     </div>
 
-    <!-- Pagination controls -->
     <div v-if="team?.length > 0" class="w-full flex justify-end mt-8">
       <div class="inline-flex items-center gap-2">
         <button :disabled="currentPage === 1" @click="prevPage"
