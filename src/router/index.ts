@@ -52,12 +52,21 @@ const router = createRouter({
           },
         },
         {
-          path: "/akademik",
-          name: "akademik",
+          path: "/tentang",
+          name: "tentang",
           component: () => import("@/views/tentang-fakultas/TentangFakultas.vue"),
           meta: {
             pageTitle: "Tentang Fakultas",
             description: "Kenali lebih dalam Fakultas Teknik Universitas Pasundan — visi, misi, sejarah, dan komitmen kami dalam mencetak insinyur berkualitas.",
+          },
+        },
+        {
+          path: "/akademik",
+          name: "akademik",
+          component: () => import("@/views/akademik/Akademik.vue"),
+          meta: {
+            pageTitle: "Akademik",
+            description: "Informasi lengkap mengenai program studi, kurikulum, kompetensi lulusan, peraturan akademik, biaya pendidikan, dan layanan akademik di Fakultas Teknik Universitas Pasundan.",
           },
         },
         {

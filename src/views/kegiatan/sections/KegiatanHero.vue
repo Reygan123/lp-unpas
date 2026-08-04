@@ -1,89 +1,53 @@
 <script setup lang="ts">
-import TextBody from '@/components/TextBody.vue';
-import TextSection from '@/components/TextSection.vue';
 import TitleMain from '@/components/TitleMain.vue';
+import TextSection from '@/components/TextSection.vue';
 import InteractiveHoverButton from '@/components/ui/interactive-hover-button/InteractiveHoverButton.vue';
-import Piala from '@/assets/piala.png'
-import Sertif from '@/assets/dokumen.png'
-import NumberTicker from '@/components/ui/number-ticker/NumberTicker.vue';
-import type { Organization } from '@/core/types/organisasi';
-import { computed } from 'vue';
+import HeroImage from '@/assets/gedung.jpg'
+// import { ref } from 'vue';
 
-const props = defineProps<{
-  organisasi: Organization[]
-}>();
-
-// Computed properties for each category count
-const kegiatanCount = computed(() => {
-  return props.organisasi.filter(org => org.category === 'Kegiatan').length;
-});
-
-const organisasiCount = computed(() => {
-  return props.organisasi.filter(org => org.category === 'Organisasi').length;
-});
-
-const komunitasCount = computed(() => {
-  return props.organisasi.filter(org => org.category === 'Komunitas').length;
-});
+// const searchQuery = ref('');
 </script>
 
 <template>
-  <div
-    class="w-full px-[20px] py-[32px] md:px-[60px] md:py-[60px] lg:px-[120px] lg:py-[60px] space-y-12 md:space-y-16 lg:space-y-20">
-    <div class="flex flex-col justify-center items-center relative">
-      <!-- Mobile -->
-      <div class="w-full flex flex-col justify-center items-center text-center relative md:hidden">
-        <div class="w-full md:w-1/4 flex flex-col justify-center items-center gap-4">
-          <TitleMain :text="'Kemahasiswaan & Alumni'"></TitleMain>
-          <TextSection class="text-black/40">Dari organisasi kemahasiswaan, acara seni dan budaya, hingga kegiatan
-            sosial—kampus kami penuh dengan peluang untuk berkembang di luar kelas.</TextSection>
-        </div>
-        <div class="w-full flex">
-          <div class="relative -bottom-12"><img :src="Sertif" alt=""></div>
-          <div class="relative -bottom-12"><img :src="Piala" alt=""></div>
-        </div>
-      </div>
+  <div class="w-full px-[20px] py-[24px] md:px-[60px] md:py-[40px] lg:px-[120px] lg:py-[40px]">
+    <!-- <p class="text-[12px] text-gray-400 mb-6">
+      <RouterLink to="/" class="hover:text-colorPrimary">Beranda</RouterLink>
+      <span class="mx-2">/</span>
+      <span class="text-colorPrimary">Kemahasiswaan & Alumni</span>
+    </p> -->
 
-      <!-- Tablet & Dekstop -->
-      <div class="w-full md:flex justify-center items-center text-center relative hidden">
-        <div class="relative -bottom-28"><img :src="Sertif" alt=""></div>
-        <div class="w-full md:w-1/4 flex flex-col justify-center items-center gap-4 md:mb-8 lg:mb-10">
-          <TitleMain :text="'Kemahasiswaan & Alumni'"></TitleMain>
-          <TextSection class="text-black/40">Dari organisasi kemahasiswaan, acara seni dan budaya, hingga kegiatan
-            sosial—kampus kami penuh dengan peluang untuk berkembang di luar kelas.</TextSection>
-          <a href="https://pmb.unpas.ac.id/" target="_blank">
-            <InteractiveHoverButton :text="'Daftar Sekarang'" />
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+      <div class="flex flex-col gap-4">
+        <TitleMain :text="'Kemahasiswaan & Alumni'" class="!text-left"></TitleMain>
+        <TextSection class="text-black/40 !text-left">
+          Ruang tumbuh dan berprestasi bagi mahasiswa FT Unpas. Temukan kegiatan, organisasi,
+          dukungan karier, komunitas angkatan, serta informasi alumni dalam satu tempat.
+        </TextSection>
+        <div class="flex flex-wrap gap-4 mt-2">
+          <a href="#organisasi">
+            <InteractiveHoverButton :text="'Jelajahi Kegiatan'" />
           </a>
-        </div>
-        <div class="relative -bottom-28"><img :src="Piala" alt=""></div>
-      </div>
-
-      <div
-        class="w-[80%] flex justify-evenly items-center bg-[#FAFAFA] rounded-[16px] md:rounded-[24px] lg:rounded-[32px] p-5 lg:p-10 relative z-10">
-        <div class="text-center">
-          <h3 class="text-[22px] md:text-[34px] lg:text-[46px] font-bold leading-tight">
-            <NumberTicker class="text-black" :value="kegiatanCount" :duration="3000" />
-          </h3>
-          <TextBody>Kegiatan</TextBody>
-        </div>
-
-        <div class="text-center">
-          <h3 class="text-[22px] md:text-[34px] lg:text-[46px] font-bold leading-tight">
-            <NumberTicker class="text-black" :value="organisasiCount" :duration="3000" />
-          </h3>
-          <TextBody>Organisasi</TextBody>
-        </div>
-
-        <div class="text-center">
-          <h3 class="text-[22px] md:text-[34px] lg:text-[46px] font-bold leading-tight">
-            <NumberTicker class="text-black" :value="komunitasCount" :duration="3000" />
-          </h3>
-          <TextBody>Komunitas</TextBody>
+          <RouterLink to="/alumni">
+            <InteractiveHoverButton :text="'Info Alumni'" :bg-color="'bg-white'" :border-color="'border-gray-300'" :text-color="'text-gray-700'" :bg-hover="'bg-colorPrimary'" :text-hover="'text-white'" />
+          </RouterLink>
         </div>
       </div>
-      <a href="https://pmb.unpas.ac.id/" target="_blank">
-        <InteractiveHoverButton :text="'Daftar Sekarang'" class="mt-4 md:hidden"></InteractiveHoverButton>
-      </a>
+
+      <div class="relative rounded-[24px] overflow-hidden h-[220px] md:h-[280px] lg:h-[480px]">
+        <img :src="HeroImage" alt="Kemahasiswaan Fakultas Teknik UNPAS" class="w-full h-full object-cover" loading="lazy" />
+        <div class="absolute bottom-0 right-0 w-16 h-16 md:w-20 md:h-20 bg-colorPrimary" style="clip-path: polygon(100% 0, 100% 100%, 0 100%)"></div>
+      </div>
     </div>
+
+    <!-- <div class="w-full bg-white shadow-lg rounded-full flex items-center gap-3 px-4 py-2 md:px-6 md:py-3 -mt-6 md:-mt-8 relative z-10 mx-auto max-w-3xl">
+      <svg class="w-5 h-5 text-gray-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z" />
+      </svg>
+      <input v-model="searchQuery" type="text" placeholder="Cari kegiatan mahasiswa, organisasi, layanan karier, atau informasi alumni"
+        class="flex-1 outline-none text-[13px] md:text-[14px] text-gray-600 placeholder:text-gray-400" />
+      <button class="bg-colorPrimary text-white text-[13px] md:text-[14px] font-semibold px-5 py-2 rounded-full hover:opacity-90 transition-opacity duration-300 shrink-0">
+        Cari
+      </button>
+    </div> -->
   </div>
 </template>

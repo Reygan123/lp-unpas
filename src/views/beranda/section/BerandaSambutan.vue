@@ -47,7 +47,7 @@ const titleHTML = computed(() => {
           <a href="https://pmb.unpas.ac.id/" target="_blank">
             <InteractiveHoverButton :text="'Daftar Sekarang'" />
           </a>
-          <!-- <InteractiveHoverButton @click="$router.push('/akademik')" text="Selengkapnya" bg-color="bg-none"
+          <!-- <InteractiveHoverButton @click="$router.push('/tentang')" text="Selengkapnya" bg-color="bg-none"
             border-color="border-colorPrimary" text-color="text-colorPrimary" bg-hover="bg-colorPrimary"
             text-hover="text-white"></InteractiveHoverButton> -->
         </div>

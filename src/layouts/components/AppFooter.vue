@@ -124,8 +124,9 @@ const socialMedia = [
 
 const navigationLinks = [
   { path: '/', label: 'Beranda' },
-  { path: '/akademik', label: 'Tentang' },
-  { path: '/prodi', label: 'Prodi' },
+  { path: '/tentang', label: 'Tentang' },
+  { path: '/akademik', label: 'Akademik' },
+  { path: '/prodi', label: 'Program Studi' },
   { path: '/prestasi', label: 'Prestasi' },
   { path: '/kemahasiswaan-dan-alumni', label: 'Kegiatan' },
   { path: '/fasilitas', label: 'Fasilitas' },
@@ -148,7 +149,6 @@ const campuses = [
 </script>
 
 <style scoped>
-/* Ensure the logo doesn't overlap content on small screens */
 @media (max-width: 640px) {
   .absolute {
     width: 60%;

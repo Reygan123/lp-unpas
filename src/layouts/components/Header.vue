@@ -12,6 +12,22 @@ const isScrolled = ref(false)
 const color = ref('text-gray-700')
 const navbarColors = ref('text-gray-700')
 const isMobile = ref(window.innerWidth <= 768)
+const isDropdownOpen = ref(false)
+let dropdownTimeout: ReturnType<typeof setTimeout> | null = null
+
+const openDropdown = () => {
+    if (dropdownTimeout) {
+        clearTimeout(dropdownTimeout)
+        dropdownTimeout = null
+    }
+    isDropdownOpen.value = true
+}
+
+const closeDropdown = () => {
+    dropdownTimeout = setTimeout(() => {
+        isDropdownOpen.value = false
+    }, 250)
+}
 
 const props = defineProps({
     position : {
@@ -53,16 +69,32 @@ onMounted(() => {
 
 watch(() => route.path, () => {
     window.scrollTo(0, 0)
+    isDropdownOpen.value = false
 })
+
+const academicDropdownItems = [
+    { name: 'Tentang Fakultas', path: '/tentang', icon: 'pi pi-info-circle' },
+    { name: 'Program Studi', path: '/prodi', icon: 'pi pi-map-marker' },
+    { name: 'Akademik', path: '/akademik', icon: 'pi pi-book' },
+]
 
 const menuItems = [
     { name: 'Beranda', path: '/', icon: 'pi pi-home' },
-    { name: 'Akademik', path: '/akademik', icon: 'pi pi-book' },
+    { 
+        name: 'Informasi Akademik', 
+        path: '/akademik', 
+        icon: 'pi pi-book',
+        isDropdown: true,
+        children: academicDropdownItems
+    },
     { name: 'Penelitian', path: '/penelitian', icon: 'pi pi-calendar' },
     { name: 'Pengabdian', path: '/pengabdian-masyarakat', icon: 'pi pi-heart' },
-    { name: isMobile.value ? 'Kemahasiswaan' : 'Kemahasiswaan & Alumni', path: '/kemahasiswaan-dan-alumni', icon: 'pi pi-users' },
-    { name: isMobile.value ? 'Prodi' : 'Program Studi', path: '/prodi', icon: 'pi pi-map-marker' },
+    { name: isMobile.value ? 'Kemahasiswaan' : 'Kemahasiswaan ', path: '/kemahasiswaan-dan-alumni', icon: 'pi pi-users' },
 ]
+
+const isAcademicActive = () => {
+    return academicDropdownItems.some(item => route.path === item.path)
+}
 
 const handleClick = () => {
     window.location.href = 'https://pmb.unpas.ac.id/'
@@ -99,7 +131,7 @@ const navigateToHome = () => {
                 />
                 <div class="w-[85%]">
                     <p :class="['text-[0.63vw]', color]">Penerimaan Mahasiswa Baru</p>
-                    <span :class="['text-[0.90vw] md:text-[0.80vw] lg:text-[0.90vw] font-medium', color]">FT Universitas Pasundan</span>
+                    <span :class="['text-[0.90vw] md:text-[0.80vw] lg:text-[1vw] font-medium', color]">FT Universitas Pasundan</span>
                 </div>
             </div>
 
@@ -112,33 +144,86 @@ const navigateToHome = () => {
             />
 
             <div :class="['hidden xl:w-9/12 md:flex items-center xl:justify-between gap-4 xl:gap-8 font-medium', navbarColors]">
-                <RouterLink
-                    v-for="(item, index) in menuItems"
-                    :key="index"
-                    :to="item.path"
-                    :aria-label="item.name"
-                    class="relative p-4 text-center text-[0.63vw] lg:text-[0.80vw] rounded-lg md:rounded-xl lg:rounded-2xl transition-colors duration-500 ease-in-out hover:font-semibold"
-                    :class="{ 'text-[#444444]': route.path === item.path }"
-                >
-                    {{ item.name }}
-                    <motion.div
-                        v-if="route.path === item.path"
-                        layoutId="activeNavItem"
-                        initial="{ scaleY: 0 }"
-                        animate="{ scaleY: 1 }"
-                        exit="{ scaleY: 0 }"
-                        class="absolute inset-0 h-full bg-[#D0D0D0] border-2 border-[#FAFAFA]/50 rounded-lg md:rounded-xl lg:rounded-2xl z-[-1]"
-                        :style="{
-                            originY: 'top',
-                            scaleY: 1.1,
-                        }"
-                        :transition="{
-                            type: 'spring',
-                            bounce: 0.2,
-                            duration: 0.6
-                        }"
-                    />
-                </RouterLink>
+                <template v-for="(item, index) in menuItems" :key="index">
+                    <!-- Dropdown Item Desktop -->
+                    <div
+                        v-if="item.isDropdown"
+                        class="relative group"
+                        @mouseenter="openDropdown"
+                        @mouseleave="closeDropdown"
+                    >
+                        <button
+                            class="relative p-4 text-center text-[0.63vw] lg:text-[0.90vw] rounded-lg md:rounded-xl lg:rounded-2xl transition-colors duration-500 ease-in-out hover:font-semibold flex items-center gap-1 cursor-pointer"
+                            :class="{ 'text-[#444444]': isAcademicActive() }"
+                        >
+                            {{ item.name }}
+                            <i class="pi pi-chevron-down text-[0.7vw] transition-transform duration-300 group-hover:rotate-180"></i>
+                            <motion.div
+                                v-if="isAcademicActive()"
+                                layoutId="activeNavItem"
+                                initial="{ scaleY: 0 }"
+                                animate="{ scaleY: 1 }"
+                                exit="{ scaleY: 0 }"
+                                class="absolute inset-0 h-full bg-[#D0D0D0] border-2 border-[#FAFAFA]/50 rounded-lg md:rounded-xl lg:rounded-2xl z-[-1]"
+                                :style="{
+                                    originY: 'top',
+                                    scaleY: 1.1,
+                                }"
+                                :transition="{
+                                    type: 'spring',
+                                    bounce: 0.2,
+                                    duration: 0.6
+                                }"
+                            />
+                        </button>
+
+                        <div
+                            v-show="isDropdownOpen"
+                            class="absolute top-full left-0 mt-1 w-48 bg-white border border-gray-200 rounded-xl shadow-lg py-2 z-50 transition-all duration-300"
+                            @mouseenter="openDropdown"
+                            @mouseleave="closeDropdown"
+                        >
+                            <RouterLink
+                                v-for="(subItem, subIndex) in item.children"
+                                :key="subIndex"
+                                :to="subItem.path"
+                                class="block px-4 py-2 text-xs lg:text-sm text-gray-700 hover:bg-gray-100 transition-colors duration-200"
+                                :class="{ 'font-bold text-[#C73929] bg-gray-50': route.path === subItem.path }"
+                            >
+                                {{ subItem.name }}
+                            </RouterLink>
+                        </div>
+                    </div>
+
+                    <!-- Regular Link Desktop -->
+                    <RouterLink
+                        v-else
+                        :to="item.path"
+                        :aria-label="item.name"
+                        class="relative p-4 text-center text-[0.63vw] lg:text-[0.90vw] rounded-lg md:rounded-xl lg:rounded-2xl transition-colors duration-500 ease-in-out hover:font-semibold"
+                        :class="{ 'text-[#444444]': route.path === item.path }"
+                    >
+                        {{ item.name }}
+                        <motion.div
+                            v-if="route.path === item.path"
+                            layoutId="activeNavItem"
+                            initial="{ scaleY: 0 }"
+                            animate="{ scaleY: 1 }"
+                            exit="{ scaleY: 0 }"
+                            class="absolute inset-0 h-full bg-[#D0D0D0] border-2 border-[#FAFAFA]/50 rounded-lg md:rounded-xl lg:rounded-2xl z-[-1]"
+                            :style="{
+                                originY: 'top',
+                                scaleY: 1.1,
+                            }"
+                            :transition="{
+                                type: 'spring',
+                                bounce: 0.2,
+                                duration: 0.6
+                            }"
+                        />
+                    </RouterLink>
+                </template>
+
                 <button
                     class="pulsating-button flex gap-2 cursor-pointer items-center text-[0.63vw] md:text-[0.70vw] lg:text-[0.70vw] px-8 py-4 md:px-8 md:py-4 font-bold border-2 border-transparent bg-primary text-gray-700 rounded-lg md:rounded-xl lg:rounded-2xl hover:border-2 hover:border-white/50 shadow-black/5 shadow-xl drop-shadow-[0px_20px_40px_rgba(254,242,81,0.5)] hover:shadow-black/5 transition-colors duration-500"
                     @click="handleClick"
@@ -153,19 +238,50 @@ const navigateToHome = () => {
             class="w-screen fixed bottom-0 left-0 z-50 bg-white px-3 py-3 flex justify-between items-center lg:hidden rounded-t-xl"
             aria-label="Mobile navigation"
         >
-            <RouterLink
-                v-for="(item, index) in menuItems"
-                :key="index"
-                :to="item.path"
-                :aria-label="item.name"
-                class="w-full relative flex flex-col items-center py-2 justify-between rounded-full transition-colors duration-500 ease-in-out"
-                :class="route.path === item.path ? 'text-[#C73929]' : 'text-[#484C52]'"
-            >
-                <i :class="item.icon"></i>
-                <span :class="['text-[0.63vw] mt-2', route.path === item.path ? 'text-[#C73929] font-bold' : '']">
-                    {{ item.name }}
-                </span>
-            </RouterLink>
+            <template v-for="(item, index) in menuItems" :key="index">
+                <!-- Mobile Dropdown Control -->
+                <div v-if="item.isDropdown" class="w-full relative">
+                    <button
+                        @click="isDropdownOpen = !isDropdownOpen"
+                        class="w-full relative flex flex-col items-center py-2 justify-between rounded-full transition-colors duration-500 ease-in-out cursor-pointer"
+                        :class="isAcademicActive() ? 'text-[#C73929]' : 'text-[#484C52]'"
+                    >
+                        <i :class="item.icon"></i>
+                        <span :class="['text-[2vw] mt-2', isAcademicActive() ? 'text-[#C73929] font-bold' : '']">
+                            {{ item.name }}
+                        </span>
+                    </button>
+
+                    <div
+                        v-show="isDropdownOpen"
+                        class="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 w-40 bg-white border border-gray-200 rounded-xl shadow-xl py-2 z-50"
+                    >
+                        <RouterLink
+                            v-for="(subItem, subIndex) in item.children"
+                            :key="subIndex"
+                            :to="subItem.path"
+                            class="block px-3 py-2 text-center text-xs text-gray-700 hover:bg-gray-100"
+                            :class="{ 'font-bold text-[#C73929] bg-gray-50': route.path === subItem.path }"
+                        >
+                            {{ subItem.name }}
+                        </RouterLink>
+                    </div>
+                </div>
+
+                <!-- Regular Mobile Link -->
+                <RouterLink
+                    v-else
+                    :to="item.path"
+                    :aria-label="item.name"
+                    class="w-full relative flex flex-col items-center py-2 justify-between rounded-full transition-colors duration-500 ease-in-out"
+                    :class="route.path === item.path ? 'text-[#C73929]' : 'text-[#484C52]'"
+                >
+                    <i :class="item.icon"></i>
+                    <span :class="['text-[2vw] mt-2', route.path === item.path ? 'text-[#C73929] font-bold' : '']">
+                        {{ item.name }}
+                    </span>
+                </RouterLink>
+            </template>
         </nav>
     </div>
 </template>

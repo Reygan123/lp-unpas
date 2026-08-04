@@ -7,6 +7,8 @@ import CTASection from '@/components/sections/CTASection.vue';
 import KegiatanList from './sections/KegiatanList.vue';
 import { useDepartementStore } from '@/stores/departement.ts';
 import { useTestimoniStore } from '@/stores/testimoni.ts';
+import KegiatanCategoryOverview from './sections/KegiatanCategoryOverview.vue';
+import KegiatanAlumniSection from './sections/KegiatanAlumniSection.vue';
 import TestimonialsSection from '@/components/sections/TestimonialsSection.vue';
 
 const organisasiStore = useOrganisasiStore();
@@ -30,6 +32,7 @@ onMounted(async () => {
 <template>
   <MainLayout>
     <KegiatanHero :organisasi="organisasiStore.organizations" :is-loading="isLoading" />
+    <KegiatanCategoryOverview />
     <KegiatanList
       :organisasi="organisasiStore.organizations"
       :departements="departementStore.departements"

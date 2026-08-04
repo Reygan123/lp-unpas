@@ -32,7 +32,7 @@ defineProps<{
           <a href="https://pmb.unpas.ac.id/" target="_blank">
             <InteractiveHoverButton :text="'Daftar Sekarang'" />
           </a>
-          <!-- <InteractiveHoverButton @click="$router.push('/akademik')" text="Selengkapnya" bg-color="bg-transparent" textColor="text-colorPrimary"
+          <!-- <InteractiveHoverButton @click="$router.push('/tentang')" text="Selengkapnya" bg-color="bg-transparent" textColor="text-colorPrimary"
             borderColor="border-colorPrimary" bgHover="bg-colorPrimary" textHover="text-white" /> -->
         </div>
       </div>
