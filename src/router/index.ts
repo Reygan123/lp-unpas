@@ -70,6 +70,42 @@ const router = createRouter({
           },
         },
         {
+          path: '/akademik/program-perkuliahan',
+          name: 'Program Perkuliahan',
+          component: () => import('@/views/akademik/ProgramPerkuliahan.vue'),
+          meta: {
+            pageTitle: "Program Perkuliahan",
+            description: "Cerita sukses dan testimoni alumni Fakultas Teknik Universitas Pasundan di dunia profesional dan industri.",
+          },
+        },
+        {
+          path: '/akademik/peraturan',
+          name: 'peraturan-akademik',
+          component: () => import('@/views/akademik/PeraturanAkademik.vue'),
+          meta: {
+            pageTitle: "Peraturan Akademik",
+            description: "Informasi lengkap mengenai peraturan akademik di Fakultas Teknik Universitas Pasundan.",
+          },
+        },
+        {
+          path: '/kemahasiswaan-dan-alumni/tokang',
+          name: 'tokang',
+          component: () => import('@/views/kemahasiswaaan/Tokang.vue'),
+          meta: {
+            pageTitle: "Peraturan Akademik",
+            description: "Informasi lengkap mengenai peraturan akademik di Fakultas Teknik Universitas Pasundan.",
+          },
+        },
+        {
+          path: '/kemahasiswaan-dan-alumni/organisasi/:slug',
+          name: 'organisasi-detail',
+          component: () => import('@/views/organisasiDetail/OrganisasiDetail.vue'),
+          meta: {
+            pageTitle: "Organisasi Mahasiswa",
+            description: "Informasi lengkap mengenai organisasi mahasiswa di Fakultas Teknik Universitas Pasundan.",
+          },
+        },
+        {
           path: "/testimoni",
           name: "testimoni",
           component: () => import("@/views/testimoni/TestimoniView.vue"),

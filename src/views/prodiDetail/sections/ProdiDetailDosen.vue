@@ -16,6 +16,13 @@ const props = defineProps<{
   team: Team[]
 }>();
 
+const filteredTeam = computed(() => {
+  return props.team.filter(member => {
+    const title = member.title.toLowerCase();
+    return !title.includes('dekan') && !title.includes('wakil dekan');
+  });
+});
+
 const titlePriority = (title: string): number => {
   const t = title.toLowerCase();
   if (t.includes('ketua')) return 0;
@@ -35,7 +42,7 @@ const sortedTeam = computed(() => {
   const ketuaSekretaris: Team[] = [];
   const others: Team[] = [];
   
-  props.team.forEach(member => {
+  filteredTeam.value.forEach(member => {
     if (member.title.toLowerCase().includes('ketua') || member.title.toLowerCase().includes('sekretaris')) {
       ketuaSekretaris.push(member);
     } else {
