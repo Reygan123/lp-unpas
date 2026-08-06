@@ -10,10 +10,14 @@ import { useTestimoniStore } from '@/stores/testimoni.ts';
 import KegiatanCategoryOverview from './sections/KegiatanCategoryOverview.vue';
 import KegiatanAlumniSection from './sections/KegiatanAlumniSection.vue';
 import TestimonialsSection from '@/components/sections/TestimonialsSection.vue';
+import { useTokangStore } from '@/stores/tokang.ts';
+import { useAlumniUpdateStore } from '@/stores/alumniUpdate.ts';
 
 const organisasiStore = useOrganisasiStore();
 const departementStore = useDepartementStore();
 const testimoniStore = useTestimoniStore();
+const tokangStore = useTokangStore();
+const alumniUpdateStore = useAlumniUpdateStore();
 const isLoading = ref(true);
 
 onMounted(async () => {
@@ -21,6 +25,8 @@ onMounted(async () => {
     await organisasiStore.fetchOrganisasi();
     await departementStore.fetchDepartements()
     await testimoniStore.fetchTestimoni()
+    await tokangStore.fetchTokang()
+    await alumniUpdateStore.fetchAlumni()
   } catch (error) {
     console.error('Error loading organisasi:', error);
   } finally {
@@ -36,6 +42,11 @@ onMounted(async () => {
     <KegiatanList
       :organisasi="organisasiStore.organizations"
       :departements="departementStore.departements"
+      :is-loading="isLoading"
+    />
+    <KegiatanAlumniSection
+      :tokang="tokangStore.tokang"
+      :alumni="alumniUpdateStore.alumni"
       :is-loading="isLoading"
     />
     <TestimonialsSection v-if="testimoniStore.testimoni" :testimoni="testimoniStore.testimoni" />

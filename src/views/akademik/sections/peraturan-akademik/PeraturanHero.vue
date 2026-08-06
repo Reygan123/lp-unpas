@@ -4,6 +4,7 @@ import SectionLayout from "@/layouts/SectionLayout.vue";
 
 <template>
   <SectionLayout>
+  <div class="space-y-6 md:space-y-10">
     <nav class="text-sm text-desc">
       <router-link to="/" class="hover:text-colorPrimary">Beranda</router-link>
       <span class="mx-2">/</span>
@@ -21,5 +22,6 @@ import SectionLayout from "@/layouts/SectionLayout.vue";
         peraturan akademik Fakultas Teknik Universitas Pasundan.
       </p>
     </div>
+  </div>
   </SectionLayout>
 </template>

@@ -47,8 +47,9 @@ const menus = [
         <div
           v-for="menu in menus"
           :key="menu.title"
-          class="bg-white rounded-xl border border-outline p-6 hover:shadow-md transition"
+          class="bg-white rounded-xl border border-outline p-6 hover:shadow-md transition h-full flex flex-col justify-between gap-4"
         >
+        <div>
           <component :is="menu.icon" class="w-10 h-10 text-colorPrimary mb-4" stroke-width="1.5" />
           <h3 class="font-sora font-bold text-text mb-2">
             {{ menu.title }}
@@ -56,6 +57,7 @@ const menus = [
           <p class="text-desc text-sm leading-relaxed mb-4">
             {{ menu.desc }}
           </p>
+        </div>
           <router-link
             :to="menu.to"
             class="inline-flex items-center gap-1 text-colorPrimary font-semibold text-sm hover:opacity-80"

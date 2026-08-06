@@ -13,7 +13,9 @@ const color = ref('text-gray-700')
 const navbarColors = ref('text-gray-700')
 const isMobile = ref(window.innerWidth <= 768)
 const isDropdownOpen = ref(false)
+const isKemahasiswaanDropdownOpen = ref(false)
 let dropdownTimeout: ReturnType<typeof setTimeout> | null = null
+let kemahasiswaanDropdownTimeout: ReturnType<typeof setTimeout> | null = null
 
 const openDropdown = () => {
     if (dropdownTimeout) {
@@ -26,6 +28,20 @@ const openDropdown = () => {
 const closeDropdown = () => {
     dropdownTimeout = setTimeout(() => {
         isDropdownOpen.value = false
+    }, 250)
+}
+
+const openKemahasiswaanDropdown = () => {
+    if (kemahasiswaanDropdownTimeout) {
+        clearTimeout(kemahasiswaanDropdownTimeout)
+        kemahasiswaanDropdownTimeout = null
+    }
+    isKemahasiswaanDropdownOpen.value = true
+}
+
+const closeKemahasiswaanDropdown = () => {
+    kemahasiswaanDropdownTimeout = setTimeout(() => {
+        isKemahasiswaanDropdownOpen.value = false
     }, 250)
 }
 
@@ -70,12 +86,23 @@ onMounted(() => {
 watch(() => route.path, () => {
     window.scrollTo(0, 0)
     isDropdownOpen.value = false
+    isKemahasiswaanDropdownOpen.value = false
 })
 
 const academicDropdownItems = [
     { name: 'Tentang Fakultas', path: '/tentang', icon: 'pi pi-info-circle' },
     { name: 'Program Studi', path: '/prodi', icon: 'pi pi-map-marker' },
     { name: 'Akademik', path: '/akademik', icon: 'pi pi-book' },
+    { name: 'Program Perkuliahan', path: '/akademik/program-perkuliahan', icon: 'pi pi-graduation-cap' },
+    { name: 'Peraturan Akademik', path: '/akademik/peraturan', icon: 'pi pi-file' },
+]
+
+const kemahasiswaanDropdownItems = [
+    { name: 'Kemahasiswaan & Alumni', path: '/kemahasiswaan-dan-alumni', icon: 'pi pi-users' },
+    { name: 'Kehidupan Kampus', path: '/kemahasiswaan-dan-alumni/kehidupan', icon: 'pi pi-heart' },
+    { name: 'Karir', path: '/kemahasiswaan-dan-alumni/karir', icon: 'pi pi-briefcase' },
+    { name: 'Organisasi', path: '/kemahasiswaan-dan-alumni/tokang', icon: 'pi pi-flag' },
+    { name: 'IKA FT Alumni', path: '/kemahasiswaan-dan-alumni/ikaft-alumni', icon: 'pi pi-star' },
 ]
 
 const menuItems = [
@@ -89,11 +116,21 @@ const menuItems = [
     },
     { name: 'Penelitian', path: '/penelitian', icon: 'pi pi-calendar' },
     { name: 'Pengabdian', path: '/pengabdian-masyarakat', icon: 'pi pi-heart' },
-    { name: isMobile.value ? 'Kemahasiswaan' : 'Kemahasiswaan ', path: '/kemahasiswaan-dan-alumni', icon: 'pi pi-users' },
+    { 
+        name: 'Kemahasiswaan', 
+        path: '/kemahasiswaan-dan-alumni', 
+        icon: 'pi pi-users',
+        isDropdown: true,
+        children: kemahasiswaanDropdownItems
+    },
 ]
 
 const isAcademicActive = () => {
     return academicDropdownItems.some(item => route.path === item.path)
+}
+
+const isKemahasiswaanActive = () => {
+    return kemahasiswaanDropdownItems.some(item => route.path === item.path)
 }
 
 const handleClick = () => {
@@ -149,17 +186,17 @@ const navigateToHome = () => {
                     <div
                         v-if="item.isDropdown"
                         class="relative group"
-                        @mouseenter="openDropdown"
-                        @mouseleave="closeDropdown"
+                        @mouseenter="item.name === 'Informasi Akademik' ? openDropdown() : openKemahasiswaanDropdown()"
+                        @mouseleave="item.name === 'Informasi Akademik' ? closeDropdown() : closeKemahasiswaanDropdown()"
                     >
                         <button
                             class="relative p-4 text-center text-[0.63vw] lg:text-[0.90vw] rounded-lg md:rounded-xl lg:rounded-2xl transition-colors duration-500 ease-in-out hover:font-semibold flex items-center gap-1 cursor-pointer"
-                            :class="{ 'text-[#444444]': isAcademicActive() }"
+                            :class="{ 'text-[#444444]': item.name === 'Informasi Akademik' ? isAcademicActive() : isKemahasiswaanActive() }"
                         >
                             {{ item.name }}
                             <i class="pi pi-chevron-down text-[0.7vw] transition-transform duration-300 group-hover:rotate-180"></i>
                             <motion.div
-                                v-if="isAcademicActive()"
+                                v-if="item.name === 'Informasi Akademik' ? isAcademicActive() : isKemahasiswaanActive()"
                                 layoutId="activeNavItem"
                                 initial="{ scaleY: 0 }"
                                 animate="{ scaleY: 1 }"
@@ -178,10 +215,10 @@ const navigateToHome = () => {
                         </button>
 
                         <div
-                            v-show="isDropdownOpen"
+                            v-show="item.name === 'Informasi Akademik' ? isDropdownOpen : isKemahasiswaanDropdownOpen"
                             class="absolute top-full left-0 mt-1 w-48 bg-white border border-gray-200 rounded-xl shadow-lg py-2 z-50 transition-all duration-300"
-                            @mouseenter="openDropdown"
-                            @mouseleave="closeDropdown"
+                            @mouseenter="item.name === 'Informasi Akademik' ? openDropdown() : openKemahasiswaanDropdown()"
+                            @mouseleave="item.name === 'Informasi Akademik' ? closeDropdown() : closeKemahasiswaanDropdown()"
                         >
                             <RouterLink
                                 v-for="(subItem, subIndex) in item.children"
@@ -242,18 +279,18 @@ const navigateToHome = () => {
                 <!-- Mobile Dropdown Control -->
                 <div v-if="item.isDropdown" class="w-full relative">
                     <button
-                        @click="isDropdownOpen = !isDropdownOpen"
+                        @click="item.name === 'Informasi Akademik' ? isDropdownOpen = !isDropdownOpen : isKemahasiswaanDropdownOpen = !isKemahasiswaanDropdownOpen"
                         class="w-full relative flex flex-col items-center py-2 justify-between rounded-full transition-colors duration-500 ease-in-out cursor-pointer"
-                        :class="isAcademicActive() ? 'text-[#C73929]' : 'text-[#484C52]'"
+                        :class="item.name === 'Informasi Akademik' ? (isAcademicActive() ? 'text-[#C73929]' : 'text-[#484C52]') : (isKemahasiswaanActive() ? 'text-[#C73929]' : 'text-[#484C52]')"
                     >
                         <i :class="item.icon"></i>
-                        <span :class="['text-[2vw] mt-2', isAcademicActive() ? 'text-[#C73929] font-bold' : '']">
+                        <span :class="['text-[2vw] mt-2', item.name === 'Informasi Akademik' ? (isAcademicActive() ? 'text-[#C73929] font-bold' : '') : (isKemahasiswaanActive() ? 'text-[#C73929] font-bold' : '')]">
                             {{ item.name }}
                         </span>
                     </button>
 
                     <div
-                        v-show="isDropdownOpen"
+                        v-show="item.name === 'Informasi Akademik' ? isDropdownOpen : isKemahasiswaanDropdownOpen"
                         class="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 w-40 bg-white border border-gray-200 rounded-xl shadow-xl py-2 z-50"
                     >
                         <RouterLink

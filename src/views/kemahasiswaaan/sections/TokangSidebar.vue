@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { User, Archive, ListTree, Contact2, ChevronRight, Phone, Mail } from 'lucide-vue-next';
+import { Phone, Mail } from 'lucide-vue-next';
 
 const statusPic = [
   { label: 'On Duty', color: 'bg-green-500', desc: 'PIC aktif menjalankan peran dan bertanggung jawab penuh.' },
@@ -7,13 +7,13 @@ const statusPic = [
   { label: 'Tidak Aktif', color: 'bg-gray-400', desc: 'PIC tidak aktif / belum ditetapkan atau tidak dapat dihubungi.' },
 ];
 
-const navigasi = [
-  { icon: User, label: 'Angkatan Aktif' },
-  { icon: Archive, label: 'Arsip Angkatan' },
-  { icon: ListTree, label: 'Detail Angkatan' },
-  { icon: Contact2, label: 'PIC Angkatan' },
-  { icon: Phone, label: 'Kontak Resmi' },
-];
+// const navigasi = [
+//   { icon: User, label: 'Angkatan Aktif' },
+//   { icon: Archive, label: 'Arsip Angkatan' },
+//   { icon: ListTree, label: 'Detail Angkatan' },
+//   { icon: Contact2, label: 'PIC Angkatan' },
+//   { icon: Phone, label: 'Kontak Resmi' },
+// ];
 </script>
 
 <template>
@@ -30,7 +30,7 @@ const navigasi = [
       </div>
     </div>
 
-    <div class="bg-white border border-outline rounded-xl p-5">
+    <!-- <div class="bg-white border border-outline rounded-xl p-5">
       <h3 class="font-sora font-bold text-colorPrimary text-sm mb-2">Navigasi Cepat</h3>
       <div class="flex flex-col divide-y divide-outline">
         <button
@@ -45,7 +45,7 @@ const navigasi = [
           <ChevronRight class="w-4 h-4 text-desc" />
         </button>
       </div>
-    </div>
+    </div> -->
 
     <div class="bg-white border border-outline rounded-xl p-5">
       <h3 class="font-sora font-bold text-colorPrimary text-sm mb-3">Butuh Bantuan?</h3>

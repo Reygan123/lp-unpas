@@ -1,13 +1,26 @@
 <script setup lang="ts">
 import { Building2, Repeat, Wifi, Rocket, Calendar, FileSearch, Wallet, CreditCard, HelpCircle, Download } from 'lucide-vue-next';
 import SectionLayout from '@/layouts/SectionLayout.vue';
+import { useProgramStore } from '@/stores/program.ts';
+import { computed } from 'vue';
 
-const tipe = [
-  { icon: Building2, name: 'Reguler', desc: 'Tatap muka penuh di kampus' },
-  { icon: Repeat, name: 'Hybrid', desc: 'Kombinasi tatap muka dan daring' },
-  { icon: Wifi, name: 'PJJ', desc: 'Pembelajaran jauh dari daring' },
-  { icon: Rocket, name: 'Fastrack', desc: 'Sarjana ke magister berjenjang' },
-];
+const programStore = useProgramStore();
+
+const tipe = computed(() => {
+  return programStore.program.map((item: any) => {
+    let icon = Building2;
+    const name = item.nama.toLowerCase();
+    if (name.includes('hybrid')) icon = Repeat;
+    else if (name.includes('pjj') || name.includes('daring')) icon = Wifi;
+    else if (name.includes('fastrack') || name.includes('magister')) icon = Rocket;
+    return {
+      icon,
+      name: item.nama,
+      desc: item.ringkasan ? item.ringkasan.substring(0, 40) + '...' : 'Program perkuliahan',
+      slug: item.slug
+    };
+  });
+});
 
 const infoCepat = [
   { icon: Calendar, label: 'Kalender Akademik', to: '/akademik/kalender' },

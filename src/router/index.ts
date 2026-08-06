@@ -88,24 +88,6 @@ const router = createRouter({
           },
         },
         {
-          path: '/kemahasiswaan-dan-alumni/tokang',
-          name: 'tokang',
-          component: () => import('@/views/kemahasiswaaan/Tokang.vue'),
-          meta: {
-            pageTitle: "Peraturan Akademik",
-            description: "Informasi lengkap mengenai peraturan akademik di Fakultas Teknik Universitas Pasundan.",
-          },
-        },
-        {
-          path: '/kemahasiswaan-dan-alumni/organisasi/:slug',
-          name: 'organisasi-detail',
-          component: () => import('@/views/organisasiDetail/OrganisasiDetail.vue'),
-          meta: {
-            pageTitle: "Organisasi Mahasiswa",
-            description: "Informasi lengkap mengenai organisasi mahasiswa di Fakultas Teknik Universitas Pasundan.",
-          },
-        },
-        {
           path: "/testimoni",
           name: "testimoni",
           component: () => import("@/views/testimoni/TestimoniView.vue"),
@@ -244,6 +226,51 @@ const router = createRouter({
       meta: {
         pageTitle: "Kemahasiswaan & Alumni",
         description: "Kegiatan dan organisasi mahasiswa Fakultas Teknik Universitas Pasundan — UKM, himpunan, dan berbagai aktivitas kampus.",
+      },
+    },
+    {
+      path: '/kemahasiswaan-dan-alumni/kehidupan',
+      name: 'kehidupan',
+      component: () => import('@/views/kehidupan/Kehidupan.vue'),
+      meta: {
+        pageTitle: "Peraturan Akademik",
+        description: "Informasi lengkap mengenai peraturan akademik di Fakultas Teknik Universitas Pasundan.",
+      },
+    },
+    {
+      path: '/kemahasiswaan-dan-alumni/karir',
+      name: 'karir-alumni',
+      component: () => import('@/views/karier/Karier.vue'),
+      meta: {
+        pageTitle: "Karir Alumni Teknik UNPAS",
+        description: "Jelajahi peluang karir alumni Fakultas Teknik Universitas Pasundan. Temukan bagaimana lulusan UNPAS bersaing di industri teknik nasional dan internasional.",
+      },
+    },
+    {
+      path: '/kemahasiswaan-dan-alumni/tokang',
+      name: 'tokang',
+      component: () => import('@/views/kemahasiswaaan/Tokang.vue'),
+      meta: {
+        pageTitle: "Peraturan Akademik",
+        description: "Informasi lengkap mengenai peraturan akademik di Fakultas Teknik Universitas Pasundan.",
+      },
+    },
+    {
+      path: '/kemahasiswaan-dan-alumni/organisasi/:slug',
+      name: 'organisasi-detail',
+      component: () => import('@/views/organisasiDetail/OrganisasiDetail.vue'),
+      meta: {
+        pageTitle: "Organisasi Mahasiswa",
+        description: "Informasi lengkap mengenai organisasi mahasiswa di Fakultas Teknik Universitas Pasundan.",
+      },
+    },
+    {
+      path: '/kemahasiswaan-dan-alumni/ikaft-alumni',
+      name: 'ikaft-alumni',
+      component: () => import('@/views/ikaft/IkaFt.vue'),
+      meta: {
+        pageTitle: "IKA FT",
+        description: "Informasi tentang Ikatan Alumni Fakultas Teknik Universitas Pasundan.",
       },
     },
     {

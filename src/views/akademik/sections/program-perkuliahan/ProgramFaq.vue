@@ -1,25 +1,23 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { ChevronDown } from "lucide-vue-next";
 import SectionLayout from "@/layouts/SectionLayout.vue";
 
-const faqs = [
-  {
-    q: "Apakah biaya pendidikan sudah termasuk biaya praktikum dan laboratorium?",
-    a:
-      "Biaya pendidikan yang tercantum merupakan estimasi UKT per semester dan belum termasuk biaya praktikum, laboratorium, atau kegiatan penunjang akademik lainnya yang diinformasikan tersendiri oleh program studi.",
-  },
-  {
-    q: "Bisakah saya berpindah program dari Reguler ke Hybrid atau PJJ?",
-    a:
-      "Mahasiswa dapat mengajukan perpindahan skema program perkuliahan dengan mengikuti prosedur akademik yang berlaku dan persetujuan dari program studi terkait.",
-  },
-  {
-    q: "Bagaimana teknis perkuliahan di program Fastrack Sarjana-Magister?",
-    a:
-      "Program Fastrack memungkinkan mahasiswa mengambil sejumlah mata kuliah magister sejak masa sarjana sesuai ketentuan akademik, sehingga masa studi S1 dan S2 dapat ditempuh lebih efisien.",
-  },
-];
+const props = defineProps<{
+  faq: any[];
+}>();
+
+const filteredFaqs = computed(() => {
+  return props.faq
+    .filter(item => 
+      item.category_name.toLowerCase().includes("program") || 
+      item.category_name.toLowerCase().includes("biaya")
+    )
+    .map(item => ({
+      q: item.question,
+      a: item.answer.replace(/<[^>]*>/g, '')
+    }));
+});
 
 const openIndex = ref<number | null>(null);
 
@@ -37,7 +35,7 @@ const toggle = (index: number) => {
     </h2>
 
     <div class="bg-white rounded-xl border border-outline divide-y divide-outline">
-      <div v-for="(item, index) in faqs" :key="item.q">
+      <div v-for="(item, index) in filteredFaqs" :key="item.q">
         <button
           class="w-full flex items-center justify-between gap-4 px-5 py-4 text-left"
           @click="toggle(index)"
@@ -49,7 +47,7 @@ const toggle = (index: number) => {
           />
         </button>
         <div v-show="openIndex === index" class="px-5 pb-4">
-          <p class="text-desc text-sm leading-relaxed">{{ item.a }}</p>
+          <p class="text-desc text-sm leading-relaxed" v-html="item.a"></p>
         </div>
       </div>
     </div>

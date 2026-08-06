@@ -6,14 +6,17 @@ import ProgramCards from './sections/program-perkuliahan/ProgramCards.vue';
 import ProgramFaq from './sections/program-perkuliahan/ProgramFaq.vue';
 import { onMounted, ref } from 'vue';
 import { useProgramStore } from '@/stores/program.ts';
+import { useFaqStore } from '@/stores/faq.ts';
 
 const programStore = useProgramStore();
+const faqStore = useFaqStore();
 const isLoading = ref(true);
 
 onMounted(async () => {
   try {
     await Promise.all([
       programStore.fetchProgram(),
+      faqStore.fetchFaq(),
     ]);
   } catch (error) {
     console.error('Error loading data:', error);
@@ -28,6 +31,6 @@ onMounted(async () => {
     <ProgramHero />
     <ProgramCards :programs="programStore.program" />
     <!-- <ProgramComparison /> -->
-    <ProgramFaq />
+    <ProgramFaq :faq="faqStore.faqs" />
   </MainLayout>
 </template>

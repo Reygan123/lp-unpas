@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import SectionLayout from '@/layouts/SectionLayout.vue';
 import { MessageSquareText, Users, Building2, Megaphone, Handshake, GraduationCap } from 'lucide-vue-next';
 
 const tujuan = [
@@ -12,8 +13,9 @@ const tujuan = [
 </script>
 
 <template>
-  <section class="bg-netral">
-    <div class="max-w-7xl mx-auto px-4 lg:px-8 pb-8">
+  <div
+    class="w-full px-[20px] py-[20px] md:px-[60px] md:pb-[20px] lg:px-[120px] lg:pt-[60px] lg:pb-[20px] space-y-4 md:space-y-4 lg:space-y-4"
+  >
       <h2 class="font-sora text-xl font-bold text-colorPrimary mb-4">
         Tujuan Program
       </h2>
@@ -30,6 +32,5 @@ const tujuan = [
           </p>
         </div>
       </div>
-    </div>
-  </section>
+  </div>
 </template>
