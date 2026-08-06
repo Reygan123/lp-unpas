@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+                            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+  
+  <!-- Beranda -->
+  <url>
+    <loc>https://ft.unpas.ac.id/</loc>
+    <lastmod>2026-07-22</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.00</priority>
+  </url>
+
+  <!-- Program Studi -->
+  <url>
+    <loc>https://ft.unpas.ac.id/prodi</loc>
+    <lastmod>2026-07-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+
+  <!-- Berita -->
+  <url>
+    <loc>https://ft.unpas.ac.id/berita</loc>
+    <lastmod>2026-07-22</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.90</priority>
+  </url>
+
+  <!-- Tentang Fakultas -->
+  <url>
+    <loc>https://ft.unpas.ac.id/tentang-fakultas</loc>
+    <lastmod>2026-07-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <!-- Riset dan Inovasi -->
+  <url>
+    <loc>https://ft.unpas.ac.id/riset-dan-inovasi</loc>
+    <lastmod>2026-07-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <!-- Kegiatan Mahasiswa -->
+  <url>
+    <loc>https://ft.unpas.ac.id/kemahasiswaan-dan-alumni</loc>
+    <lastmod>2026-07-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <!-- Fasilitas -->
+  <url>
+    <loc>https://ft.unpas.ac.id/fasilitas</loc>
+    <lastmod>2026-07-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <!-- Prestasi -->
+  <url>
+    <loc>https://ft.unpas.ac.id/prestasi</loc>
+    <lastmod>2026-07-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <!-- Kerjasama -->
+  <url>
+    <loc>https://ft.unpas.ac.id/kerjasama</loc>
+    <lastmod>2026-07-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <!-- Tenaga Pengajar -->
+  <url>
+    <loc>https://ft.unpas.ac.id/tenaga-pengajar</loc>
+    <lastmod>2026-07-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+
+  <!-- Testimoni -->
+  <url>
+    <loc>https://ft.unpas.ac.id/testimoni</loc>
+    <lastmod>2026-07-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+
+  <!-- Kontak -->
+  <url>
+    <loc>https://ft.unpas.ac.id/kontak</loc>
+    <lastmod>2026-07-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+
+  <!-- FAQ -->
+  <url>
+    <loc>https://ft.unpas.ac.id/faq</loc>
+    <lastmod>2026-07-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.60</priority>
+  </url>
+
+</urlset>
