@@ -3,6 +3,8 @@
 
 // import ImgBeber from '@/assets/pengabdian/pengabdian-beber-sorgum.jpg';
 
+import Image from '@/assets/sosialisasi.webp'
+
 export const pengabdianData: any[] = [
   {
     id: 1,
@@ -27,6 +29,25 @@ export const pengabdianData: any[] = [
     ],
     sumber: 'https://jabartandang.com/2026/07/21/fakultas-teknik-unpas-dan-pemerintah-desa-beber-resmi-jalin-kerja-sama-sorgum-diproyeksikan-jadi-ikon-unggulan-desa/',
   },
+  {
+  id: 2,
+  judul: 'Sosialiasi SMK fast Track Sarjana Teknik FT Unpas dan Aplikasi KUNCI sistem mutu sekolah , Sekolah SMK Swasta Kab Karawang , di Hotel Brits Karawang tgl 5 Agustus 2026',
+  kategori: 'Pendidikan',
+  lokasi: 'Hotel Brits Karawang, Kabupaten Karawang',
+  tanggal: '5 Agustus 2026',
+  deskripsi: 'Fakultas Teknik UNPAS menyelenggarakan kegiatan sosialisasi program SMK Fast Track Sarjana Teknik serta pengenalan Aplikasi KUNCI untuk sistem manajemen mutu sekolah. Acara ini ditujukan bagi sekolah-sekolah SMK Swasta di Kabupaten Karawang sebagai upaya meningkatkan kualitas tata kelola pendidikan dan percepatan studi ke jenjang perguruan tinggi.',
+  gambar: Image,
+  dosenPenanggungJawab: [
+    'Dr. Ir. H. Jaja Suteja, M.T., IPU',
+    'Dr. Ayi Purbasari, S.T., M.T.',
+    'Dr. Ir. Riza Fathoni Ishak, M.T.'
+  ],
+  prodi: [
+    'Informatika',
+    'Teknik Industri'
+  ],
+  // sumber: 'https://jabartandang.com/2026/08/05/sosialisasi-smk-fast-track-sarjana-teknik-ft-unpas-dan-aplikasi-kunci-di-karawang/'
+}
 ];
 
 export const pengabdianKategori: string[] = [
