@@ -6,6 +6,7 @@ import AgendaService from "@/core/services/AgendaService";
 interface AgendaState {
   agendas: Agenda[];
   currentAgenda: Agenda | null;
+  calendar: any[];
   loading: boolean;
   error: string | null;
 }
@@ -14,6 +15,7 @@ export const useAgendaStore = defineStore("agenda", {
   state: (): AgendaState => ({
     agendas: [],
     currentAgenda: null,
+    calendar: [],
     loading: false,
     error: null,
   }),
@@ -42,6 +44,21 @@ export const useAgendaStore = defineStore("agenda", {
       } catch (error: any) {
         this.error = error.message || "Failed to fetch agenda";
         console.error("Error fetching agenda:", error);
+      } finally {
+        this.loading = false;
+      }
+    },
+
+    async fetchCalendarAkademik() {
+      this.loading = true;
+      this.error = null;
+      try {
+        const response = await AgendaService.getCalendarAkademik();
+        // Assuming the response contains a list of agendas, you can handle it accordingly
+        this.calendar = response.data;
+      } catch (error: any) {
+        this.error = error.message || "Failed to fetch calendar akademik";
+        console.error("Error fetching calendar akademik:", error);
       } finally {
         this.loading = false;
       }

@@ -101,7 +101,7 @@ const kemahasiswaanDropdownItems = [
     { name: 'Kemahasiswaan & Alumni', path: '/kemahasiswaan-dan-alumni', icon: 'pi pi-users' },
     { name: 'Kehidupan Kampus', path: '/kemahasiswaan-dan-alumni/kehidupan', icon: 'pi pi-heart' },
     { name: 'Karir', path: '/kemahasiswaan-dan-alumni/karir', icon: 'pi pi-briefcase' },
-    { name: 'Organisasi', path: '/kemahasiswaan-dan-alumni/tokang', icon: 'pi pi-flag' },
+    { name: 'Tokang', path: '/kemahasiswaan-dan-alumni/tokang', icon: 'pi pi-flag' },
     { name: 'IKA FT Alumni', path: '/kemahasiswaan-dan-alumni/ikaft-alumni', icon: 'pi pi-star' },
 ]
 

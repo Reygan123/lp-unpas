@@ -19,11 +19,13 @@ import BerandaFasilitas from './section/BerandaFasilitas.vue'
 import HomeSlider from '@/components/HomeSlider.vue'
 import ProdiDetailPrestasi from '../prodiDetail/sections/ProdiDetailPrestasi.vue'
 import CTASection from '@/components/sections/CTASection.vue'
+import { useOrmawaStore } from '@/stores/ormawa.ts'
 
 const partnerStore = usePartnerStore();
 const sliderStore = useSliderStore();
 const fakultasStore = useFakultasStore();
 const testimoniStore = useTestimoniStore();
+const organisasiStore = useOrmawaStore();
 
 const isLoading = ref(true);
 
@@ -34,7 +36,8 @@ onMounted(async () => {
       partnerStore.fetchPartnersHome(),
       sliderStore.fetchSlider(),
       fakultasStore.fetchFakultas(),
-      testimoniStore.fetchTestimoni()
+      testimoniStore.fetchTestimoni(),
+      organisasiStore.fetchOrmawa()
     ]);
   } finally {
     isLoading.value = false;
@@ -51,7 +54,7 @@ onMounted(async () => {
     <BerandaInovasi :fakultas="fakultasStore.fakultas"/>
     <MitraSection :partners="partnerStore.partners" />
     <ProdiDetailPrestasi :prestasi="berandaStore.prestasiData" />
-    <ProdiDetailKegiatan :organisasi="berandaStore.organisasiData" />
+    <ProdiDetailKegiatan :organisasi="organisasiStore.ormawa" />
     <BerandaAgenda v-if="berandaStore.agendaData.length > 0" :agenda="berandaStore.agendaData" />
     <BerandaFasilitas :fasilitas="berandaStore.fasilitasData" />
     <TestimonialsSection v-if="testimoniStore.testimoni" :testimoni="testimoniStore.testimoni" />

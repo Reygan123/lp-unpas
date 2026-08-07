@@ -14,6 +14,10 @@ const AgendaService = {
         throw error;
       });
   },
+
+  getCalendarAkademik() {
+    return ApiService.get("akademik/kalender");
+  },
 };
 
 export default AgendaService;

@@ -12,8 +12,9 @@ import KegiatanAlumniSection from './sections/KegiatanAlumniSection.vue';
 import TestimonialsSection from '@/components/sections/TestimonialsSection.vue';
 import { useTokangStore } from '@/stores/tokang.ts';
 import { useAlumniUpdateStore } from '@/stores/alumniUpdate.ts';
+import { useOrmawaStore } from '@/stores/ormawa.ts';
 
-const organisasiStore = useOrganisasiStore();
+const organisasiStore = useOrmawaStore();
 const departementStore = useDepartementStore();
 const testimoniStore = useTestimoniStore();
 const tokangStore = useTokangStore();
@@ -22,7 +23,7 @@ const isLoading = ref(true);
 
 onMounted(async () => {
   try {
-    await organisasiStore.fetchOrganisasi();
+    await organisasiStore.fetchOrmawa();
     await departementStore.fetchDepartements()
     await testimoniStore.fetchTestimoni()
     await tokangStore.fetchTokang()
@@ -37,10 +38,10 @@ onMounted(async () => {
 
 <template>
   <MainLayout>
-    <KegiatanHero :organisasi="organisasiStore.organizations" :is-loading="isLoading" />
+    <KegiatanHero :organisasi="organisasiStore.ormawa" :is-loading="isLoading" />
     <KegiatanCategoryOverview />
     <KegiatanList
-      :organisasi="organisasiStore.organizations"
+      :organisasi="organisasiStore.ormawa"
       :departements="departementStore.departements"
       :is-loading="isLoading"
     />

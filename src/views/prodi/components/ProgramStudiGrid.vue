@@ -29,7 +29,7 @@ const linkMap = {
   'teknik-industri': 'https://situ2.unpas.ac.id/spmbfront/program-studi-detail/detail/26201',
   'teknologi-pangan': 'https://situ2.unpas.ac.id/spmbfront/program-studi-detail/detail/41221',
   'teknik-mesin': 'https://situ2.unpas.ac.id/spmbfront/program-studi-detail/detail/21201',
-  'teknik-informatika': 'https://situ2.unpas.ac.id/spmbfront/program-studi-detail/detail/55201',
+  'teknik-informatika': 'https://pmb.unpas.ac.id/',
   'perencanaan-wilayah-dan-kota': 'https://situ2.unpas.ac.id/spmbfront/program-studi-detail/detail/35201',
 };
 

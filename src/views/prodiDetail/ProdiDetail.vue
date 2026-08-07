@@ -33,6 +33,7 @@ import { useSliderStore } from '@/stores/slider';
 import { useUnggulanStore } from '@/stores/unggulan.ts';
 import ProdiAlasan from '../prodi/sections/ProdiAlasan.vue';
 import ProdiDetailAkreditas from './sections/ProdiDetailAkreditas.vue';
+import { useOrmawaStore } from '@/stores/ormawa.ts';
 
 const route = useRoute();
 const departementStore = useDepartementStore();
@@ -41,7 +42,7 @@ const partnerStore = usePartnerStore();
 const prestasiStore = usePrestasiStore();
 const fasilitasStore = useFasilitasStore();
 const teamStore = useTeamStore();
-const organisasiStore = useOrganisasiStore();
+const organisasiStore = useOrmawaStore();
 const testimoniStore = useTestimoniStore();
 const postStore = usePostStore();
 const prospekStore = useProspekStore();
@@ -70,7 +71,7 @@ onMounted(async () => {
           prestasiStore.fetchPrestasibyId(departementId),
           fasilitasStore.fetchFasilitasbyId(departementId),
           teamStore.fetchTeambyId(departementId),
-          organisasiStore.fetchOrganisasibyId(departementId),
+          organisasiStore.fetchOrmawa(),
           testimoniStore.fetchTestimonibyId(departementId),
           prospekStore.fetchProspekbyId(departementId),
           unggulanStore.fetchUnggulanbyId(departementId),
@@ -118,7 +119,7 @@ watch(() => departementStore.currentDepartement, updateTitle);
       <ProdiDetailPrestasi v-if="prestasiStore.currentPrestasi.length > 0" :prestasi="prestasiStore.currentPrestasi" :is-loading="false" />
       <GaleriSection v-if="fasilitasStore.currentFasilitas.length > 0" :fasilitas="fasilitasStore.currentFasilitas" :is-loading="false" />
       <DosenSection v-if="teamStore.currentTeams.length > 0" :team="teamStore.currentTeams" :is-loading="false" />
-      <ProdiDetailKegiatan v-if="organisasiStore.currentOrganizations.length > 0" :organisasi="organisasiStore.currentOrganizations" :is-loading="false" />
+      <ProdiDetailKegiatan v-if="organisasiStore.ormawa.length > 0" :organisasi="organisasiStore.ormawa" :is-loading="false" />
       <ProdiDetailAgenda v-if="agendaStore.agendas.length > 0" :agenda="agendaStore.agendas" :is-loading="false" />
       <PanduanSection :is-loading="false" />
       <TestimonialsSection v-if="testimoniStore.currentTestimoni.length > 0" :testimoni="testimoniStore.currentTestimoni" :is-loading="false" />

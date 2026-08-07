@@ -64,5 +64,16 @@ const props = defineProps<{
         </a>
       </div>
     </div>
+
+    <div
+      v-if="!isLoading && (!layanan || layanan.length === 0)"
+      class="flex flex-col items-center justify-center text-center pb-16"
+    >
+      <div class="w-14 h-14 rounded-full bg-colorPrimary/10 flex items-center justify-center mb-4">
+        <MonitorSmartphone class="w-7 h-7 text-colorPrimary" stroke-width="1.5" />
+      </div>
+      <h3 class="font-sora font-bold text-text text-sm mb-1">Belum Ada Layanan</h3>
+      <p class="text-desc text-xs">Layanan akademik dan administrasi akan muncul di sini</p>
+    </div>
   </SectionLayout>
 </template>

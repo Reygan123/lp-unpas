@@ -73,6 +73,17 @@ const unduhan = [
               <p class="text-desc text-xs leading-snug">{{ item.desc }}</p>
             </div>
           </div>
+
+          <div
+            v-if="!tipe || tipe.length === 0"
+            class="flex flex-col items-center justify-center text-center py-12 bg-white rounded-xl border border-outline"
+          >
+            <div class="w-12 h-12 rounded-full bg-colorPrimary/10 flex items-center justify-center mb-3">
+              <Building2 class="w-6 h-6 text-colorPrimary" stroke-width="1.5" />
+            </div>
+            <p class="font-sora font-bold text-text text-sm mb-1">Belum Ada Program Perkuliahan</p>
+            <p class="text-desc text-xs">Program perkuliahan akan muncul di sini</p>
+          </div>
         </div>
 
         <div class="flex flex-col gap-6">
@@ -89,6 +100,14 @@ const unduhan = [
                 </a>
               </li>
             </ul>
+
+            <div
+              v-if="!infoCepat || infoCepat.length === 0"
+              class="flex flex-col items-center justify-center text-center py-6"
+            >
+              <HelpCircle class="w-6 h-6 text-colorPrimary mb-2" stroke-width="1.5" />
+              <p class="text-desc text-xs">Belum ada informasi cepat</p>
+            </div>
           </div>
 
           <div class="bg-white rounded-xl border border-outline p-5">
@@ -102,6 +121,14 @@ const unduhan = [
                 <Download class="w-4 h-4 text-colorPrimary shrink-0" />
               </li>
             </ul>
+
+            <div
+              v-if="!unduhan || unduhan.length === 0"
+              class="flex flex-col items-center justify-center text-center py-6"
+            >
+              <Download class="w-6 h-6 text-colorPrimary mb-2" stroke-width="1.5" />
+              <p class="text-desc text-xs">Belum ada unduhan populer</p>
+            </div>
           </div>
         </div>
       </div>

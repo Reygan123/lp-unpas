@@ -90,6 +90,17 @@ const programs = computed(() => {
         </div>
       </div>
     </div>
+
+    <div
+      v-if="!programs || programs.length === 0"
+      class="flex flex-col items-center justify-center text-center"
+    >
+      <div class="w-14 h-14 rounded-full bg-colorPrimary/10 flex items-center justify-center mb-4">
+        <GraduationCap class="w-7 h-7 text-colorPrimary" stroke-width="1.5" />
+      </div>
+      <h3 class="font-sora font-bold text-text text-sm mb-1">Belum Ada Program Perkuliahan</h3>
+      <p class="text-desc text-xs">Program perkuliahan akan muncul di sini</p>
+    </div>
   </SectionLayout>
   <!-- <section class="bg-netral">
     <div class="max-w-7xl mx-auto px-4 lg:px-8 pb-8">

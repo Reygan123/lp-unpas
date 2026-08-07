@@ -1,11 +1,16 @@
 <script setup lang="ts">
-import { CalendarDays, Users2, ChevronRight } from 'lucide-vue-next';
+import { CalendarDays, Users2 } from 'lucide-vue-next';
 
-defineProps<{
+const props = defineProps<{
   periode: string;
   totalPengurus: string;
-  pengurusInti: Array<{ foto: string; jabatan: string; nama: string }>;
+  pengurusInti: Array<{ foto: string | null; jabatan: string; nama: string; namaBidang: string }>;
+  isLoading: boolean;
 }>();
+
+const formatJabatan = (jabatan: string) => {
+  return jabatan ? jabatan.replace(/_/g, ' ') : '-';
+};
 </script>
 
 <template>
@@ -14,7 +19,11 @@ defineProps<{
       B. STRUKTUR KEPENGURUSAN
     </h2>
 
-    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+    <div v-if="isLoading" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+      <div v-for="n in 6" :key="n" class="bg-white rounded-xl border border-outline h-48 animate-pulse"></div>
+    </div>
+
+    <div v-else class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
       <div class="bg-netral rounded-xl border border-outline p-4 flex flex-col items-center justify-center text-center gap-3">
         <CalendarDays class="w-6 h-6 text-colorPrimary" stroke-width="1.5" />
         <div>
@@ -33,23 +42,27 @@ defineProps<{
         :key="item.nama"
         class="bg-white rounded-xl border border-outline overflow-hidden flex flex-col"
       >
-        <img :src="item.foto" :alt="item.nama" class="w-full aspect-square object-cover" />
+        <img v-if="item.foto" :src="item.foto" :alt="item.nama" class="w-full aspect-square object-cover" />
+        <div v-else class="w-full aspect-square bg-colorPrimary/10 flex items-center justify-center">
+          <Users2 class="w-8 h-8 text-colorPrimary" stroke-width="1.5" />
+        </div>
         <div class="p-3 text-center">
-          <span class="inline-block bg-colorPrimary text-white text-[10px] font-semibold px-2 py-0.5 rounded mb-1.5">
-            {{ item.jabatan }}
+          <span class="inline-block bg-colorPrimary text-white text-[10px] font-semibold px-2 py-0.5 rounded mb-1.5 capitalize">
+            {{ formatJabatan(item.jabatan) }}
           </span>
           <p class="text-text text-sm font-semibold">{{ item.nama }}</p>
+          <p v-if="item.namaBidang && item.namaBidang !== item.nama" class="text-desc text-xs mt-0.5">{{ item.namaBidang }}</p>
         </div>
       </div>
 
-      <button class="bg-white rounded-xl border border-outline p-4 flex flex-col items-center justify-center text-center gap-2 hover:bg-netral transition">
+      <!-- <button class="bg-white rounded-xl border border-outline p-4 flex flex-col items-center justify-center text-center gap-2 hover:bg-netral transition">
         <Users2 class="w-6 h-6 text-colorPrimary" stroke-width="1.5" />
         <p class="text-text text-xs font-semibold">Kepala Bidang / Departemen</p>
         <p class="text-colorPrimary text-xs font-semibold inline-flex items-center gap-1">
           Lihat Selengkapnya
           <ChevronRight class="w-3.5 h-3.5" />
         </p>
-      </button>
+      </button> -->
     </div>
   </section>
 </template>

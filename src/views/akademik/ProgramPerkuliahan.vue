@@ -29,7 +29,7 @@ onMounted(async () => {
 <template>
   <MainLayout>
     <ProgramHero />
-    <ProgramCards :programs="programStore.program" />
+    <ProgramCards v-if="programStore.program.length > 0" :programs="programStore.program" />
     <!-- <ProgramComparison /> -->
     <ProgramFaq :faq="faqStore.faqs" />
   </MainLayout>

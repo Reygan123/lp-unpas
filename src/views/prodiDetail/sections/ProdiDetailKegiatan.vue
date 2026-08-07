@@ -9,9 +9,10 @@ import 'swiper/css/pagination';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/autoplay';
-import type { Organization } from '@/core/types/organisasi';
+// import type { Organization } from '@/core/types/organisasi';
 import KegiatanCard from '@/views/prodiDetail/components/KegiatanCard.vue';
 import InteractiveHoverButton from '@/components/ui/interactive-hover-button/InteractiveHoverButton.vue';
+import { useRouter } from 'vue-router';
 
 const baseUrl = import.meta.env.VITE_APP_IMG_URL;
 
@@ -21,8 +22,10 @@ const getImageUrl = (imagePath: string | null) => {
 };
 
 const props = defineProps<{
-  organisasi: Organization[]
+  organisasi: any[]
 }>();
+
+const router = useRouter();
 
 const activeFilter = ref("semua");
 const visibleItems = ref(6);
@@ -40,13 +43,17 @@ const visibleFilteredOrganisasi = computed(() => {
   return filteredOrganisasi.value.slice(0, visibleItems.value);
 });
 
-const setFilter = async (filter: string) => {
-  if (activeFilter.value === filter) return;
+// const setFilter = async (filter: string) => {
+//   if (activeFilter.value === filter) return;
 
-  activeFilter.value = filter;
-  visibleItems.value = 6;
+//   activeFilter.value = filter;
+//   visibleItems.value = 6;
 
-  refreshKey.value++;
+//   refreshKey.value++;
+// };
+
+const navigateToDetail = (slug: string) => {
+  router.push(`/kemahasiswaan-dan-alumni/organisasi/${slug}`);
 };
 </script>
 
@@ -59,7 +66,7 @@ const setFilter = async (filter: string) => {
         </TextSection>
       </div>
 
-      <div class="w-full flex justify-center items-center overflow-x-auto pb-2">
+      <!-- <div class="w-full flex justify-center items-center overflow-x-auto pb-2">
         <div class="w-fit flex gap-2 lg:gap-4">
           <div @click="setFilter('semua')"
             :class="['rounded-full px-6 py-3 lg:px-6 lg:py-3 cursor-pointer transition-all duration-300', activeFilter === 'semua' ? 'bg-colorPrimary' : 'bg-text/50 hover:bg-text/70']">
@@ -78,14 +85,14 @@ const setFilter = async (filter: string) => {
             <p class="text-[10px] md:text-[12px] lg:text-[14px] text-white">Komunitas</p>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
 
     <!-- Tablet & Desktop -->
     <div class="hidden md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 lg:gap-12">
       <KegiatanCard v-for="(kegiatan, index) in visibleFilteredOrganisasi" :key="`${kegiatan.id}-${refreshKey}`"
-        :title="kegiatan.name" :description="kegiatan.description" :image="getImageUrl(kegiatan.image)"
-        :index="index" />
+        :title="kegiatan.nama" :description="kegiatan.deskripsi_singkat" :image="getImageUrl(kegiatan.logo)"
+        :index="index"  @click="navigateToDetail(kegiatan.slug)" />
     </div>
 
     <!-- Mobile Swiper -->
@@ -98,8 +105,8 @@ const setFilter = async (filter: string) => {
         dynamicMainBullets: 3
       }" :space-between="20" :slides-per-view="1.2" class="kegiatan-swiper">
         <SwiperSlide v-for="(kegiatan, index) in filteredOrganisasi" :key="`${kegiatan.id}-${refreshKey}`">
-          <KegiatanCard :title="kegiatan.name" :description="kegiatan.description" :image="getImageUrl(kegiatan.image)"
-            :index="index" />
+          <KegiatanCard :title="kegiatan.nama" :description="kegiatan.deskripsi_singkat" :image="getImageUrl(kegiatan.logo)"
+            :index="index" @click="navigateToDetail(kegiatan.slug)" />
         </SwiperSlide>
       </Swiper>
       <div class="flex justify-center items-center">

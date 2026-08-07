@@ -10,8 +10,8 @@ import 'swiper/css/pagination';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/autoplay';
-import type { Organization } from '@/core/types/organisasi';
 import KegiatanCard from '@/views/prodiDetail/components/KegiatanCard.vue';
+import { useRouter } from 'vue-router';
 
 // Replace with your project's actual Department type/import if one exists
 interface Department {
@@ -28,12 +28,14 @@ const getImageUrl = (imagePath: string | null) => {
 };
 
 const props = defineProps<{
-  organisasi: Organization[]
+  organisasi: any[]
   departements: Department[]
 }>();
 
+const router = useRouter();
+
 const activeFilter = ref("semua");
-const activeProdi = ref("semua"); // department id as string, or 'semua'
+const activeProdi = ref("semua"); 
 const visibleItems = ref(6);
 const itemsPerLoad = 3;
 const refreshKey = ref(0);
@@ -56,14 +58,14 @@ const visibleFilteredOrganisasi = computed(() => {
   return filteredOrganisasi.value.slice(0, visibleItems.value);
 });
 
-const setFilter = async (filter: string) => {
-  if (activeFilter.value === filter) return;
+// const setFilter = async (filter: string) => {
+//   if (activeFilter.value === filter) return;
 
-  activeFilter.value = filter;
-  visibleItems.value = 6;
+//   activeFilter.value = filter;
+//   visibleItems.value = 6;
 
-  refreshKey.value++;
-};
+//   refreshKey.value++;
+// };
 
 const setProdiFilter = async (value: string) => {
   if (activeProdi.value === value) return;
@@ -83,6 +85,10 @@ const loadMore = async () => {
 const showLoadMore = computed(() => {
   return visibleItems.value < filteredOrganisasi.value.length;
 });
+
+const navigateToDetail = (slug: string) => {
+  router.push(`/kemahasiswaan-dan-alumni/organisasi/${slug}`);
+};
 </script>
 
 <template>
@@ -94,7 +100,7 @@ const showLoadMore = computed(() => {
       </div>
 
       <!-- Category filter -->
-      <div class="w-full flex justify-center items-center overflow-x-auto pb-2">
+      <!-- <div class="w-full flex justify-center items-center overflow-x-auto pb-2">
         <div class="w-fit flex gap-2 lg:gap-4">
           <div @click="setFilter('semua')"
             :class="['rounded-full px-6 py-3 lg:px-6 lg:py-3 cursor-pointer transition-all duration-300', activeFilter === 'semua' ? 'bg-colorPrimary' : 'bg-text/50 hover:bg-text/70']">
@@ -113,7 +119,7 @@ const showLoadMore = computed(() => {
             <p class="text-[10px] md:text-[12px] lg:text-[14px] text-white">Komunitas</p>
           </div>
         </div>
-      </div>
+      </div> -->
 
       <!-- Prodi filter -->
       <div class="w-full flex justify-center items-center">
@@ -135,10 +141,11 @@ const showLoadMore = computed(() => {
       <KegiatanCard
         v-for="(kegiatan, index) in visibleFilteredOrganisasi"
         :key="`${kegiatan.id}-${refreshKey}`"
-        :title="kegiatan.name"
-        :description="kegiatan.description"
-        :image="getImageUrl(kegiatan.image)"
+        :title="kegiatan.nama"
+        :description="kegiatan.deskripsi_singkat"
+        :image="getImageUrl(kegiatan.logo)"
         :index="index"
+        @click="navigateToDetail(kegiatan.slug)"
       />
     </div>
 
@@ -153,10 +160,11 @@ const showLoadMore = computed(() => {
       }" :space-between="20" :slides-per-view="1.2" class="kegiatan-swiper">
         <SwiperSlide v-for="(kegiatan, index) in filteredOrganisasi" :key="`${kegiatan.id}-${refreshKey}`">
           <KegiatanCard
-            :title="kegiatan.name"
-            :description="kegiatan.description"
-            :image="getImageUrl(kegiatan.image)"
+            :title="kegiatan.nama"
+            :description="kegiatan.deskripsi_singkat"
+            :image="getImageUrl(kegiatan.logo)"
             :index="index"
+            @click="navigateToDetail(kegiatan.slug)"
           />
         </SwiperSlide>
       </Swiper>

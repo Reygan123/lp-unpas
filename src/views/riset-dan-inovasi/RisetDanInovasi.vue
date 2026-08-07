@@ -7,7 +7,7 @@ import RisetInovasi from './sections/RisetInovasi.vue'
 import RisetJurnal from './sections/RisetJurnal.vue'
 import CTASection from '@/components/sections/CTASection.vue'
 import RisetFokusSection from './sections/RisetFokusSection.vue'
-import RIsetCapaianSection from './sections/RIsetCapaianSection.vue'
+// import RIsetCapaianSection from './sections/RIsetCapaianSection.vue'
 import { useFakultasStore } from '@/stores/fakultas.ts'
 
 const fakultasStore = useFakultasStore();
@@ -47,7 +47,7 @@ const capaianItems = [
   <MainLayout>
     <RisetHero />
     <RisetFokusSection :fokus-items="fokusItems" />
-    <RIsetCapaianSection :capaian-items="capaianItems" />
+    <!-- <RIsetCapaianSection :capaian-items="capaianItems" /> -->
     <RisetInovasi :inovasi="berandaStore.portofolioData"/>
     <BerandaBerita :fakultas="fakultasStore.fakultas" :post="berandaStore.beritaData.slice(0,3)" />
     <RisetJurnal v-if="berandaStore.jurnalData.length > 0" :jurnal="berandaStore.jurnalData"/>

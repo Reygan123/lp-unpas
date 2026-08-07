@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { UserCircle2, Network, ListChecks, Newspaper, Images, FileText, Phone } from 'lucide-vue-next';
+import { UserCircle2, Network, ListChecks,  Images, FileText, Phone } from 'lucide-vue-next';
 
 const nav = [
   { key: 'profil', label: 'Profil', icon: UserCircle2 },
   { key: 'struktur', label: 'Struktur Kepengurusan', icon: Network },
   { key: 'program-kerja', label: 'Program Kerja', icon: ListChecks },
-  { key: 'berita', label: 'Berita & Kegiatan', icon: Newspaper },
+  // { key: 'berita', label: 'Berita & Kegiatan', icon: Newspaper },
   { key: 'galeri', label: 'Galeri', icon: Images },
   { key: 'dokumen', label: 'Dokumen Organisasi', icon: FileText },
   { key: 'kontak', label: 'Kontak', icon: Phone },

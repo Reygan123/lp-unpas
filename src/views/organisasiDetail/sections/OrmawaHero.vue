@@ -2,24 +2,12 @@
 import { CalendarDays, Users, Landmark, Phone } from 'lucide-vue-next';
 
 defineProps<{
-  ormawa: {
-    logo: string;
-    kategori: string;
-    nama: string;
-    namaLengkap: string;
-    unit: string;
-    tagline: string;
-    banner: string;
-    periode: string;
-    jumlahAnggota: string;
-    pembina: string;
-    kontak: string;
-  };
+  ormawa: any;
 }>();
 </script>
 
 <template>
-  <section class="relative bg-colorPrimary overflow-hidden">
+  <section class="relative bg-colorPrimary">
     <img
       :src="ormawa.banner"
       alt=""
@@ -56,13 +44,13 @@ defineProps<{
             {{ ormawa.namaLengkap }}<br />
             {{ ormawa.unit }}
           </p>
-          <p class="text-white/70 text-sm">{{ ormawa.tagline }}</p>
+          <p class="text-white/70 text-sm" v-html="ormawa.tagline"></p>
         </div>
       </div>
     </div>
 
-    <div class="relative z-10">
-      <div class="max-w-7xl mx-auto px-4 lg:px-8 -mb-8">
+    <div class="relative z-10 top-9">
+      <div class="max-w-7xl mx-auto px-4 lg:px-8 mb-6 md:mb-10">
         <div class="bg-white rounded-xl border border-outline shadow-sm p-5 grid grid-cols-2 lg:grid-cols-4 gap-6">
           <div class="flex items-center gap-3">
             <CalendarDays class="w-8 h-8 text-colorPrimary shrink-0" stroke-width="1.5" />

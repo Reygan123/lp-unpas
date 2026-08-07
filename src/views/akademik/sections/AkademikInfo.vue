@@ -43,6 +43,17 @@ const props = defineProps<{
               </p>
             </div>
           </div>
+
+          <div
+            v-if="!props.pengumuman || props.pengumuman.length === 0"
+            class="flex flex-col items-center justify-center text-center py-8"
+          >
+            <div class="w-12 h-12 rounded-lg bg-colorPrimary/10 flex items-center justify-center mb-3">
+              <i class="pi pi-megaphone text-colorPrimary text-[1.25rem]"></i>
+            </div>
+            <p class="text-text text-[0.875rem] font-semibold mb-1">Belum Ada Pengumuman</p>
+            <p class="text-desc text-[0.75rem]">Pengumuman terbaru akan muncul di sini</p>
+          </div>
         </div>
 
         <!-- <router-link
@@ -86,6 +97,17 @@ const props = defineProps<{
               </p>
             </div>
           </div>
+
+          <div
+            v-if="!props.kalender || props.kalender.length === 0"
+            class="flex flex-col items-center justify-center text-center py-8"
+          >
+            <div class="w-12 h-12 rounded-lg bg-colorPrimary/10 flex items-center justify-center mb-3">
+              <i class="pi pi-calendar text-colorPrimary text-[1.25rem]"></i>
+            </div>
+            <p class="text-text text-[0.875rem] font-semibold mb-1">Belum Ada Agenda</p>
+            <p class="text-desc text-[0.75rem]">Kalender akademik akan muncul di sini</p>
+          </div>
         </div>
 
         <!-- <button
@@ -123,6 +145,17 @@ const props = defineProps<{
                 PDF &nbsp;•&nbsp; {{ (item.file.split('/').pop()?.length || 0) > 0 ? '1.2 MB' : '1.2 MB' }}
               </p>
             </div>
+          </div>
+
+          <div
+            v-if="!props.dokumen || props.dokumen.length === 0"
+            class="flex flex-col items-center justify-center text-center py-8"
+          >
+            <div class="w-12 h-12 rounded-lg bg-colorPrimary/10 flex items-center justify-center mb-3">
+              <FileText class="w-6 h-6 text-colorPrimary" stroke-width="1.5" />
+            </div>
+            <p class="text-text text-[0.875rem] font-semibold mb-1">Belum Ada Dokumen</p>
+            <p class="text-desc text-[0.75rem]">Dokumen terbaru akan muncul di sini</p>
           </div>
         </div>
 

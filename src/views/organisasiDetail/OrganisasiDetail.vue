@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { computed, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import MainLayout from '@/layouts/MainLayout.vue';
 import OrmawaHero from './sections/OrmawaHero.vue';
@@ -10,52 +10,97 @@ import ProgramKerja from './sections/ProgramKerja.vue';
 import BeritaKegiatan from './sections/BeritaKegiatan.vue';
 import Galeri from './sections/Galeri.vue';
 import DokumenOrganisasi from './sections/DokumenOrganisasi.vue';
+import { useOrmawaDetailStore } from '@/stores/ormawaDetail';
+import CTASection from '@/components/sections/CTASection.vue';
 
 const route = useRoute();
-const isLoading = ref(true);
+const slug = route.params.slug as string;
+const ormawaDetailStore = useOrmawaDetailStore();
+const isLoading = computed(() => ormawaDetailStore.loading);
 
-const ormawa = ref({
-  logo: '/images/logo-hmti.png',
-  kategori: 'ORMAWA',
-  nama: 'HMTI',
-  namaLengkap: 'Himpunan Mahasiswa Teknik Industri',
-  unit: 'Fakultas Teknik – Universitas Pasundan',
-  tagline: 'Bersinergi • Berintegritas • Berkarya',
-  banner: '/images/hmti-banner.jpg',
-  periode: '2025/2026',
-  jumlahAnggota: '126 Mahasiswa',
-  pembina: 'Dr. Ir. Yudi Rahayu, MT.',
-  kontak: 'hmti@unpas.ac.id / @hmti.unpas',
+const baseUrl = import.meta.env.VITE_APP_IMG_URL
+
+const getImageUrl = (imagePath: string | null) => {
+  if (!imagePath) return ''
+  return `${baseUrl}/${imagePath}`
+}
+
+const ormawa = computed(() => {
+  const data = ormawaDetailStore.ormawa || {};
+  return {
+    logo: getImageUrl(data.logo),
+    kategori: data.departement?.jenjang || 'ORMAWA',
+    nama: data.singkatan || '-',
+    namaLengkap: data.nama || '-',
+    unit: data.departement?.name ? `${data.departement.name} - Fakultas Teknik Universitas Pasundan` : 'Fakultas Teknik Universitas Pasundan',
+    tagline: data.deskripsi_singkat || '-',
+    banner: getImageUrl(data.departement?.image1),
+    periode: data.periode_kepengurusan || '-',
+    jumlahAnggota: ormawaDetailStore.pengurus?.length ? `${ormawaDetailStore.pengurus.length} Pengurus` : '-',
+    pembina: data.ketua || '-',
+    kontak: data.media_sosial || '-',
+    visi: data.visi || '-',
+    misi: data.misi || '-',
+    tujuan: data.tujuan || '-',
+    nilaiOrganisasi: data.nilai_organisasi || '-',
+    ruangLingkup: data.ruang_lingkup || '-',
+  };
 });
 
-const pengurusInti = ref([
-  { foto: '/images/pengurus/raka.jpg', jabatan: 'Ketua', nama: 'Raka Pratama' },
-  { foto: '/images/pengurus/salsa.jpg', jabatan: 'Wakil Ketua', nama: 'Salsa Anindita' },
-  { foto: '/images/pengurus/dinda.jpg', jabatan: 'Sekretaris', nama: 'Dinda Aulia' },
-  { foto: '/images/pengurus/fauzan.jpg', jabatan: 'Bendahara', nama: 'Fauzan Akbar' },
-]);
+const pengurusInti = computed(() => {
+  return (ormawaDetailStore.pengurus || [])
+    .slice()
+    .sort((a: any, b: any) => (a.urutan || 0) - (b.urutan || 0))
+    .map((item: any) => ({
+      foto: getImageUrl(item.foto),
+      jabatan: item.jabatan,
+      nama: item.nama,
+      namaBidang: item.nama_bidang,
+    }));
+});
 
-const berita = ref([
-  { foto: '/images/berita/industrial-visit.jpg', title: 'HMTI UNPAS Gelar Industrial Visit ke PT XYZ', tanggal: '20 Mei 2025', desc: 'Kegiatan ini bertujuan untuk menambah wawasan mahasiswa mengenai dunia industri...' },
-  { foto: '/images/berita/seminar.jpg', title: 'Seminar Nasional Teknik Industri 2025', tanggal: '15 Mei 2025', desc: 'Mengangkat tema "Transformasi Industri untuk Masa Depan Berkelanjutan"...' },
-  { foto: '/images/berita/pengabdian.jpg', title: 'Pengabdian Masyarakat di Desa Cileunyi', tanggal: '5 Mei 2025', desc: 'HMTI UNPAS melaksanakan kegiatan pengabdian masyarakat di bidang edukasi dan...' },
-]);
+const totalPengurus = computed(() => `${ormawaDetailStore.pengurus?.length || 0} Orang`);
 
-const galeri = ref([
-  { src: '/images/galeri/hmti-1.jpg' },
-  { src: '/images/galeri/hmti-2.jpg' },
-  { src: '/images/galeri/hmti-3.jpg' },
-  { src: '/images/galeri/hmti-4.jpg' },
-  { src: '/images/galeri/hmti-5.jpg', isVideo: true },
-  { src: '/images/galeri/hmti-6.jpg', isVideo: true },
-]);
+const programKerja = computed(() => {
+  return (ormawaDetailStore.programKerja || []).map((item: any) => ({
+    kategori: item.kategori,
+    namaProgram: item.nama_program,
+    deskripsi: item.deskripsi,
+    tanggalPelaksanaan: item.tanggal_pelaksanaan,
+    status: item.status,
+  }));
+});
+
+const galeri = computed(() => {
+  return (ormawaDetailStore.galeri || []).map((item: any) => ({
+    src: getImageUrl(item.file),
+    isVideo: item.tipe === 'video',
+    caption: item.caption,
+  }));
+});
+
+const dokumen = computed(() => {
+  return (ormawaDetailStore.dokumen || []).map((item: any) => ({
+    id: item.id,
+    title: item.judul,
+    kategori: item.kategori,
+    tahun: item.tahun,
+    url: getImageUrl(item.file),
+  }));
+});
 
 onMounted(async () => {
   try {
+    await Promise.all([
+      await ormawaDetailStore.fetchOrmawaDetail(slug),
+      await ormawaDetailStore.fetchPengurus(slug),
+      await ormawaDetailStore.fetchProgramKerja(slug),
+      await ormawaDetailStore.fetchBerita(slug),
+      await ormawaDetailStore.fetchGaleri(slug),
+      await ormawaDetailStore.fetchDokumen(slug),
+    ]);
   } catch (error) {
     console.error('Error loading data:', error);
-  } finally {
-    isLoading.value = false;
   }
 });
 </script>
@@ -71,22 +116,25 @@ onMounted(async () => {
         </div>
 
         <div class="lg:col-span-3 flex flex-col">
-          <ProfilOrganisasi />
+          <ProfilOrganisasi :ormawa="ormawa" :is-loading="isLoading" />
           <StrukturKepengurusan
             :periode="ormawa.periode"
-            :total-pengurus="'32 Orang'"
+            :total-pengurus="totalPengurus"
             :pengurus-inti="pengurusInti"
+            :is-loading="isLoading"
           />
-          <ProgramKerja />
+          <ProgramKerja :program-kerja="programKerja" :is-loading="isLoading" />
 
           <div id="kontak" class="grid lg:grid-cols-2 gap-6 mt-10 scroll-mt-24">
-            <BeritaKegiatan :berita="berita" />
-            <Galeri :galeri="galeri" />
+            <!-- <BeritaKegiatan :berita="berita" /> -->
+            <Galeri :galeri="galeri" :is-loading="isLoading" />
           </div>
 
-          <DokumenOrganisasi />
+          <DokumenOrganisasi :dokumen="dokumen" :is-loading="isLoading" />
         </div>
       </div>
     </section>
+
+    <CTASection />
   </MainLayout>
 </template>

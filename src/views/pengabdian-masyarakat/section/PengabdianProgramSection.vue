@@ -1,13 +1,30 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import TitleSection from '@/components/TitleSection.vue';
 import TextSection from '@/components/TextSection.vue';
 import InteractiveHoverButton from '@/components/ui/interactive-hover-button/InteractiveHoverButton.vue';
 import SectionLayout from '@/layouts/SectionLayout.vue';
 import PengabdianDetailModal from './PengabdianDetailModal.vue';
-import { pengabdianData } from '../data/pengabdian-data';
+import { usePengabdianStore } from '@/stores/pengabdian.ts';
 
-const programItems = pengabdianData.slice(0, 6);
+const pengabdianStore = usePengabdianStore();
+
+const programItems = computed(() => {
+  return (pengabdianStore.pengabdian || []).slice(0, 6).map((item: any) => ({
+    id: item.id,
+    judul: item.judul,
+    slug: item.slug,
+    kategori: item.kategori,
+    lokasi: item.lokasi,
+    tanggal: item.tanggal,
+    deskripsi: item.deskripsi,
+    gambar: `${import.meta.env.VITE_APP_IMG_URL}/${item.gambar}`,
+    prodi: (item.departements || []).map((d: any) => d.name),
+    dosenPenanggungJawab: item.dosen_penanggung_jawab || [],
+    sumber: item.sumber,
+  }));
+});
+
 const selectedItem = ref<any | null>(null);
 
 const openDetail = (item: any) => {
