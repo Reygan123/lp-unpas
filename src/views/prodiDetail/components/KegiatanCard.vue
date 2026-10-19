@@ -26,6 +26,7 @@ onMounted(() => {
     :class="[isVisible ? 'card-visible' : 'card-hidden', `delay-${(index || 0) % 9}`]">
     <div class="w-full h-full rounded-[16px] md:rounded-[24px] lg:rounded-[32px] overflow-hidden">
       <img :src="image || 'https://via.placeholder.com/300'" :alt="title || 'Kemahasiswaan & Alumni'"
+        loading="lazy" decoding="async"
         class="w-full h-full object-top object-cover rounded-[16px] md:rounded-[24px] lg:rounded-[32px] transition-transform duration-500">
     </div>
     <div

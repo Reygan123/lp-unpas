@@ -23,7 +23,7 @@ onMounted(async () => {
   <div class="lg:mt-48 mt-32 px-[5%] relative custom-gradient">
     <div class="text-center lg:w-1/2 w-full mx-auto">
       <div class="px-5 py-2 rounded-full mx-auto mb-5 w-fit bg-colorPrimary/20">
-        <h6 class="font-semibold text-colorPrimary">Testimonials</h6>
+        <div class="font-semibold text-colorPrimary">Testimonials</div>
       </div>
       <TitleSection text="Apa Kata Mereka" class="text-center"></TitleSection>
       <p class="text-gray-500 mt-5">
@@ -46,8 +46,8 @@ onMounted(async () => {
         >
         <img :src="getImageUrl(data.image)" alt="" class="rounded-full w-20 h-20 bg-gray-200 object-cover" />
           <p class="mt-5 text-center text-sm md:text-base" v-html="data.description"></p>
-          <h1 class="md:text-2xl text-xl font-semibold mt-5">{{ data.name }}</h1>
-          <h6 class="text-gray-500 text-sm md:text-base">{{ data.title }}</h6>
+          <h3 class="md:text-2xl text-xl font-semibold mt-5">{{ data.name }}</h3>
+          <div class="text-gray-500 text-sm md:text-base">{{ data.title }}</div>
         </div>
       </template>
     </div>
@@ -62,8 +62,8 @@ onMounted(async () => {
         >
           <img :src="getImageUrl(currentTestimoni.image)" alt="" class="rounded-full w-20 h-20 bg-gray-200 object-cover" />
           <p class="mt-5 text-center text-sm" v-html="currentTestimoni.description"></p>
-          <h1 class="text-xl font-semibold mt-5">{{ currentTestimoni.name }}</h1>
-          <h6 class="text-gray-500 text-sm">{{ currentTestimoni.title }}</h6>
+          <h3 class="text-xl font-semibold mt-5">{{ currentTestimoni.name }}</h3>
+          <div class="text-gray-500 text-sm">{{ currentTestimoni.title }}</div>
         </div>
       </transition>
 

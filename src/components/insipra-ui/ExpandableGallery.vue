@@ -13,6 +13,8 @@
         class="relative w-full h-full object-cover"
         :src="getImageUrl(facility.image1 || '')"
         :alt="facility.title || ''"
+        loading="lazy"
+        decoding="async"
       />
       <div
         class="absolute bottom-0 left-0 z-20 p-4 w-full transition-all duration-300 transform translate-y-full group-hover:translate-y-0"

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import SectionLayout from '@/layouts/SectionLayout.vue';
-import Org from '@/assets/org.png'
+import Org from '@/assets/org.webp'
 import ProspekCard from '../components/ProspekCard.vue';
 import TitleSection from '@/components/TitleSection.vue';
 import type { Prospek } from '@/core/types/prospek';

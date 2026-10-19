@@ -66,7 +66,7 @@ const closeDetail = () => {
             <span class="inline-block text-xs font-semibold text-colorPrimary bg-colorPrimary/10 px-3 py-1 rounded-full mb-3">
               {{ item.kategori }}
             </span>
-            <h3 class="text-lg font-bold text-[#444444] mb-2 leading-snug">
+            <h3 class="text-lg font-bold text-[#444444] mb-2 leading-snug line-clamp-2 ">
               {{ item.judul }}
             </h3>
             <p class="text-sm text-gray-500 mb-3 line-clamp-3">
@@ -87,10 +87,5 @@ const closeDetail = () => {
 </template>
 
 <style scoped>
-.line-clamp-3 {
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
+
 </style>

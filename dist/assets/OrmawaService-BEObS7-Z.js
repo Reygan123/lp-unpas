@@ -1,0 +1,1 @@
+import{A as e}from"./index-zWUDTtyC.js";const a={getAll:()=>e.get("ormawa"),getBySlug:a=>e.get("ormawa",a),getPengurus:a=>e.get(`ormawa/${a}/pengurus`),getProgramKerja:a=>e.get(`ormawa/${a}/program-kerja`),getBerita:a=>e.get(`ormawa/${a}/berita`),getGaleri:a=>e.get(`ormawa/${a}/galeri`),getDokumen:a=>e.get(`ormawa/${a}/dokumen`)};export{a as O};

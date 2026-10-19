@@ -56,7 +56,7 @@ const limitedPrestasi = computed(() => {
         </div>
 
         <!-- Tablet & Dekstop -->
-        <div id="prestasi-scroll" class="hidden md:flex w-full lg:w-[60%] h-full overflow-y-auto cursor-pointer">
+        <div id="prestasi-scroll" class="hidden md:flex w-full lg:w-[60%] h-full overflow-y-auto cursor-pointer border-2 border-colorPrimary rounded-[16px] md:rounded-[24px] lg:rounded-[32px] p-6 bg-colorPrimary/10">
           <div class="w-1/2">
             <div class="w-full h-[26vh] xl:h-[22vh]"></div>
             <template v-for="(item, index) in limitedPrestasi" :key="item.id">

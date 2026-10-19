@@ -2,14 +2,11 @@
 import TextSection from '../TextSection.vue';
 import TitleSection from '../TitleSection.vue';
 import type { Partner } from '@/core/types/partner';
-import { computed, ref } from 'vue';
+import { computed, onMounted, onUnmounted, ref } from 'vue';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { Autoplay, Pagination } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/autoplay';
+import '@/lib/swiper-styles'
 
-// Pastikan modul diinisialisasi dengan benar
 const modules = ref([Autoplay, Pagination]);
 
 const baseUrl = import.meta.env.VITE_APP_IMG_URL;
@@ -24,13 +21,32 @@ const props = defineProps<{
 
 const titleHTML = 'Mitra <span class="text-colorPrimary">Kerjasama</span>';
 
+const getItemsPerSlide = () => {
+  if (typeof window === 'undefined') return 5;
+  if (window.innerWidth >= 1024) return 5;
+  if (window.innerWidth >= 768) return 3;
+  return 2;
+};
+
+const itemsPerSlide = ref(getItemsPerSlide());
+
+const updateItemsPerSlide = () => {
+  itemsPerSlide.value = getItemsPerSlide();
+};
+
+onMounted(() => {
+  updateItemsPerSlide();
+  window.addEventListener('resize', updateItemsPerSlide);
+});
+
+onUnmounted(() => {
+  window.removeEventListener('resize', updateItemsPerSlide);
+});
+
 const groupedPartners = computed(() => {
   const partnersToShow = props.partners?.slice(0, 15) || [];
 
-  const desiredGroupCount = Math.min(
-    Math.max(1, Math.ceil(partnersToShow.length / 5)),
-    3
-  );
+  const desiredGroupCount = Math.max(1, Math.ceil(partnersToShow.length / itemsPerSlide.value));
 
   const partnersPerGroup = Math.ceil(partnersToShow.length / desiredGroupCount);
 
@@ -41,20 +57,19 @@ const groupedPartners = computed(() => {
 
   return groups;
 });
-
 </script>
 
 <template>
   <div>
     <div
-      class="w-full px-[20px] py-[32px] md:px-[60px] md:py-[60px] lg:px-[120px] lg:py-[60px] space-y-12 md:space-y-16 lg:space-y-20">
+      class="w-full px-[20px] py-[32px] md:px-[60px] md:py-[60px] lg:px-[120px] lg:py-[60px] space-y-12 md:space-y-16 lg:space-y-0">
       <div class="w-full flex justify-center items-center">
         <TitleSection :text="titleHTML" :html="true" :delay="60" />
       </div>
     </div>
     <div class="lg:mb-10 px-4">
-      <swiper v-if="groupedPartners.length > 0" :modules="modules" :slides-per-view="1" :space-between="30" :speed="650"
-        :loop="true" :autoplay="{
+      <swiper v-if="groupedPartners.length > 0" :key="itemsPerSlide" :modules="modules" :slides-per-view="1"
+        :space-between="30" :speed="650" :loop="true" :autoplay="{
           delay: 2800,
           disableOnInteraction: false,
           pauseOnMouseEnter: true
@@ -64,9 +79,9 @@ const groupedPartners = computed(() => {
           bulletActiveClass: 'custom-bullet-active'
         }">
         <swiper-slide v-for="(group, groupIndex) in groupedPartners" :key="groupIndex">
-          <div class="grid grid-cols-5 gap-4 w-full">
+          <div class="flex flex-wrap justify-center gap-4 md:gap-6 lg:gap-12 w-full">
             <div v-for="(partner, index) in group" :key="index"
-              class="h-32 lg:h-40 flex items-center justify-center lg:mb-10">
+              class="w-[calc((100%_-_1rem)/2)] md:w-[calc((100%_-_3rem)/3)] lg:w-[calc((100%_-_12rem)/5)] h-40 md:h-44 lg:h-40 flex items-center justify-center lg:mb-10 border-2 border-colorPrimary rounded-[16px] md:rounded-[24px] lg:rounded-[32px] p-4 md:p-6 bg-colorPrimary/10">
               <img :src="getImageUrl(partner?.image || '')" :alt="partner?.name"
                 class="w-full h-full object-contain rounded-[8px] md:rounded-[16px] lg:rounded-[24px]" loading="lazy" />
             </div>
@@ -151,14 +166,6 @@ const groupedPartners = computed(() => {
     height: 8px;
   }
 }
-
-/*
-@media (max-width: 767px) {
-  .custom-bullet,
-  .custom-bullet-active {
-    display: none;
-  }
-} */
 
 @media (min-width: 1024px) {
   .swiper-pagination {

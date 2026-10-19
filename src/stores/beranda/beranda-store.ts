@@ -28,12 +28,9 @@ export const useBerandaStore = defineStore("beranda", {
                     this.getDataUngulan(true),
                     this.getDataPrestasi(true),
                     this.getDataAgenda(),
-                    this.getDataOrganisasi(true),
                     this.getDataBerita(),
                     this.getDataFasilitas(true),
-                    this.getDataPortofolio(true),
                     this.getDataDosen(true),
-                    this.getDataSlider(true),
                 ]);
             } catch (error) {
                 console.error("Error fetching data:", error);

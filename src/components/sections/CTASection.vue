@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import ctaBackground from '@/assets/ctaBackground.png'
-import ctaOrang from '@/assets/Org.png'
+import ctaOrang from '@/assets/org.webp'
 import InteractiveHoverButton from '../ui/interactive-hover-button/InteractiveHoverButton.vue';
 import ContactAdminButton from '../ContactAdminButton.vue';
 </script>
@@ -22,7 +22,7 @@ import ContactAdminButton from '../ContactAdminButton.vue';
 
           <div class="flex items-center gap-3 sm:gap-4 mt-2 sm:mt-0">
             <a href="https://pmb.unpas.ac.id/" target="_blank">
-              <InteractiveHoverButton :bg-color="'bg-white'" :text-color="'text-colorPrimary'" :bg-hover="'bg-colorPrimary'" :text-hover="'text-white'" :border-hover="'border-white'" :text="'Daftar Sekarang'"></InteractiveHoverButton>
+              <InteractiveHoverButton :bg-color="'bg-white'" :text-color="'text-[#b35300]'" :bg-hover="'bg-colorPrimary'" :text-hover="'text-white'" :border-hover="'border-white'" :text="'Daftar Sekarang'"></InteractiveHoverButton>
             </a>
             <ContactAdminButton />
           </div>
@@ -30,17 +30,15 @@ import ContactAdminButton from '../ContactAdminButton.vue';
 
         <!-- Image Section - Optimized for mobile -->
         <div class="order-1 md:order-2 w-full h-full relative -mt-12 md:mt-0 lg:mt-0">
-          <!-- Mobile version (centered and larger) -->
           <div class="md:hidden absolute inset-0 flex items-center justify-center">
             <div class="h-[200px] w-full flex items-center justify-center overflow-visible">
-              <img :src="ctaOrang" alt="Gambar Kanan" class="z-10 object-cover object-top"
+              <img :src="ctaOrang" alt="Gambar Kanan" width="687" height="1024" loading="lazy" decoding="async" class="z-10 object-cover object-top"
                 style="height: 100%; max-height: 250px; width: auto; mask-image: linear-gradient(to bottom, black 60%, transparent 100%); -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);" />
             </div>
           </div>
 
-          <!-- Desktop version (original effect) -->
           <div class="hidden md:block absolute bottom-0 right-0 md:h-[120%] lg:h-[120%] w-full">
-            <img :src="ctaOrang" alt="Gambar Kanan" class="absolute z-10 object-contain object-bottom"
+            <img :src="ctaOrang" alt="Gambar Kanan" width="687" height="1024" loading="lazy" decoding="async" class="absolute z-10 object-contain object-bottom"
               style="height: 110%; bottom: 0; right: 0; max-width: 100%" />
           </div>
         </div>

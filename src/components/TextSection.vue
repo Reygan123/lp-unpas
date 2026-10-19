@@ -13,7 +13,7 @@ defineProps<Props>();
     :class="[
       'text-[12px] md:text-[14px] lg:text-[18px]',
       alignText,
-      weightText || 'font-medium'
+      weightText || 'font-normal'
     ]"
   >
     <slot></slot>

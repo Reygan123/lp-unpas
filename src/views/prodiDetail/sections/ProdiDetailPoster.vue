@@ -2,10 +2,7 @@
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import { ref } from 'vue';
-import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
-import 'swiper/css/autoplay';
+import '@/lib/swiper-styles'
 import type { Slider } from '@/core/types/slider';
 import type { Swiper as SwiperClass } from 'swiper';
 

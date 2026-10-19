@@ -2,7 +2,7 @@
 import TextBody from '@/components/TextBody.vue';
 import type { Departement } from '@/core/types/departement';
 import Star from '@/assets/icons/star.png'
-import Gedung from '@/assets/gedung.jpg'
+import Gedung from '@/assets/gedung.webp'
 import router from '@/router';
 import InteractiveHoverButton from '@/components/ui/interactive-hover-button/InteractiveHoverButton.vue';
 import { computed } from 'vue';

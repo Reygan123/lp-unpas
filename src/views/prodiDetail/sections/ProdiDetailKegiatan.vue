@@ -5,10 +5,7 @@ import SectionLayout from '@/layouts/SectionLayout.vue';
 import { ref, computed } from 'vue';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { Autoplay, Pagination } from 'swiper/modules';
-import 'swiper/css/pagination';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/autoplay';
+import '@/lib/swiper-styles'
 // import type { Organization } from '@/core/types/organisasi';
 import KegiatanCard from '@/views/prodiDetail/components/KegiatanCard.vue';
 import InteractiveHoverButton from '@/components/ui/interactive-hover-button/InteractiveHoverButton.vue';
@@ -62,7 +59,7 @@ const navigateToDetail = (slug: string) => {
     <div class="w-full flex flex-col gap-5 lg:gap-10">
       <div class="w-full flex flex-col gap-4 md:gap-5 lg:gap-6 justify-center items-center">
         <TitleSection :text="'Kemahasiswaan & Alumni'"></TitleSection>
-        <TextSection class="text-center md:text-left text-black/40">Fasilitas unggulan kami mendukung pengalaman belajar yang optimal.
+        <TextSection class="text-center md:text-left text-gray-600">Fasilitas unggulan kami mendukung pengalaman belajar yang optimal.
         </TextSection>
       </div>
 

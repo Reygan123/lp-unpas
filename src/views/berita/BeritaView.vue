@@ -33,8 +33,8 @@ const error = computed(() => postStore.error);
 
 <template>
   <MainLayout>
-    <HeroSection :berita="posts" :is-loading="isLoading" />
-    <BeritaListSection :posts="posts" :loading="isLoading" :error="error" />
+    <HeroSection v-if="posts.length > 0" :berita="posts" :is-loading="isLoading" />
+    <BeritaListSection v-if="posts.length > 0" :posts="posts" :loading="isLoading" :error="error" />
     <AcaraSection :acara="agenda?.slice(0, 3)" :is-loading="isLoading" />
     <CTASection />
   </MainLayout>

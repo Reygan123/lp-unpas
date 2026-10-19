@@ -83,12 +83,14 @@ const selectedAnimation = animationVariants[props.animationStyle]
       <img
         :src="thumbnailSrc"
         :alt="thumbnailAlt"
+        loading="lazy"
+        decoding="async"
         :class="['object-cover rounded-[16px] md:rounded-[24px] lg:rounded-[32px] shadow-lg transition-all duration-200 ease-out group-hover:brightness-[0.8]', size]"
       />
       <div class="absolute inset-0 flex scale-[0.9] items-center justify-center rounded-2xl transition-all duration-200 ease-out group-hover:scale-100">
-        <div class="flex size-28 items-center justify-center rounded-full bg-black/10 backdrop-blur-md">
+        <div class="flex size-28 items-center justify-center rounded-full bg-black/5 backdrop-blur-md">
           <div
-            class="relative flex size-20 scale-100 items-center justify-center rounded-full bg-gradient-to-b from-black/30 to-black shadow-md transition-all duration-200 ease-out group-hover:scale-[1.2]"
+            class="relative flex size-20 scale-100 items-center justify-center rounded-full bg-gradient-to-b from-black/10 to-black shadow-md transition-all duration-200 ease-out group-hover:scale-[1.2]"
           >
             <Play
               class="size-8 scale-100 fill-white text-white transition-transform duration-200 ease-out group-hover:scale-105"

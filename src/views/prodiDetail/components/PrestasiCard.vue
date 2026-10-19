@@ -17,7 +17,7 @@ defineProps<{
     </div>
     <div class="w-full h-48 md:h-52">
       <div :class="['w-full h-full group overflow-hidden', rounded]">
-        <img :src="image" :alt="title" :class="['w-full h-full object-top object-cover group-hover:scale-105 transition duration-500', rounded]">
+        <img :src="image" :alt="title" loading="lazy" decoding="async" :class="['w-full h-full object-top object-cover group-hover:scale-105 transition duration-500', rounded]">
       </div>
     </div>
   </div>

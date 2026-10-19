@@ -1,7 +1,5 @@
-# https://www.robotstxt.org/robotstxt.html
+# Non-production environment - block all crawlers
 User-agent: *
 Allow: /
 
-# Host & Sitemap Location
-Host: https://ft.unpas.ac.id
-Sitemap: https://ft.unpas.ac.id/sitemap.xml
+Sitemap: https://teknik.unpas.ac.id/sitemap.xml

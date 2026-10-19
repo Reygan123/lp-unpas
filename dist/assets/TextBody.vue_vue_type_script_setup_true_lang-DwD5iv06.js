@@ -1,0 +1,1 @@
+import{d as t,h as e,n as a,A as s,e as o}from"./vendor-vue-D-N3CjNk.js";const x=t({__name:"TextBody",props:{alignText:{},weightText:{default:"font-normal"}},setup:t=>(t,x)=>(o(),e("p",{class:a(["text-[10px] md:text-[12px] lg:text-[16px] font-normal",t.alignText,t.weightText])},[s(t.$slots,"default")],2))});export{x as _};

@@ -4,9 +4,7 @@ import type { Post } from '@/core/types/post';
 import { useSanitize } from '@/composables/useSanitize';
 import { computed } from 'vue';
 import { useClipboard } from '@vueuse/core';
-import { toast } from 'vue3-toastify';
 import { useRouter } from 'vue-router';
-import 'vue3-toastify/dist/index.css';
 
 import CopyIcon from '@/assets/icons/copy.png';
 import WhatsappIcon from '@/assets/icons/wa.png';
@@ -53,7 +51,20 @@ const goToDetail = () => {
   }
 };
 
-const shareTo = (platform: string) => {
+// Toastify di-load on-demand (dynamic import) supaya CSS & JS-nya
+// tidak ikut nempel di bundle awal — toast cuma dibutuhkan
+// saat user benar-benar klik tombol share/copy.
+let toastifyCssLoaded = false;
+async function getToast() {
+  if (!toastifyCssLoaded) {
+    await import('vue3-toastify/dist/index.css');
+    toastifyCssLoaded = true;
+  }
+  const { toast } = await import('vue3-toastify');
+  return toast;
+}
+
+const shareTo = async (platform: string) => {
   if (!firstBerita.value) return;
 
   const title = firstBerita.value.title;
@@ -61,7 +72,8 @@ const shareTo = (platform: string) => {
   const text = `${title} - Baca selengkapnya di: ${url}`;
 
   switch (platform) {
-    case 'copy':
+    case 'copy': {
+      const toast = await getToast();
       if (isCopySupported) {
         copy(url);
         toast.success('Link berhasil disalin!', { autoClose: 2000 });
@@ -69,6 +81,7 @@ const shareTo = (platform: string) => {
         toast.error('Browser tidak mendukung copy link', { autoClose: 2000 });
       }
       break;
+    }
     case 'whatsapp':
       window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
       break;

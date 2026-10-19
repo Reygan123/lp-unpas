@@ -1,16 +1,10 @@
 <script setup lang="ts">
 import InteractiveHoverButton from '@/components/ui/interactive-hover-button/InteractiveHoverButton.vue';
-import { useAnalyticStore } from '@/stores/analytic';
-import { useIdentityStore } from '@/stores/identity';
-import { onMounted } from 'vue';
-
-const identityStore = useIdentityStore();
-const analyticStore = useAnalyticStore();
 
 defineProps({
   bgColor: {
     type: String,
-    default: 'bg-colorPrimary'
+    default: 'bg-[#b35300]'
   },
   textColor: {
     type: String,
@@ -22,7 +16,7 @@ defineProps({
   },
   textHover: {
     type: String,
-    default: 'text-colorPrimary'
+    default: 'text-[#b35300]'
   },
   borderColor: {
     type: String,
@@ -36,11 +30,6 @@ defineProps({
     type: String,
     default: 'Hubungi Admin'
   }
-});
-
-onMounted(async () => {
-  await identityStore.fetchIdentity();
-  await analyticStore.fetchAnalytic();
 });
 
 const contactAdmin = () => {

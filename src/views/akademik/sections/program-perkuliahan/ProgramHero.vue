@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Building2, Repeat, Wifi, Rocket, Calendar, FileSearch, Wallet, CreditCard, HelpCircle, Download } from 'lucide-vue-next';
+import { Building2, Repeat, Wifi, Rocket, Calendar, FileSearch, Book, CreditCard, HelpCircle, Download } from 'lucide-vue-next';
 import SectionLayout from '@/layouts/SectionLayout.vue';
 import { useProgramStore } from '@/stores/program.ts';
 import { computed } from 'vue';
@@ -23,18 +23,11 @@ const tipe = computed(() => {
 });
 
 const infoCepat = [
-  { icon: Calendar, label: 'Kalender Akademik', to: '/akademik/kalender' },
+  { icon: Calendar, label: 'Kalender Akademik', to: '/akademik/peraturan' },
   { icon: FileSearch, label: 'Pendaftaran PMB', to: 'https://pmb.unpas.ac.id/' },
-  { icon: Wallet, label: 'Beasiswa', to: '/akademik/beasiswa' },
-  { icon: CreditCard, label: 'Biaya Pendidikan', to: '/akademik/biaya-pendidikan' },
+  { icon: Book, label: 'Akademik', to: '/akademik' },
+  { icon: CreditCard, label: 'Program Perkuliahan', to: '/akademik/program-perkuliahan' },
   { icon: HelpCircle, label: 'FAQ', to: '#faq' },
-];
-
-const unduhan = [
-  { title: 'Panduan Biaya Pendidikan 2024', ukuran: '2.1 MB' },
-  { title: 'Skema Program Perkuliahan', ukuran: '1.4 MB' },
-  { title: 'Pedoman UKT', ukuran: '980 KB' },
-  { title: 'Brosur Fakultas Teknik', ukuran: '3.2 MB' },
 ];
 </script>
 
@@ -107,27 +100,6 @@ const unduhan = [
             >
               <HelpCircle class="w-6 h-6 text-colorPrimary mb-2" stroke-width="1.5" />
               <p class="text-desc text-xs">Belum ada informasi cepat</p>
-            </div>
-          </div>
-
-          <div class="bg-white rounded-xl border border-outline p-5">
-            <h3 class="font-sora font-bold text-text mb-4">Unduhan Populer</h3>
-            <ul class="flex flex-col divide-y divide-outline">
-              <li v-for="item in unduhan" :key="item.title" class="flex items-center justify-between gap-3 py-2.5">
-                <div>
-                  <p class="text-text text-sm font-medium leading-snug">{{ item.title }}</p>
-                  <p class="text-desc text-xs">{{ item.ukuran }}</p>
-                </div>
-                <Download class="w-4 h-4 text-colorPrimary shrink-0" />
-              </li>
-            </ul>
-
-            <div
-              v-if="!unduhan || unduhan.length === 0"
-              class="flex flex-col items-center justify-center text-center py-6"
-            >
-              <Download class="w-6 h-6 text-colorPrimary mb-2" stroke-width="1.5" />
-              <p class="text-desc text-xs">Belum ada unduhan populer</p>
             </div>
           </div>
         </div>

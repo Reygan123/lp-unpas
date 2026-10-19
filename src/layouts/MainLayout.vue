@@ -18,11 +18,10 @@ onMounted(async () => {
   <div class="bg-[#f3f4f4] relative">
     <Header />
     <Transition name="fade-up" appear>
-      <div v-show="showContent" class="slot-container lg:mt-28">
+      <main v-show="showContent" class="slot-container lg:mt-28">
         <slot></slot>
-      </div>
+      </main>
     </Transition>
-    <!-- <GoogleTranslate /> -->
     <Footer />
   </div>
 </template>

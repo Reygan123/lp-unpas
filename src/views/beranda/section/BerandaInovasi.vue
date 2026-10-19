@@ -4,7 +4,7 @@ import TitleSection from '@/components/TitleSection.vue';
 import InteractiveHoverButton from '@/components/ui/interactive-hover-button/InteractiveHoverButton.vue';
 import SectionLayout from '@/layouts/SectionLayout.vue';
 import type { Faculty } from '@/core/types/fakultas';
-import Bg from '@/assets/inovasi.png'
+import Bg from '@/assets/inovasi.webp'
 
 defineProps<{
   fakultas: Faculty | null;
@@ -20,7 +20,7 @@ defineProps<{
       </div>
       <div class="lg:w-1/2 w-[90%] text-black space-y-6 md:space-y-7 lg:space-y-8">
         <div class="space-y-4 md:space-y-5 lg:space-y-6">
-          <h6 class="font-semibold md:text-lg">Inovasi</h6>
+          <div class="font-semibold md:text-lg">Inovasi</div>
           <TitleSection text="Penelitian Unggulan dan Publikasi Terbaru" class="mt-5"></TitleSection>
           <TextSection>Fakultas kami berkomitmen untuk menghasilkan penelitian yang berdampak. Temukan karya-karya
             inovatif yang dihasilkan oleh para akademisi kami.</TextSection>

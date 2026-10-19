@@ -1,0 +1,5 @@
+# Non-production environment - block all crawlers
+User-agent: *
+Allow: /
+
+Sitemap: https://teknik.unpas.ac.id/sitemap.xml

@@ -1,0 +1,1 @@
+import{a as p}from"./index-zWUDTtyC.js";import{h as s,e,A as a}from"./vendor-vue-D-N3CjNk.js";const x={class:"w-full px-[20px] py-[32px] md:px-[60px] md:py-[60px] lg:px-[120px] lg:py-[60px] space-y-10 md:space-y-14 lg:space-y-16"},r=p({},[["render",function(p,r){return e(),s("div",x,[a(p.$slots,"default")])}]]);export{r as S};

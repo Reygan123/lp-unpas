@@ -2,14 +2,14 @@
 import { onMounted, ref } from "vue";
 import MainLayout from '@/layouts/MainLayout.vue';
 import SectionLayout from '@/layouts/SectionLayout.vue';
-import KarierHero from './sections/KarierHEro.vue';
+import KarierHero from './sections/KarierHero.vue';
 import KarierQuickNav from './sections/KarierQuickNav.vue';
 import MagangSection from './sections/MagangSection.vue';
 import LowonganSection from './sections/LowonganSection.vue';
 import WebinarSection from './sections/WebinarSection.vue';
 import AlumniNetworkingSection from './sections/AlumniNetworkingSection.vue';
 import TracerStudySection from './sections/TracerStudySection.vue';
-import CvReviewForm from './sections/CVReviewForm.vue';
+import CvReviewForm from './sections/CvReviewForm.vue';
 import { useMagangStore } from '@/stores/magang';
 import { useLowonganStore } from '@/stores/lowongan';
 import { useWebinarStore } from '@/stores/webinar';

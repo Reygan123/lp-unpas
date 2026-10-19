@@ -1,19 +1,9 @@
-import Agenda from '@/views/agenda/Agenda.vue'
-import AgendaDetail from '@/views/agendaDetail/AgendaDetail.vue'
-import Berita from '@/views/berita/BeritaView.vue'
-import BeritaDetail from '@/views/beritaDetail/BeritaDetail.vue'
-import Faq from '@/views/Faq/Faq.vue'
-import Kegiatan from '@/views/kegiatan/Kegiatan.vue'
-import Kontak from '@/views/kontak/KontakView.vue'
-import Prodi from '@/views/prodi/ProdiView.vue'
-import ProdiDetail from '@/views/prodiDetail/ProdiDetail.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import ApiService from "@/core/services/ApiService";
 import { destroyExpDt, destroyToken } from "@/core/services/JwtService";
 import { isExpired } from '@/stores/auth';
-import Swal from 'sweetalert2';
 
-const BASE_URL = 'https://ft.unpas.ac.id'
+const BASE_URL = 'https://teknik.unpas.ac.id'
 const SITE_NAME = 'Fakultas Teknik Universitas Pasundan'
 
 function setMeta(name: string, content: string, attr = 'name') {
@@ -150,7 +140,7 @@ const router = createRouter({
     {
       path: '/prodi',
       name: 'prodi',
-      component: Prodi,
+      component: () => import('@/views/prodi/ProdiView.vue'),
       meta: {
         pageTitle: "Program Studi",
         description: "Daftar program studi di Fakultas Teknik Universitas Pasundan. Pilih jurusan teknik terbaik sesuai minat dan karir impian Anda.",
@@ -159,7 +149,7 @@ const router = createRouter({
     {
       path: '/prodi/:slug',
       name: 'prodiDetail',
-      component: ProdiDetail,
+      component: () => import('@/views/prodiDetail/ProdiDetail.vue'),
       meta: {
         pageTitle: "Prodi Detail",
         description: "Informasi lengkap program studi di Fakultas Teknik Universitas Pasundan — kurikulum, prospek karir, dan keunggulan jurusan.",
@@ -168,7 +158,7 @@ const router = createRouter({
     {
       path: '/berita',
       name: 'berita',
-      component: Berita,
+      component: () => import('@/views/berita/BeritaView.vue'),
       meta: {
         pageTitle: "Berita",
         description: "Berita terbaru seputar kegiatan, prestasi, dan informasi akademik Fakultas Teknik Universitas Pasundan.",
@@ -177,7 +167,7 @@ const router = createRouter({
     {
       path: '/berita/:slug',
       name: 'beritaDetail',
-      component: BeritaDetail,
+      component: () => import('@/views/beritaDetail/BeritaDetail.vue'),
       meta: {
         pageTitle: "Berita Detail",
         description: "Baca berita lengkap dari Fakultas Teknik Universitas Pasundan.",
@@ -186,34 +176,16 @@ const router = createRouter({
     {
       path: '/kontak',
       name: 'kontak',
-      component: Kontak,
+      component: () => import('@/views/kontak/KontakView.vue'),
       meta: {
         pageTitle: "Kontak",
         description: "Hubungi Fakultas Teknik Universitas Pasundan — alamat, nomor telepon, email, dan formulir kontak tersedia untuk Anda.",
       },
     },
-    // {
-    //   path: '/agenda',
-    //   name: 'agenda',
-    //   component: Agenda,
-    //   meta: {
-    //     pageTitle: "Agenda",
-    //     description: "Jadwal agenda dan acara Fakultas Teknik Universitas Pasundan — seminar, workshop, dan kegiatan akademik terkini.",
-    //   },
-    // },
-    // {
-    //   path: '/agenda/:slug',
-    //   name: 'agendaDetail',
-    //   component: AgendaDetail,
-    //   meta: {
-    //     pageTitle: "Agenda Detail",
-    //     description: "Detail agenda dan acara Fakultas Teknik Universitas Pasundan.",
-    //   },
-    // },
     {
       path: '/faq',
       name: 'faq',
-      component: Faq,
+      component: () => import('@/views/Faq/Faq.vue'),
       meta: {
         pageTitle: "FAQ",
         description: "Pertanyaan yang sering diajukan seputar Fakultas Teknik Universitas Pasundan — penerimaan mahasiswa, akademik, dan lainnya.",
@@ -222,7 +194,7 @@ const router = createRouter({
     {
       path: '/kemahasiswaan-dan-alumni',
       name: 'kegiatan',
-      component: Kegiatan,
+      component: () => import('@/views/kegiatan/Kegiatan.vue'),
       meta: {
         pageTitle: "Kemahasiswaan & Alumni",
         description: "Kegiatan dan organisasi mahasiswa Fakultas Teknik Universitas Pasundan — UKM, himpunan, dan berbagai aktivitas kampus.",
@@ -285,7 +257,7 @@ const router = createRouter({
   ],
 })
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   const pageTitle = to.meta.pageTitle as string | undefined
   const description = to.meta.description as string | undefined
 
@@ -312,6 +284,7 @@ router.beforeEach((to, from, next) => {
       destroyToken();
       destroyExpDt();
       next({ name: "sign-in" });
+      const { default: Swal } = await import('sweetalert2');
       Swal.fire({
         title: "Session Ended",
         text: "Session Ended, please relogin.",

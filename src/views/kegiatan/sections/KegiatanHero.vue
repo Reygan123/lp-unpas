@@ -2,7 +2,7 @@
 import TitleMain from '@/components/TitleMain.vue';
 import TextSection from '@/components/TextSection.vue';
 import InteractiveHoverButton from '@/components/ui/interactive-hover-button/InteractiveHoverButton.vue';
-import HeroImage from '@/assets/gedung.jpg'
+import HeroImage from '@/assets/gedung.webp'
 // import { ref } from 'vue';
 
 // const searchQuery = ref('');

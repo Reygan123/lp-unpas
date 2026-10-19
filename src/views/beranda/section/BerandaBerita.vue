@@ -24,10 +24,10 @@ defineProps<{
   <SectionLayout>
     <div class="flex justify-between lg:items-end flex-col lg:flex-row">
       <div class="grid gap-5">
-        <h6
+        <div
           class="md:px-6 md:py-2 px-4 py-1 border-2 border-colorPrimary rounded-full w-fit text-colorPrimary font-semibold text-sm md:text-base">
           Latest Insight
-        </h6>
+        </div>
         <TitleSection v-if="fakultas?.name"
           :text="`Seputar Berita <span class='text-colorPrimary'>${fakultas?.name}</span>`" :html="true"
           class="text-black"></TitleSection>

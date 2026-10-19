@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import kolaborasiIllustration from '@/assets/Org.png'
+import kolaborasiIllustration from '@/assets/org.webp'
 import ContactAdminButton from '@/components/ContactAdminButton.vue';
 
 const points = [

@@ -8,6 +8,7 @@ export interface Portofolio {
   image2: string;
   image3: string;
   yt: string;
+  video?: string | null;
   created_at: string;
   updated_at: string;
 }

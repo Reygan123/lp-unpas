@@ -1,6 +1,7 @@
 <!-- src/views/pengabdian-masyarakat/section/PengabdianDetailModal.vue -->
 <script setup lang="ts">
 import { watch } from 'vue';
+import MediaVideoPlayer from '@/components/MediaVideoPlayer.vue';
 // import type { Pengabdian } from '@/core/types/pengabdian';
 
 const props = defineProps<{
@@ -18,6 +19,11 @@ watch(() => props.item, (val) => {
 
 const handleOverlayClick = (e: MouseEvent) => {
   if (e.target === e.currentTarget) emit('close');
+};
+
+const formatDate = (date: string | null) => {
+  if (!date) return '-';
+  return new Date(date).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
 };
 </script>
 
@@ -43,7 +49,17 @@ const handleOverlayClick = (e: MouseEvent) => {
               <span class="pi pi-times text-gray-600"></span>
             </button>
 
-            <img :src="item.gambar" :alt="item.judul" class="w-full h-56 md:h-72 object-cover rounded-t-2xl" />
+            <div class="w-full h-64 md:h-80 rounded-t-2xl overflow-hidden bg-black/5">
+              <MediaVideoPlayer
+                :video="item.video"
+                :poster="item.gambar"
+                :autoplay="true"
+                :muted="true"
+                :loop="true"
+                :controls="true"
+                class-name="w-full h-full object-cover"
+              />
+            </div>
 
             <div class="p-6 md:p-8">
               <span class="inline-block text-xs font-semibold text-colorPrimary bg-colorPrimary/10 px-3 py-1 rounded-full mb-4">
@@ -65,7 +81,7 @@ const handleOverlayClick = (e: MouseEvent) => {
                 </div>
                 <div>
                   <p class="font-medium text-gray-500 mb-1">Tanggal</p>
-                  <p class="text-gray-700">{{ item.tanggal }}</p>
+                  <p class="text-gray-700">{{ formatDate(item.tanggal) }}</p>
                 </div>
                 <div>
                   <p class="font-medium text-gray-500 mb-1">Program Studi Terlibat</p>

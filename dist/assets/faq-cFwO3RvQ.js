@@ -1,0 +1,1 @@
+import{O as a}from"./vendor-vue-D-N3CjNk.js";import{A as t}from"./index-zWUDTtyC.js";const s=()=>t.get("faqs"),o=a("faq",{state:()=>({faqs:[],loading:!1,error:null}),actions:{async fetchFaq(){this.loading=!0,this.error=null;try{const a=await s();this.faqs=a.data}catch(a){this.error=a.message||"Failed to fetch faq"}finally{this.loading=!1}}}});export{o as u};

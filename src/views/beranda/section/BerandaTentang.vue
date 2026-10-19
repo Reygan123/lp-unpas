@@ -21,7 +21,7 @@ const props = defineProps<{
 
 const titleHTML = computed(() => {
   if (!props.fakultas?.name) return 'Tentang';
-  return `Tentang <span class="text-colorPrimary">${props.fakultas?.name}</span>`;
+  return `Tentang<br/><span class="text-colorPrimary">${props.fakultas?.name}</span>`;
 });
 </script>
 

@@ -39,7 +39,7 @@ import SectionLayout from '@/layouts/SectionLayout.vue';
 
         <div class="relative rounded-2xl overflow-hidden aspect-[16/10]">
           <img
-            src="/src/assets/Gedung.jpg"
+            src="/src/assets/gedung.webp"
             alt="Mahasiswa Fakultas Teknik Universitas Pasundan"
             class="w-full h-full object-cover"
           />

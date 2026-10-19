@@ -1,0 +1,1 @@
+import{O as a}from"./vendor-vue-D-N3CjNk.js";import{O as r}from"./OrmawaService-BEObS7-Z.js";const t=a("ormawa",{state:()=>({ormawa:[],loading:!1,error:null}),actions:{async fetchOrmawa(){this.loading=!0,this.error=null;try{const a=await r.getAll();this.ormawa=a.data}catch(a){this.error=a.message||"Failed to fetch ormawa"}finally{this.loading=!1}}}});export{t as u};

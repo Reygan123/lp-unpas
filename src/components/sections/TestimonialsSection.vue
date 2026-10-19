@@ -3,15 +3,13 @@ import SectionLayout from '@/layouts/SectionLayout.vue';
 import TitleSection from '@/components/TitleSection.vue';
 import TextSection from '@/components/TextSection.vue';
 import type { Testimonial } from '@/core/types/testimoni';
-import Gedung from '@/assets/gedung.jpg'
+import Gedung from '@/assets/gedung.webp'
 import InteractiveHoverButton from '../ui/interactive-hover-button/InteractiveHoverButton.vue';
 import { computed, ref } from 'vue';
 import TestimonialsSectionMobile from '../TestimonialsSectionMobile.vue';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
+import '@/lib/swiper-styles'
 
 const props = defineProps<{
   testimoni: Testimonial[];
@@ -51,15 +49,15 @@ const modules = [Navigation, Pagination, Autoplay];
 
 <template>
   <div class="bg-[#EFF0F0]">
-    <SectionLayout>
+    <div class="w-full px-[20px] py-[32px] md:px-[60px] md:py-[60px] lg:px-[120px] lg:py-[60px] space-y-10 md:space-y-14 lg:space-y-16">
       <div class="w-full text-center flex flex-col justify-center items-center gap-4">
         <div class="w-fit py-2 px-5 bg-colorPrimary/10 rounded-[16px] md:rounded-[24px] lg:rounded-[32px]">
-          <p class="text-colorPrimary text-sm lg:text-base">Testimonials</p>
+          <p class="text-[#8a3e00] font-semibold text-sm lg:text-base">Testimonials</p>
         </div>
         <TitleSection :text="'Apa Kata Mereka'"></TitleSection>
         <TextSection class="lg:max-w-2xl">Kisah sukses dan pengalaman nyata dari mereka yang telah merasakan transformasi digital serta efisiensi terbaik bersama kami.</TextSection>
       </div>
-    </SectionLayout>
+    </div>
 
     <div class="w-full px-[20px] py-[32px] md:px-[60px] md:py-[32px] lg:px-[240px] hidden lg:block">
       <div class="w-full relative h-[65vh] flex flex-col justify-end">
@@ -97,6 +95,7 @@ const modules = [Navigation, Pagination, Autoplay];
               'h-[65vh] pt-8': activeIndex === index
             }">
               <img :src="getImageUrl(item.image)"
+                loading="lazy" decoding="async"
                 class="w-full h-full object-cover object-center rounded-[8px] md:rounded-[16px] lg:rounded-[24px] transition-all duration-500" />
             </div>
           </SwiperSlide>

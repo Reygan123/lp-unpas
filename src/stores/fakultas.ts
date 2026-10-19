@@ -8,6 +8,8 @@ interface FakultasState {
   currentFacultyColor: string | null;
 }
 
+let fetchPromise: Promise<any> | null = null;
+
 export const useFakultasStore = defineStore("fakultas", {
   state: (): FakultasState => ({
     fakultas: null,
@@ -16,33 +18,40 @@ export const useFakultasStore = defineStore("fakultas", {
 
   actions: {
     async fetchFakultas() {
-      try {
-        const response = await FakultasService.getDetail();
-        this.fakultas = response.data;
-      } catch (error: any) {
-        console.error("Error fetching fakultas:", error);
+      if (this.fakultas) return;
+      if (fetchPromise) {
+        await fetchPromise;
+        return;
       }
+      fetchPromise = FakultasService.getDetail().then(response => {
+        this.fakultas = response.data;
+      }).catch(error => {
+        console.error("Error fetching fakultas:", error);
+      }).finally(() => {
+        fetchPromise = null;
+      });
+      await fetchPromise;
     },
 
     async getFacultyColor() {
-      if (this.currentFacultyColor) {
+      if (this.currentFacultyColor && this.fakultas) {
         return this.currentFacultyColor;
       }
 
       try {
-        const response = await FakultasService.getDetail();
-        if (response.data?.color1) {
-          this.currentFacultyColor = response.data.color1;
+        await this.fetchFakultas();
+        if (this.fakultas?.color1) {
+          this.currentFacultyColor = this.fakultas.color1;
 
-          const rgbColor = hexToRgb(response.data.color1);
-          const hslColor = hexToCssHsl(response.data.color1);
+          const rgbColor = hexToRgb(this.fakultas.color1);
+          const hslColor = hexToCssHsl(this.fakultas.color1);
 
           document.documentElement.style.setProperty('--color-primary-r', rgbColor.r.toString());
           document.documentElement.style.setProperty('--color-primary-g', rgbColor.g.toString());
           document.documentElement.style.setProperty('--color-primary-b', rgbColor.b.toString());
           document.documentElement.style.setProperty('--background', hslColor);
 
-          return response.data.color1;
+          return this.fakultas.color1;
         }
         return null;
       } catch (error) {

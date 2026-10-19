@@ -3,24 +3,76 @@ import { fileURLToPath, URL } from 'node:url'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueDevTools from 'vite-plugin-vue-devtools'
+import viteCompression from 'vite-plugin-compression'
 
-// https://vite.dev/config/
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
   plugins: [
     vue(),
-    vueDevTools(),
-  ],
+    mode === 'development' ? vueDevTools() : null,
+
+    {
+      name: 'primeicons-font-display-swap',
+      transform(code: string, id: string) {
+        if (id.includes('primeicons.css')) {
+          return code.replace('font-display: block;', 'font-display: swap;')
+        }
+      }
+    },
+    viteCompression({
+      algorithm: 'gzip',
+      ext: '.gz',
+      threshold: 1024,
+    }),
+    viteCompression({
+      algorithm: 'brotliCompress',
+      ext: '.br',
+      threshold: 1024,
+    }),
+  ].filter(Boolean),
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     },
   },
-  // server: {
-  //   port: 5174,        // Memaksa project berjalan di port 5174
-  //   strictPort: true,  // Jika port 5174 terpakai, Vite akan memberi peringatan (tidak asal lompat ke 5175)
-  //   host: true,        // Membuka akses jaringan lokal
-  //   allowedHosts: [
-  //     '.devtunnels.ms' // Wildcard agar aman jika dipasang Dev Tunnels
-  //   ]
-  // }
-})
+  build: {
+    cssCodeSplit: true,
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
+        passes: 2,
+      },
+    },
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            if (id.includes('primeicons') || id.includes('primevue')) {
+              return 'vendor-primevue'
+            }
+            if (id.includes('vue') || id.includes('vue-router') || id.includes('pinia')) {
+              return 'vendor-vue'
+            }
+            if (id.includes('swiper')) {
+              return 'vendor-swiper'
+            }
+            if (id.includes('sweetalert2')) {
+              return 'vendor-sweetalert'
+            }
+            if (id.includes('vue3-toastify')) {
+              return 'vendor-toastify'
+            }
+            if (id.includes('dompurify')) {
+              return 'vendor-dompurify'
+            }
+            if (id.includes('axios')) {
+              return 'vendor-axios'
+            }
+          }
+        },
+      },
+    },
+    chunkSizeWarningLimit: 600,
+  },
+}))

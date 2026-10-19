@@ -1,0 +1,1 @@
+import{O as t}from"./vendor-vue-D-N3CjNk.js";import{A as a}from"./index-zWUDTtyC.js";const o=()=>a.get("tokang-kampus"),n=t("tokang",{state:()=>({tokang:[],loading:!1,error:null}),actions:{async fetchTokang(){this.loading=!0,this.error=null;try{const t=await o();this.tokang=t.data}catch(t){this.error=t.message||"Failed to fetch tokang"}finally{this.loading=!1}}}});export{n as u};

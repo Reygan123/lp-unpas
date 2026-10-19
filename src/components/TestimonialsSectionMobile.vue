@@ -1,13 +1,10 @@
 <script setup lang="ts">
-import 'swiper/css';
-import 'swiper/css/effect-fade';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
+import '@/lib/swiper-styles'
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { EffectFade, Navigation, Pagination, Autoplay } from 'swiper/modules';
 import TextSection from '@/components/TextSection.vue';
 import type { Testimonial } from '@/core/types/testimoni';
-import Gedung from '@/assets/gedung.jpg'
+import Gedung from '@/assets/gedung.webp'
 import { ref } from 'vue';
 
 defineProps<{
@@ -73,6 +70,7 @@ const prevSlide = () => {
                 class="absolute inset-0 bg-gradient-to-t from-colorPrimary/90 via-transparent to-transparent z-10 rounded-[16px] md:rounded-[24px] lg:rounded-[32px]">
               </div>
               <img :src="getImageUrl(item.image)" :alt="item.name"
+                loading="lazy" decoding="async"
                 class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
               <div class="absolute bottom-4 left-4 right-4 lg:bottom-8 lg:left-8 lg:right-8 text-white z-20 space-y-2">
                 <TextSection :weight-text="'font-bold'">{{ item.name }}</TextSection>

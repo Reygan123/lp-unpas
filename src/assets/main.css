@@ -96,10 +96,6 @@
     @apply font-semibold;
   }
 
-  /* p {
-    color: hsl(var(--muted-foreground));
-  } */
-
   .scrolldown {
     --color: rgb(var(--color-primary-r), var(--color-primary-g), var(--color-primary-b));
     --sizeX: 30px;

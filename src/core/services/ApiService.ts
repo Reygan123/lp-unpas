@@ -1,13 +1,10 @@
-// ApiService.ts
 import axios from "axios";
 import type { AxiosError, AxiosResponse } from "axios";
 import JwtService, { destroyToken, destroyExpDt } from "@/core/services/JwtService";
 import router from "@/router";
-import Swal from "sweetalert2";
 
 axios.defaults.baseURL = import.meta.env.VITE_APP_BE_URL;
 
-// Setup once
 axios.interceptors.response.use(
   (response) => response,
   (error: AxiosError) => {
@@ -15,14 +12,16 @@ axios.interceptors.response.use(
       destroyToken();
       destroyExpDt();
       router.push({ name: "sign-in" });
-      Swal.fire({
-        title: "Session Ended",
-        text: "Session Ended, please relogin.",
-        icon: "error",
-        confirmButtonText: "OK",
-        customClass: {
-          confirmButton: "btn fw-semibold btn-light-danger",
-        },
+      import("sweetalert2").then(({ default: Swal }) => {
+        Swal.fire({
+          title: "Session Ended",
+          text: "Session Ended, please relogin.",
+          icon: "error",
+          confirmButtonText: "OK",
+          customClass: {
+            confirmButton: "btn fw-semibold btn-light-danger",
+          },
+        });
       });
     }
     return Promise.reject(error);

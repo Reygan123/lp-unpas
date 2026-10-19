@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import { ref, onMounted, type Ref, type CSSProperties } from 'vue';
 
-// Definisi tipe untuk struktur data
 interface CharStyle extends CSSProperties {
   animationDelay: string;
 }
@@ -25,6 +24,7 @@ interface HtmlChar {
   char: string;
   tags: TagInfo[];
   style?: CharStyle;
+  isBreak?: boolean;
 }
 
 interface WordItem {
@@ -32,7 +32,6 @@ interface WordItem {
   chars: HtmlChar[];
 }
 
-// Definisi props dengan TypeScript
 const props = defineProps({
   text: {
     type: String,
@@ -52,7 +51,6 @@ const props = defineProps({
   }
 });
 
-// Definisi ref dengan tipe yang tepat
 const container: Ref<HTMLElement | null> = ref(null);
 const characters: Ref<CharItem[]> = ref([]);
 const htmlCharacters: Ref<HtmlChar[]> = ref([]);
@@ -102,6 +100,17 @@ const processNodeForAnimation = (
     }
   } else if (node.nodeType === Node.ELEMENT_NODE) {
     const element = node as Element;
+
+    if (element.nodeName.toLowerCase() === 'br') {
+      const breakChar: HtmlChar = { char: '', tags: [], isBreak: true };
+      if (isWordBased) {
+        result.push({ type: 'break', chars: [breakChar] });
+      } else {
+        result.push(breakChar);
+      }
+      return result;
+    }
+
     const tagInfo: TagInfo = {
       name: element.nodeName.toLowerCase(),
       attributes: Array.from(element.attributes).map(attr => ({
@@ -156,6 +165,7 @@ onMounted(() => {
 
       let charCount = 0;
       htmlWords.value = extractedWords.map(wordObj => {
+        if (wordObj.chars[0]?.isBreak) return wordObj.chars;
         const wordChars = wordObj.chars.map((charObj, charIndex) => ({
           ...charObj,
           style: {
@@ -171,12 +181,18 @@ onMounted(() => {
         processNodeForAnimation(node, extractedChars);
       });
 
-      htmlCharacters.value = extractedChars.map((item, index) => ({
-        ...item,
-        style: {
-          animationDelay: `${index * props.delay}ms`
-        }
-      }));
+      let charCount = 0;
+      htmlCharacters.value = extractedChars.map(item => {
+        if (item.isBreak) return item;
+        const styled = {
+          ...item,
+          style: {
+            animationDelay: `${charCount * props.delay}ms`
+          }
+        };
+        charCount += 1;
+        return styled;
+      });
     }
   }
 
@@ -258,30 +274,37 @@ const renderCharWithTags = (charObj: HtmlChar): string => {
 
     <template v-else>
       <template v-if="wordBased">
-        <span
+        <template
           v-for="(word, wordIndex) in htmlWords"
           :key="`html-word-${wordIndex}`"
-          class="word-container-html"
         >
+          <br v-if="word[0]?.isBreak" />
+          <span v-else class="word-container-html">
+            <span
+              v-for="(item, charIndex) in word"
+              :key="`html-char-${wordIndex}-${charIndex}`"
+              :style="item.style"
+              class="inline-block opacity-0 character-animation"
+              :class="{ 'animate-character': isVisible }"
+              v-html="renderCharWithTags(item)"
+            ></span>
+          </span>
+        </template>
+      </template>
+      <template v-else>
+        <template
+          v-for="(item, index) in htmlCharacters"
+          :key="`html-char-${index}`"
+        >
+          <br v-if="item.isBreak" />
           <span
-            v-for="(item, charIndex) in word"
-            :key="`html-char-${wordIndex}-${charIndex}`"
+            v-else
             :style="item.style"
             class="inline-block opacity-0 character-animation"
             :class="{ 'animate-character': isVisible }"
             v-html="renderCharWithTags(item)"
           ></span>
-        </span>
-      </template>
-      <template v-else>
-        <span
-          v-for="(item, index) in htmlCharacters"
-          :key="`html-char-${index}`"
-          :style="item.style"
-          class="inline-block opacity-0 character-animation"
-          :class="{ 'animate-character': isVisible }"
-          v-html="renderCharWithTags(item)"
-        ></span>
+        </template>
       </template>
     </template>
   </h2>

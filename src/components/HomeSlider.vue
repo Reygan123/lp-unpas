@@ -1,97 +1,42 @@
 <script lang="ts" setup>
 import InteractiveHoverButton from '@/components/ui/interactive-hover-button/InteractiveHoverButton.vue';
-import type { Slider } from '@/core/types/slider';
-import { ref, onMounted, onUnmounted, nextTick } from 'vue';
-import Gedung from '@/assets/gedung.jpg'
-
-const baseUrl = import.meta.env.VITE_APP_IMG_URL;
-
-const getImageUrl = (imagePath: string | null) => {
-  if (!imagePath) return '';
-  return `${baseUrl}${imagePath}`;
-};
-
-const props = defineProps<{
-  sliders: Slider[];
-  isLoading?: boolean;
-}>();
-
-const currentSlide = ref(0);
-const isInitialLoad = ref(true);
-let interval: number;
-
-const nextSlide = () => {
-  isInitialLoad.value = false;
-  currentSlide.value = (currentSlide.value + 1) % props.sliders.length;
-};
-
-const goToSlide = (index: number) => {
-  isInitialLoad.value = false;
-  currentSlide.value = index;
-};
-
-onMounted(() => {
-  nextTick(() => {
-    setTimeout(() => {
-      isInitialLoad.value = false;
-    }, 100);
-  });
-  interval = setInterval(nextSlide, 5000);
-});
-
-onUnmounted(() => {
-  clearInterval(interval);
-});
 </script>
 
 <template>
   <div class="min-w-full p-0 md:p-4 lg:p-8">
-    <div v-if="isLoading"
-      class="relative w-full h-[80vh] md:h-[426px] lg:h-[75vh] overflow-hidden bg-gray-200 rounded-b-[32px] md:rounded-[24px] lg:rounded-[32px] animate-pulse">
-      <div class="absolute inset-0 flex items-center justify-center">
-        <svg class="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
-          </path>
-        </svg>
-      </div>
-    </div>
+    <svg :style="{ visibility: 'hidden', position: 'absolute' }" width="0" height="0"
+      xmlns="http://www.w3.org/2000/svg" version="1.1">
+      <defs>
+        <filter id="goo">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+          <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9"
+            result="goo" />
+          <feComposite in="SourceGraphic" in2="goo" operator="atop" />
+        </filter>
+      </defs>
+    </svg>
 
-    <div v-else class="relative w-full h-[80vh] md:h-[426px] lg:h-[656px] overflow-hidden">
-      <div v-for="(slider, index) in sliders" :key="index"
-        class="w-full h-full absolute top-0 left-0 bg-cover bg-top rounded-b-[32px] md:rounded-[24px] lg:rounded-[32px] transition-opacity duration-1000"
-        :style="{
-          'opacity': currentSlide === index ? 1 : 0,
-          'z-index': currentSlide === index ? 1 : 0
-        }">
+    <div class="relative w-full h-[80vh] md:h-[426px] lg:h-[656px] overflow-hidden">
+      <div class="w-full h-full absolute top-0 left-0 bg-cover bg-top rounded-b-[32px] md:rounded-[24px] lg:rounded-[32px]">
         <div class="w-full h-full z-10 img-container">
-          <img :src="Gedung" alt="Gedung" class="w-full h-full object-cover object-[10_10] img-box">
-          <svg :style="{ visibility: 'hidden', position: 'absolute' }" width="0" height="0"
-            xmlns="http://www.w3.org/2000/svg" version="1.1">
-            <defs>
-              <filter id="goo">
-                <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
-                <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9"
-                  result="goo" />
-                <feComposite in="SourceGraphic" in2="goo" operator="atop" />
-              </filter>
-            </defs>
-          </svg>
+          <img src="/Gedung.webp" alt="Gedung" width="1024" height="683" fetchpriority="high" decoding="async" class="w-full h-full object-cover object-[10_10] img-box">
         </div>
 
-        <!-- Tablet & Dekstop -->
         <div class="md:w-[80%] lg:w-[70%] xl:w-[60%] 2xl:w-[50%] absolute bottom-0 right-0 md:flex items-center lg:gap-4 hidden">
-          <h1
-            class="w-full text-[20px] md:text-[26px] lg:text-[32px] font-bold leading-tight text-[#444444] text-left transition-all duration-1000 transform"
-            :class="(currentSlide === index && !isInitialLoad) ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'">
-            {{ slider.title }}
+          <h1 class="w-full text-[20px] md:text-[26px] lg:text-[32px] font-bold leading-tight text-[#444444] text-left">
+            Fakultas Teknik Universitas Pasundan
           </h1>
 
-          <div class="transition-all duration-1000 transform delay-200"
-            :class="(currentSlide === index && !isInitialLoad) ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'">
+          <div class="flex items-center gap-6">
+            <div class="side-arrow">
+              <span class="side-arrow__chevron"></span>
+              <span class="side-arrow__chevron"></span>
+            </div>
+
             <a href="https://pmb.unpas.ac.id/" target="_blank">
               <InteractiveHoverButton :text="'Daftar Sekarang'" />
             </a>
+
           </div>
         </div>
 
@@ -104,17 +49,13 @@ onUnmounted(() => {
           </div>
         </div>
 
-        <!-- Mobile -->
         <div class="md:hidden absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-          <h1
-            class="text-[20px] md:text-[26px] lg:text-[32px] font-bold leading-tight text-white text-center p-4 transition-all duration-1000 transform"
-            :class="(currentSlide === index && !isInitialLoad) ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'">
-            {{ slider.title }}
+          <h1 class="text-[20px] md:text-[26px] lg:text-[32px] font-bold leading-tight text-white text-center p-4">
+            Fakultas Teknik Universitas Pasundan
           </h1>
         </div>
 
-        <div class="absolute bottom-0 right-0 transition-all duration-1000 transform delay-200 md:hidden"
-          :class="(currentSlide === index && !isInitialLoad) ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'">
+        <div class="absolute bottom-0 right-0 md:hidden">
           <InteractiveHoverButton :text="'Daftar Sekarang'"></InteractiveHoverButton>
         </div>
       </div>
@@ -236,6 +177,86 @@ onUnmounted(() => {
 @media (min-width: 768px) {
   .img-container {
     filter: url("#goo") drop-shadow(0px -2px 0px transparent)
+  }
+}
+
+.scrolldown .chevrons {
+  animation: chevron-bounce 1.6s ease-in-out infinite;
+}
+
+.scrolldown .chevrondown {
+  opacity: 0;
+  animation: chevron-fade 1.6s ease-in-out infinite;
+}
+
+.scrolldown .chevrondown:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.scrolldown .chevrondown:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+@keyframes chevron-bounce {
+  0%, 100% {
+    transform: translateY(-4px);
+  }
+  50% {
+    transform: translateY(6px);
+  }
+}
+
+@keyframes chevron-fade {
+  0% {
+    opacity: 0;
+  }
+  40%, 60% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.side-arrow {
+  display: flex;
+  align-items: center;
+  animation: side-arrow-move 1.6s ease-in-out infinite;
+}
+
+.side-arrow__chevron {
+  width: 14px;
+  height: 14px;
+  margin-left: -6px;
+  border-right: 3px solid #f59e0b;
+  border-bottom: 3px solid #f59e0b;
+  transform: rotate(-45deg);
+  opacity: 0;
+  animation: side-arrow-fade 1.6s ease-in-out infinite;
+}
+
+.side-arrow__chevron:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+@keyframes side-arrow-move {
+  0%, 100% {
+    transform: translateX(-4px);
+  }
+  50% {
+    transform: translateX(6px);
+  }
+}
+
+@keyframes side-arrow-fade {
+  0% {
+    opacity: 0;
+  }
+  40%, 60% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
   }
 }
 </style>

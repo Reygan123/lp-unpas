@@ -3,7 +3,7 @@ import TextSection from '@/components/TextSection.vue';
 import TitleSection from '@/components/TitleSection.vue';
 import type { Faculty } from '@/core/types/fakultas';
 import type { Unggulan } from '@/core/types/unggulan';
-import Gedung from '@/assets/gedung.jpg'
+import Gedung from '@/assets/gedung.webp'
 import { computed } from 'vue';
 import TextBody from '@/components/TextBody.vue';
 
@@ -69,7 +69,7 @@ const titleHTML = computed(() => {
                     </svg>
         </div>
         <div class="text-center space-y-4 md:space-y-5 lg:space-y-6">
-          <h6 class="text-[14px] md:text-[18px] lg:text-[22px]">{{ feature.title }}</h6>
+          <h3 class="text-[14px] md:text-[18px] lg:text-[22px]">{{ feature.title }}</h3>
           <TextBody><span v-html="feature.description"></span></TextBody>
         </div>
       </div>
